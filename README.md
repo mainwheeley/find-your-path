@@ -29,7 +29,7 @@ Find Your Path
 ## Contributors
 * Revanth Nagurla ([@rnagurla](https://github.com/rnagurla))
 * Aldio Ngudjiharto ([@insert](https://github.com/))
-* Simron Patel ([@insert](https://github.com/))
+* Simron Patel ([@patel418](https://github.com/patel418))
 * Willy Tanggono ([@mainwheeley](https://github.com/mainwheeley))
 * Jackie Wu ([@jackielwu](https://github.com/jackielwu))
 ### Artwork
