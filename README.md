@@ -50,6 +50,3 @@ Find Your Path
 
 ## How-to use this code
 * see [INSTRUCTIONS](https://github.com/username/appname/blob/master/INSTRUCTIONS.md) file
-
-
-[![Flattr this git repo](http://api.flattr.com/button/flattr-badge-large.png)](https://flattr.com/submit/auto?user_id=username&url=https://github.com/username/appname&title=appname&language=&tags=github&category=software) 
