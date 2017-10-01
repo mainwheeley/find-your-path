@@ -12,7 +12,35 @@ import {
   View
 } from 'react-native';
 
-export default class LoginUI extends Component {
+const FBSDK = require('react-native-fbsdk');
+const {
+  LoginButton,
+} = FBSDK;
+
+var Login = React.createClass({
+  render: function() {
+    return (
+      <View>
+        <LoginButton
+          publishPermissions={["publish_actions"]}
+          onLoginFinished={
+            (error, result) => {
+              if (error) {
+                alert("Login failed with error: " + result.error);
+              } else if (result.isCancelled) {
+                alert("Login was cancelled");
+              } else {
+                alert("Login was successful with permissions: " + result.grantedPermissions);
+              }
+            }
+          }
+          onLogoutFinished={() => alert("User logged out")}/>
+      </View>
+    );
+  }
+});
+
+export default class LogInUI extends Component {
   render() {
     return (
       <View style={styles.container}>
@@ -20,8 +48,9 @@ export default class LoginUI extends Component {
           Welcome to React Native!
         </Text>
         <Text style={styles.instructions}>
-          To get started, edit index.ios.js
+          Welcome to the Facebook SDK for React Native!
         </Text>
+        <Login />
         <Text style={styles.instructions}>
           Press Cmd+R to reload,{'\n'}
           Cmd+D or shake for dev menu
@@ -50,4 +79,4 @@ const styles = StyleSheet.create({
   },
 });
 
-AppRegistry.registerComponent('LoginUI', () => LoginUI);
+AppRegistry.registerComponent('LogInUI', () => LogInUI);

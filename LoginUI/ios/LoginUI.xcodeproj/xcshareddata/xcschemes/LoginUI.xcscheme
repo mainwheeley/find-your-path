@@ -29,9 +29,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
-               BuildableName = "LoginUI.app"
-               BlueprintName = "LoginUI"
-               ReferencedContainer = "container:LoginUI.xcodeproj">
+               BuildableName = "LogInUI.app"
+               BlueprintName = "LogInUI"
+               ReferencedContainer = "container:LogInUI.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
          <BuildActionEntry
@@ -43,9 +43,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "00E356ED1AD99517003FC87E"
-               BuildableName = "LoginUITests.xctest"
-               BlueprintName = "LoginUITests"
-               ReferencedContainer = "container:LoginUI.xcodeproj">
+               BuildableName = "LogInUITests.xctest"
+               BlueprintName = "LogInUITests"
+               ReferencedContainer = "container:LogInUI.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -61,9 +61,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "00E356ED1AD99517003FC87E"
-               BuildableName = "LoginUITests.xctest"
-               BlueprintName = "LoginUITests"
-               ReferencedContainer = "container:LoginUI.xcodeproj">
+               BuildableName = "LogInUITests.xctest"
+               BlueprintName = "LogInUITests"
+               ReferencedContainer = "container:LogInUI.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
@@ -71,9 +71,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
-            BuildableName = "LoginUI.app"
-            BlueprintName = "LoginUI"
-            ReferencedContainer = "container:LoginUI.xcodeproj">
+            BuildableName = "LogInUI.app"
+            BlueprintName = "LogInUI"
+            ReferencedContainer = "container:LogInUI.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
       <AdditionalOptions>
@@ -94,9 +94,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
-            BuildableName = "LoginUI.app"
-            BlueprintName = "LoginUI"
-            ReferencedContainer = "container:LoginUI.xcodeproj">
+            BuildableName = "LogInUI.app"
+            BlueprintName = "LogInUI"
+            ReferencedContainer = "container:LogInUI.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
       <AdditionalOptions>
@@ -113,9 +113,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
-            BuildableName = "LoginUI.app"
-            BlueprintName = "LoginUI"
-            ReferencedContainer = "container:LoginUI.xcodeproj">
+            BuildableName = "LogInUI.app"
+            BlueprintName = "LogInUI"
+            ReferencedContainer = "container:LogInUI.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>

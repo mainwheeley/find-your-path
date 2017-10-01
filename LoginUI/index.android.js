@@ -12,7 +12,7 @@ import {
   View
 } from 'react-native';
 
-export default class LoginUI extends Component {
+export default class LogInUI extends Component {
   render() {
     return (
       <View style={styles.container}>
@@ -50,4 +50,4 @@ const styles = StyleSheet.create({
   },
 });
 
-AppRegistry.registerComponent('LoginUI', () => LoginUI);
+AppRegistry.registerComponent('LogInUI', () => LogInUI);
