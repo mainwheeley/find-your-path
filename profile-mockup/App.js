@@ -3,6 +3,8 @@ import { StyleSheet, Text, View, Button, Alert, FlatList, Image } from 'react-na
 
 import Header from './comps/components/Header';
 import buttontest from './comps/components/buttontest';
+import Bar from './comps/components/Bar';
+import Stats from './comps/components/Stats';
 
 export default class App extends React.Component {
     alertMess() {
@@ -24,17 +26,19 @@ export default class App extends React.Component {
 	<View style={styles.container}> 
 
 	    <Header />
+	    <Bar />
+	    <Stats />
 
-	</View>
-
-	<View style={styles.container}>	
-	    <FlatList
-		data={[{key: 'Total running time: '}, {key: 'Total miles run'}]}
-  	    	renderItem={({item}) => <Text style={styles.statStyle}>{item.key}</Text>}
-		ItemSeparatorComponent={this.itemSeparator}
-	    />
 	</View>
     </View>
+
+//	<View style={styles.container}>	
+//	    <FlatList
+//		data={[{key: 'Total running time: '}, {key: 'Total miles run'}]}
+//  	    	renderItem={({item}) => <Text style={styles.statStyle}>{item.key}</Text>}
+//		ItemSeparatorComponent={this.itemSeparator}
+//	    />
+//	</View>
     );
   }
 }
