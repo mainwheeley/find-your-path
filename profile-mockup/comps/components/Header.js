@@ -1,27 +1,42 @@
 import React from 'react';
-import { StyleSheet, Text, View, Button, Alert, FlatList, Image } from 'react-native';
+import { 
+    StyleSheet,
+    Text,
+    View,
+    Button,
+    Alert,
+    FlatList,
+    Image,
+    Dimensions
+} from 'react-native';
 
 export default class Header extends React.Component {
     render() {
     return (
       
-	<Image style={styles.headerBG} source={require('../imgs/bgprof.jpg')}>
+	<View style={styles.mainHead}>
+	    <Image style={styles.headerBG} source={require('../imgs/bgprofdua.jpg')}>
 
-	    <View style={styles.header}>
-		<View style={styles.profPicWrap}>
-		    <Image style={styles.profpic} source={require('../imgs/profpic.jpg')} /> 
-		</View>
+	        <View style={styles.header}>
+	    	<View style={styles.profPicWrap}>
+	    	    <Image style={styles.profpic} source={require('../imgs/profpic.jpg')} /> 
+	    	</View>
 
-		<Text style={styles.name}> Johnny Appleseed </Text>
-	    </View>
+	    	<Text style={styles.name}> Johnny Appleseed </Text>
+	        </View>
 
-	</Image>
+	    </Image>
+	</View>
 	
     );
   }
 }
 
 const styles = StyleSheet.create({
+    mainHead: {
+	height: (Dimensions.get('window').height / 4),
+	alignSelf: 'stretch',
+    },
     headerBG: {
 	flex: 1,
 	width: null,
@@ -35,8 +50,10 @@ const styles = StyleSheet.create({
 	backgroundColor: 'rgba(0, 0, 0, 0.5)',
     },
     profPicWrap: {
-	width: 180,
-	height: 180,
+	width: (Dimensions.get('window').width / 4),
+	height: (Dimensions.get('window').width / 4),
+//	width: 180,
+//	height: 180,
 	borderRadius: 100,
 	borderColor: 'rgba(0,0,0, 0.4)',
 	borderWidth: 16,
@@ -45,7 +62,7 @@ const styles = StyleSheet.create({
 	flex: 1,
 	width: null,
 	alignSelf: 'stretch',
-	borderRadius: 100,
+	borderRadius: 25,
 	borderColor: '#fff',
 	borderWidth: 4
     },

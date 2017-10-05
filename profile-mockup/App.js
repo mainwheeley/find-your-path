@@ -1,5 +1,14 @@
 import React from 'react';
-import { StyleSheet, Text, View, Button, Alert, FlatList, Image } from 'react-native';
+import { 
+    StyleSheet,
+    Text,
+    View,
+    Button,
+    Alert,
+    FlatList,
+    Image,
+    ScrollView
+} from 'react-native';
 
 import Header from './comps/components/Header';
 import buttontest from './comps/components/buttontest';
@@ -22,15 +31,15 @@ export default class App extends React.Component {
 
     render() {
     return (
-    <View style = {styles.container}>
-	<View style={styles.container}> 
+ //   <View style = {styles.container}>
+	<ScrollView style={styles.container}> 
 
 	    <Header />
 	    <Bar />
 	    <Stats />
 
-	</View>
-    </View>
+	</ScrollView>
+//    </View>
 
 //	<View style={styles.container}>	
 //	    <FlatList
