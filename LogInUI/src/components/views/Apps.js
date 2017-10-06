@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Platform, StatusBar, StyleSheet, Text, View, Button } from 'react-native';
-import { TabNavigator } from 'react-navigation';
-import { Icon } from 'react-native-vector-icons/FontAwesome';
+//import { TabNavigator } from 'react-navigation';
+//import { Icon } from 'react-native-vector-icons/FontAwesome';
 
 import Profile from './Profile';
 import Maps from './Maps'

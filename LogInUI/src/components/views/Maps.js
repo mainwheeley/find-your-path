@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { View, StyleSheet } from 'react-native';
 import { Button, Text } from 'react-native-elements';
-import MapView from 'react-native-maps';
+//import MapView from 'react-native-maps';
 
 
 MapStyle =
@@ -42,21 +42,24 @@ MapStyle =
   }
 ]
 
-
+/*
+<MapView
+  //provider={PROVIDER_GOOGLE}
+  //customMapStyle={MapStyle}
+  style={styles.map}
+  initialRegion={{
+    latitude: 40.426990,
+    longitude: -86.916448,
+    latitudeDelta: 0.0922,
+    longitudeDelta: 0.0421
+  }}
+  //onRegionChange={this.onRegionChange}
+/>
+*/
 export default ({ navitgation }) => (
   <View >
-    <MapView
-      //provider={PROVIDER_GOOGLE}
-      //customMapStyle={MapStyle}
-      style={styles.map}
-      initialRegion={{
-        latitude: 40.426990,
-        longitude: -86.916448,
-        latitudeDelta: 0.0922,
-        longitudeDelta: 0.0421
-      }}
-      //onRegionChange={this.onRegionChange}
-    />
+    <Text>MapView</Text>
+
   </View>
 )
 

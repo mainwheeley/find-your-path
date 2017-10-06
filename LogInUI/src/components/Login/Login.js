@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { StyleSheet, View, Image, Text, KeyboardAvoidingView } from 'react-native';
-import { StackNavigator } from 'react-native-maps';
+//import { StackNavigator } from 'react-navigation';
 import LoginForm from './LoginForm';
 
 

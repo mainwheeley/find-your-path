@@ -6,6 +6,7 @@ import { FontAwesome } from 'react-native-vector-icons';
 import SignIn from './Login/Login1';
 import Maps from './views/Maps';
 import Profile from './views/Profile';
+import MapSettings from './views/MapSettings';
 
 const headerStyle = {
   marginTop: Platform.OS === "android" ? StatusBar.currentHeight : 0
@@ -21,10 +22,27 @@ export const SignedOut = StackNavigator({
   }
 });
 
+export const MapView = StackNavigator({
+  MapSettings: {
+    screen: MapSettings,
+    navigationOptions: {
+      title: "Settings",
+      headerStyle
+    }
+  },
+  Maps: {
+    screen: Maps,
+    navigationOptions: {
+      title: "Map",
+      headerStyle
+    }
+  }
+});
+
 export const SignedIn = TabNavigator(
   {
     Maps: {
-      screen: Maps,
+      screen: MapView,
       navigationOptions: {
         tabBarLabel: "Map"
       }
