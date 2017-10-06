@@ -44,19 +44,6 @@ export default class Weather extends Component {
     });
   }
 
-/*
-  componentWillMount(){
-    api.getWeathers().then((res) => {
-      this.setState({
-        weather: res.weather,
-        weatherTemp: res.main.temp,
-        weatherType: res.weather[0].description
-      })
-    });
-  }
-  */
-
-
   _handlePress(){
     Alert.alert("Hello")
   }
@@ -67,11 +54,9 @@ export default class Weather extends Component {
 
   render() {
     this.cityName = this.state.tempName;
-    //this.callAPI();
 
     if(this.state.flag == 1){
       this.callAPI();
-      console.log("URL: ", this.finalURL);
       this.state.flag = 0;
     }
 
@@ -100,7 +85,6 @@ export default class Weather extends Component {
             color="#841584"
           />
         </View>
-
 
       </View>
     );
