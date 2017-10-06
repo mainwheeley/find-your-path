@@ -32,13 +32,13 @@ export default class App extends React.Component {
     render() {
     return (
  //   <View style = {styles.container}>
-	<ScrollView style={styles.container}> 
+	<View style={styles.container}> 
 
 	    <Header />
 	    <Bar />
 	    <Stats />
 
-	</ScrollView>
+	</View>
 //    </View>
 
 //	<View style={styles.container}>	

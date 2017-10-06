@@ -14,7 +14,7 @@ export default class Stats extends React.Component {
   render() {
     return (
 
-	//<ScrollView>
+	<ScrollView>
 	<View>
 	<View style={styles.statsRow}>
 	    <View style={styles.statsGrid}>
@@ -22,9 +22,13 @@ export default class Stats extends React.Component {
 		    <Image style={styles.photo} resizeMode="contain" source={require('../imgs/run.png')} />
 		</View>
 		<View style={styles.textWrap}>
-		    <Text style={styles.statsList}>Total miles run: </Text>
+		    <Text style={styles.statsList}>Average pace: </Text>
 		</View>
 	    </View>
+	</View>
+
+	<View style={styles.statsRow}>
+	    <View style={styles.lineSeparator}></View>
 	</View>
 
 	<View style={styles.statsRow}>
@@ -33,18 +37,69 @@ export default class Stats extends React.Component {
 		    <Image style={styles.photo} resizeMode="stretch" source={require('../imgs/road.jpg')} />
 		</View>
 		<View style={styles.textWrap}>
+		    <Text style={styles.statsList}>Total distance: </Text>
+		</View>
+	    </View>
+	</View>
+
+	<View style={styles.statsRow}>
+	    <View style={styles.lineSeparator}></View>
+	</View>
+
+	<View style={styles.statsRow}>
+	    <View style={styles.statsGrid}>
+		<View style={styles.photoWrap}>
+		    <Image style={styles.photo} resizeMode="contain" source={require('../imgs/fire.jpg')} />
+		</View>
+		<View style={styles.textWrap}>
+		    <Text style={styles.statsList}>Total calories burned: </Text>
+		</View>
+	    </View>
+	</View>
+
+	<View style={styles.statsRow}>
+	    <View style={styles.lineSeparator}></View>
+	</View>
+
+	<View style={styles.statsRow}>
+	    <View style={styles.statsGrid}>
+		<View style={styles.photoWrap}>
+		    <Image style={styles.photo} resizeMode="contain" source={require('../imgs/time.png')} />
+		</View>
+		<View style={styles.textWrap}>
 		    <Text style={styles.statsList}>Total time run: </Text>
 		</View>
 	    </View>
 	</View>
 
+	<View style={styles.statsRow}>
+	    <View style={styles.lineSeparator}></View>
 	</View>
-	//</ScrollView>
+
+	<View style={styles.statsRow}>
+	    <View style={styles.statsGrid}>
+		<View style={styles.photoWrap}>
+		    <Image style={styles.photo} resizeMode="contain" source={require('../imgs/star.png')} />
+		</View>
+		<View style={styles.textWrap}>
+		    <Text style={styles.statsList}>Favorite route: </Text>
+		</View>
+	    </View>
+	</View>
+
+	</View>
+	</ScrollView>
     );
   }
 }
 
 const styles = StyleSheet.create({
+    lineSeparator: {
+	backgroundColor: '#000',
+	height: 1,
+	width: (Dimensions.get('window').width - 25),
+	alignSelf: 'center',
+    },
     boxTest: {
 	backgroundColor: '#e3aa1a',
     },
