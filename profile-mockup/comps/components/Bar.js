@@ -8,12 +8,12 @@ export default class Bar extends React.Component {
 	<View style={styles.bar}>
 
 	    <View style={[styles.barItem, styles.barseparator]}>
-		<Text style={styles.barTop}>12K</Text>
+		<Text style={styles.barTop}>10</Text>
 		<Text style={styles.barBottom}>Followers</Text>
 	    </View>
 
 	    <View style={[styles.barItem, styles.barseparator]}>
-		<Text style={styles.barTop}>12K</Text>
+		<Text style={styles.barTop}>10</Text>
 		<Text style={styles.barBottom}>Following</Text>
 	    </View>
 
@@ -27,7 +27,7 @@ const styles = StyleSheet.create({
     bar: {
 	borderColor: '#fff',
 	borderTopWidth: 4,
-	backgroundColor: '#ec2e4a',
+	backgroundColor: '#8BC34A',
 	flexDirection: 'row',
     },
     barSeparator: {

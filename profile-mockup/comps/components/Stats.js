@@ -35,7 +35,7 @@ export default class Stats extends React.Component {
 		    <Image style={styles.photo} resizeMode="contain" source={require('../imgs/run.png')} />
 		</View>
 		<View style={styles.textWrap}>
-		    <Text style={styles.statsList}>Average pace: </Text>
+		    <Text style={styles.statsList}>Average pace: 7.5 min/mile</Text>
 		</View>
 	    </View>
 	</View>
@@ -50,7 +50,7 @@ export default class Stats extends React.Component {
 		    <Image style={styles.photo} resizeMode="stretch" source={require('../imgs/road.jpg')} />
 		</View>
 		<View style={styles.textWrap}>
-		    <Text style={styles.statsList}>Total distance: </Text>
+		    <Text style={styles.statsList}>Total distance: 200 mi </Text>
 		</View>
 	    </View>
 	</View>
@@ -65,7 +65,7 @@ export default class Stats extends React.Component {
 		    <Image style={styles.photo} resizeMode="contain" source={require('../imgs/fire.jpg')} />
 		</View>
 		<View style={styles.textWrap}>
-		    <Text style={styles.statsList}>Total calories burned: </Text>
+		    <Text style={styles.statsList}>Ave. calories burned: 150 cals</Text>
 		</View>
 	    </View>
 	</View>
@@ -80,7 +80,7 @@ export default class Stats extends React.Component {
 		    <Image style={styles.photo} resizeMode="contain" source={require('../imgs/time.png')} />
 		</View>
 		<View style={styles.textWrap}>
-		    <Text style={styles.statsList}>Total time run: </Text>
+		    <Text style={styles.statsList}>Total time run: 200 hrs</Text>
 		</View>
 	    </View>
 	</View>
@@ -95,7 +95,7 @@ export default class Stats extends React.Component {
 		    <Image style={styles.photo} resizeMode="contain" source={require('../imgs/star.png')} />
 		</View>
 		<View style={styles.textWrap}>
-		    <Text style={styles.statsList}>Favorite route: </Text>
+		    <Text style={styles.statsList}>Favorite route: State St.</Text>
 		</View>
 	    </View>
 	</View>
@@ -105,7 +105,7 @@ export default class Stats extends React.Component {
 	</View>
 
 	<View style={styles.statsRow}>
-	    <View style={styles.statsGrid}>
+	    <View style={styles.delButton}>
 		<Button
     	   	    onPress={this.deletePrompt}
     	   	    title="Delete Account"
@@ -123,6 +123,10 @@ export default class Stats extends React.Component {
 
 const styles = StyleSheet.create({
     delButton: {
+	flex: 1,
+	height: (Dimensions.get('window').width / 5) - 25,
+	alignItems: 'center',
+	justifyContent: 'center',
     },
     lineSeparator: {
 	backgroundColor: '#000',
