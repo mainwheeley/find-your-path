@@ -5,18 +5,12 @@ import { Icon } from 'react-native-vector-icons/FontAwesome';
 
 import Profile from './Profile';
 import Maps from './Maps'
-
-class MapScreen extends Component {
-  render() {
-    return (
-      <View style={styles.container}>
-        <Text>Route map</Text>
-      </View>
-    );
-  }
-}
+import App from '../index'
 
 
+export default App;
+
+/*
 const SimpleApp = TabNavigator({
   Map: {
     screen: Maps,
@@ -58,5 +52,5 @@ const styles = StyleSheet.create({
     height: 26
   }
 });
-
+*/
 //AppRegistry.registerComponent('LogInUI', () => LogInUI);

@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
-import { View } from 'react-native';
+import { View, StyleSheet } from 'react-native';
 import { Button, Text } from 'react-native-elements';
 
 
-export default ({ navitgation }) => (
+export default ({ navigation }) => (
   <View style={{ paddingVertical: 20 }}>
     <View
       style={{
@@ -19,10 +19,31 @@ export default ({ navitgation }) => (
     >
       <Text style={{ color: "white", fontSize: 28 }}>JA</Text>
     </View>
+    <View>
+      <Text style={styles.name}>Name: Johnny Appleseed</Text>
+      <Text style={styles.data}>Distance Traveled: 50 miles</Text>
+      <Text style={styles.data}>Hours Logged: 15 hours</Text>
+    </View>
     <Button
       backgroundColor="#03A9F4"
       title="SIGN OUT"
-      //onPress={() => onSignOut().then(() => navigation.navigate("SignedOut"))}
+      onPress={() => navigation.navigate("SignedOut")}
     />
   </View>
 )
+
+const styles = StyleSheet.create({
+  name: {
+    alignSelf: 'center',
+    marginBottom: 12,
+    fontSize: 16,
+    fontWeight: '700',
+    color: '#222222'
+  },
+  data: {
+    alignSelf: 'center',
+    marginBottom: 12,
+    fontSize: 16,
+    fontWeight: '700'
+  }
+})

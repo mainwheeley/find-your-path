@@ -1,26 +1,23 @@
 import React, { Component } from 'react';
 import { StyleSheet, View, Image, Text, KeyboardAvoidingView } from 'react-native';
+import { StackNavigator } from 'react-native-maps';
 import LoginForm from './LoginForm';
 
 
-export default class Login extends Component {
-  render() {
-    return (
-      <KeyboardAvoidingView behavior="padding" style={styles.container}>
-        <View style={styles.logoContainer}>
-          <Image
-            style={styles.logo}
-            source={require('../../images/FYP.png')}
-            />
-            <Text style={styles.title}>An app made for github using React Native</Text>
-        </View>
-        <View style={styles.formContainer}>
-          <LoginForm />
-        </View>
-      </KeyboardAvoidingView>
-    );
-  }
-}
+export default ({ navitgation }) => (
+  <KeyboardAvoidingView behavior="padding" style={styles.container}>
+    <View style={styles.logoContainer}>
+      <Image
+        style={styles.logo}
+        source={require('../../images/FYP.png')}
+        />
+        <Text style={styles.title}>An app made for github using React Native</Text>
+    </View>
+    <View style={styles.formContainer}>
+      <LoginForm />
+    </View>
+  </KeyboardAvoidingView>
+);
 
 const styles = StyleSheet.create({
   container: {

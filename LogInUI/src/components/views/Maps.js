@@ -42,19 +42,21 @@ MapStyle =
   }
 ]
 
+
 export default ({ navitgation }) => (
-  <View style={styles.container}>
+  <View >
     <MapView
       //provider={PROVIDER_GOOGLE}
-      customMapStyle={MapStyle}
+      //customMapStyle={MapStyle}
+      style={styles.map}
       initialRegion={{
         latitude: 40.426990,
         longitude: -86.916448,
         latitudeDelta: 0.0922,
-        longitudeDelta: 0.0421,
+        longitudeDelta: 0.0421
       }}
-    >
-    </MapView>
+      //onRegionChange={this.onRegionChange}
+    />
   </View>
 )
 
@@ -62,6 +64,8 @@ export default ({ navitgation }) => (
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#FFF'
+  },
+  map: {
+    ...StyleSheet.absoluteFillObject,
   }
 });
