@@ -1,16 +1,29 @@
 import React from 'react';
 import { 
     AppRegistry,
+    Button,
     StyleSheet,
     Text,
     View,
     ListView,
     Image,
     Dimensions,
-    ScrollView
+    ScrollView,
+    Alert,
 } from 'react-native';
 
 export default class Stats extends React.Component {
+    deletePrompt() {
+	Alert.alert(
+	    'Delete Account',
+	    'Are you sure you want to delete your account?',
+	    [
+		{text: 'Delete', onPress: () => console.log('User delete')},
+		{text: 'No', onPress: () => console.log('No delete')},
+	    ],
+	);
+    }
+
   render() {
     return (
 
@@ -87,6 +100,21 @@ export default class Stats extends React.Component {
 	    </View>
 	</View>
 
+	<View style={styles.statsRow}>
+	    <View style={{height: 5, backgroundColor: '#000', }}></View>
+	</View>
+
+	<View style={styles.statsRow}>
+	    <View style={styles.statsGrid}>
+		<Button
+    	   	    onPress={this.deletePrompt}
+    	   	    title="Delete Account"
+    	   	    color="red"
+    	   	/>
+	   </View>
+	</View>
+
+
 	</View>
 	</ScrollView>
     );
@@ -94,6 +122,8 @@ export default class Stats extends React.Component {
 }
 
 const styles = StyleSheet.create({
+    delButton: {
+    },
     lineSeparator: {
 	backgroundColor: '#000',
 	height: 1,

@@ -1,7 +1,9 @@
 import React from 'react';
 import { 
     StyleSheet,
+    Dimensions,
     Text,
+    TextInput,
     View,
     Button,
     Alert,
@@ -14,10 +16,12 @@ import Header from './comps/components/Header';
 import buttontest from './comps/components/buttontest';
 import Bar from './comps/components/Bar';
 import Stats from './comps/components/Stats';
+import deleteAcc from './comps/components/deleteAcc';
 
 export default class App extends React.Component {
-    alertMess() {
-	Alert.alert("Settings button pressed");
+    constructor(props) {
+	super(props);
+    	this.state = { text: 'Useless Placeholder' };
     }
 
     itemSeparator = () => (

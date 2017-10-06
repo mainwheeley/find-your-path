@@ -1,6 +1,7 @@
 import React from 'react';
 import { 
     StyleSheet,
+    TextInput,
     Text,
     View,
     Button,
@@ -11,28 +12,43 @@ import {
 } from 'react-native';
 
 export default class Header extends React.Component {
+    constructor(props) {
+	super(props);
+	this.state = {text: 'Johnny Appleseed'};
+    }
+
     render() {
     return (
       
 	<View style={styles.mainHead}>
-	    <Image style={styles.headerBG} source={require('../imgs/bgprofdua.jpg')}>
+	    <Image style={styles.headerBG} source={require('../imgs/bgproftiga.jpg')}>
 
 	        <View style={styles.header}>
 	    	<View style={styles.profPicWrap}>
 	    	    <Image style={styles.profpic} source={require('../imgs/profpic.jpg')} /> 
 	    	</View>
-
-	    	<Text style={styles.name}> Johnny Appleseed </Text>
+		<View style={styles.nameChange}>
+		    <TextInput
+			style={{height: 20, borderColor: 'gray', borderWidth: 1, width: Dimensions.get('window').width / 2, textAlign: 'center',  }}
+			onChangeText={(text) => this.setState({text})}
+			value={this.state.text}
+		    />
+		</View>
 	        </View>
 
 	    </Image>
 	</View>
 	
+	    //	<Text style={styles.name}> Johnny Appleseed </Text>
     );
   }
 }
 
 const styles = StyleSheet.create({
+    nameChange: {
+	alignItems: 'center',
+	justifyContent: 'center',
+    },
     mainHead: {
 	height: (Dimensions.get('window').height / 4),
 	alignSelf: 'stretch',
