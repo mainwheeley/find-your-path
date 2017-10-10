@@ -1,9 +1,8 @@
-<<<<<<< HEAD
+
 import { AppRegistry } from "react-native";
 var app = require("./front/app.js");
 
 AppRegistry.registerComponent("fyp", () => app);
-=======
 import React, { Component } from 'react';
 import {
     AppRegistry,
@@ -63,4 +62,3 @@ container: {
     });
 
 AppRegistry.registerComponent("fyp", () => App);
->>>>>>> passport2
