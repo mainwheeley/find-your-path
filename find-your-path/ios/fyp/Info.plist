@@ -41,7 +41,10 @@
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string></string>
 	<key>NSAppTransportSecurity</key>
+<<<<<<< HEAD
 	<!--See http://ste.vn/2015/06/10/configuring-app-transport-security-ios-9-osx-10-11/ -->
+=======
+>>>>>>> passport2
 	<dict>
 		<key>NSExceptionDomains</key>
 		<dict>
@@ -52,6 +55,7 @@
 			</dict>
 		</dict>
 	</dict>
+<<<<<<< HEAD
   <key>CFBundleURLTypes</key>
   <array>
     <dict>
@@ -74,5 +78,43 @@
   </array>
   <key>NSPhotoLibraryUsageDescription</key>
   <string>To show more in a user's profile</string>
+=======
+	<key>CFBundleURLTypes</key>
+	<array>
+		<dict>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>fb152108875375918</string>
+			</array>
+		</dict>
+	</array>
+	<key>FacebookAppID</key>
+	<string>152108875375918</string>
+	<key>FacebookDisplayName</key>
+	<string>Find Your Path</string>
+	<key>LSApplicationQueriesSchemes</key>
+	<array>
+		<string>fbapi</string>
+		<string>fb-messenger-api</string>
+		<string>fbauth2</string>
+		<string>fbshareextension</string>
+	</array>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>To show more in a user&apos;s profile</string>
+	<key>UIAppFonts</key>
+	<array>
+		<string>Entypo.ttf</string>
+		<string>EvilIcons.ttf</string>
+		<string>Feather.ttf</string>
+		<string>FontAwesome.ttf</string>
+		<string>Foundation.ttf</string>
+		<string>Ionicons.ttf</string>
+		<string>MaterialCommunityIcons.ttf</string>
+		<string>MaterialIcons.ttf</string>
+		<string>Octicons.ttf</string>
+		<string>SimpleLineIcons.ttf</string>
+		<string>Zocial.ttf</string>
+	</array>
+>>>>>>> passport2
 </dict>
 </plist>
