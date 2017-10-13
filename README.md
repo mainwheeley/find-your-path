@@ -4,6 +4,13 @@ Find Your Path
 ======
 **Find Your Path** is an app for things. Short description here.
 
+Connecting to the database: 
+mysql -h findyourpath.c4q5kqb9rs5a.us-east-2.rds.amazonaws.com -P 3306 -u fyp -p
+
+pass:
+findyourpass
+
+
 <!-- #### Screenshot
 ![Screenshot Android](http://url/screenshot-appname-android.png "screenshot Android")
 
