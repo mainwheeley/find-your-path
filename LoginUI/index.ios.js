@@ -12,6 +12,9 @@ import {
   View
 } from 'react-native';
 
+import Login from './src/components/Login/Login';
+import App from './src/components/views/Apps';
+/*
 const FBSDK = require('react-native-fbsdk');
 const {
   LoginButton,
@@ -39,23 +42,12 @@ var Login = React.createClass({
     );
   }
 });
-
+*/
 export default class LogInUI extends Component {
   render() {
     return (
-      <View style={styles.container}>
-        <Text style={styles.welcome}>
-          Welcome to React Native!
-        </Text>
-        <Text style={styles.instructions}>
-          Welcome to the Facebook SDK for React Native!
-        </Text>
-        <Login />
-        <Text style={styles.instructions}>
-          Press Cmd+R to reload,{'\n'}
-          Cmd+D or shake for dev menu
-        </Text>
-      </View>
+        //<Login />
+        <App />
     );
   }
 }

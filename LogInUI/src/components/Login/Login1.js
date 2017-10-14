@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { StyleSheet, View, Image, Text, KeyboardAvoidingView, StatusBar, TextInput, TouchableOpacity } from 'react-native';
-
+import { StayLogged } from '../StayLogged';
 
 export default ({ navigation }) => (
   <KeyboardAvoidingView behavior="padding" style={styles.container}>
@@ -31,6 +31,7 @@ export default ({ navigation }) => (
           style={styles.input}
           ref={(input) => this.passwordInput = input}
           />
+
         <TouchableOpacity
           style={styles.buttonContainer}
           onPress={() => navigation.navigate("SignedIn")}
