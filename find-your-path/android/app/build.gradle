@@ -72,6 +72,10 @@ import com.android.build.OutputFile
  * ]
  */
 
+project.ext.react = [
+    entryFile: "index.js"
+]
+
 apply from: "../../node_modules/react-native/react.gradle"
 
 /**
@@ -133,10 +137,8 @@ android {
 }
 
 dependencies {
-<<<<<<< HEAD
-=======
     compile project(':react-native-vector-icons')
->>>>>>> passport2
+    compile project(':react-native-fbsdk')
     compile fileTree(dir: "libs", include: ["*.jar"])
     compile "com.android.support:appcompat-v7:23.0.1"
     compile "com.facebook.react:react-native:+"  // From node_modules
