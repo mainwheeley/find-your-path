@@ -8,6 +8,8 @@ import {
 } from 'react-native';
 import FBSDK, { LoginManager } from 'react-native-fbsdk'
 
+import Test from './routes/router';
+
 export default class App extends Component {
 
    _fbAuth() {
@@ -18,6 +20,7 @@ export default class App extends Component {
             } else {
                alert('Login success with permissions: '
                +result.grantedPermissions.toString());
+               //this.props.navigation.navigate('Test');
             }
          },
          function(error) {
