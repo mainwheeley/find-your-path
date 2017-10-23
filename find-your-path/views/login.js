@@ -7,10 +7,20 @@ import {
    TouchableOpacity
 } from 'react-native';
 import FBSDK, { LoginManager } from 'react-native-fbsdk'
+const util = require("util");
+//var {navigate} = this.props.navigation;
 
-import Test from './routes/router';
+class Login extends React.Component {
 
-export default class App extends Component {
+  static navigationOptions = {
+    title: "Login"
+  };
+
+  loganav(nav)
+  {
+    this._fbAuth();
+    nav('TestPage');
+  }
 
    _fbAuth() {
       LoginManager.logInWithReadPermissions(['public_profile']).then(
@@ -20,7 +30,7 @@ export default class App extends Component {
             } else {
                alert('Login success with permissions: '
                +result.grantedPermissions.toString());
-               //this.props.navigation.navigate('Test');
+                //navigate('TestPage');
             }
          },
          function(error) {
@@ -30,12 +40,17 @@ export default class App extends Component {
    }
 
    render() {
+    var {navigate} = this.props.navigation;
+   console.log("this.props.navigation = " + util.inspect(this.props.navigation, false, null));
       return (
+        
          <View style={styles.container}>
-            <TouchableOpacity onPress={this._fbAuth}>
+            <TouchableOpacity onPress={ this.loganav(navigate) 
+              }>
                <Text>Login with Facebook</Text>
             </TouchableOpacity>
-         </View>
+         </View> 
+
       );
    }
 }
@@ -59,4 +74,4 @@ const styles = StyleSheet.create({
    },
 });
 
-AppRegistry.registerComponent('fyp', () => App);
+export default Login;

@@ -1,8 +1,13 @@
 import React, { Component } from 'react'
 import { AppRegistry, View, StyleSheet } from 'react-native'
+class Test extends React.Component {
 
-class test extends Component {
+  static navigationOptions = {
+    title: "Test"
+  };
+//export default class Test extends Component {
   render() {
+   
     return (
       <View style={styles.container}>
         <View style={styles.box} />
@@ -27,5 +32,5 @@ const styles = StyleSheet.create({
   },
 })
 
-export default test;
-//AppRegistry.registerComponent('test', () => test)
+export default Test;
+//AppRegistry.registerComponent('Test', () => Test)
