@@ -1,5 +1,5 @@
 import React from 'react';
-import { 
+import {
     StyleSheet,
     Dimensions,
     Text,
@@ -18,7 +18,7 @@ import Bar from './comps/components/Bar';
 import Stats from './comps/components/Stats';
 import deleteAcc from './comps/components/deleteAcc';
 
-export default ([navigation}) => {
+class Profile extends React.Component {
     constructor(props) {
 	super(props);
     	this.state = { text: 'Useless Placeholder' };
@@ -36,7 +36,7 @@ export default ([navigation}) => {
     render() {
     return (
  //   <View style = {styles.container}>
-	<View style={styles.container}> 
+	<View style={styles.container}>
 
 	    <Header />
 	    <Bar />
@@ -45,7 +45,7 @@ export default ([navigation}) => {
 	</View>
 //    </View>
 
-//	<View style={styles.container}>	
+//	<View style={styles.container}>
 //	    <FlatList
 //		data={[{key: 'Total running time: '}, {key: 'Total miles run'}]}
 //  	    	renderItem={({item}) => <Text style={styles.statStyle}>{item.key}</Text>}
@@ -69,5 +69,5 @@ const styles = StyleSheet.create({
 	backgroundColor: '#fff',
     }
 });
-
+export default Profile;
 //var test = React.createClass
