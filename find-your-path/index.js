@@ -7,20 +7,42 @@ import {
 import { TabNavigator, StackNavigator } from 'react-navigation';
 
 //import TestStack from './routes/router.js';
-import Test from './views/test.js';
-import Login from './views/login.js';
+//import Test from './views/test.js';
+//import Login from './views/login.js';
 
+import  { createRootNavigator } from "./views/components/router.js";
+
+export default class App extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      signedIn: false,
+      checkedSignedIn: false
+    };
+  }
+  render() {
+    const { checkedSignedIn, signedIn } = this.state;
+
+    if (signedIn) {
+
+    }
+    const Layout = createRootNavigator(signedIn);
+    return <Layout />;
+  }
+}
+
+/*
 const App = StackNavigator({
-    LoginPage: { 
+    LoginPage: {
         screen: Login
-    }, 
+    },
     TestPage: {
         screen: Test
     }
-}, /*{
+}, *//*{
     mode: 'modal',
     headerMode: 'none',
-  }*/);
+  });
 
 /*class App extends Component {
    render() {
@@ -53,4 +75,3 @@ const App = StackNavigator({
 }); */
 //export default App;
 AppRegistry.registerComponent('fyp', () => App);
-
