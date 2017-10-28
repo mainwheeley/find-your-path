@@ -27,6 +27,7 @@ const styles = StyleSheet.create({
     bar: {
 	borderColor: '#fff',
 	borderTopWidth: 4,
+	height: 80,
 	backgroundColor: '#8BC34A',
 	flexDirection: 'row',
     },

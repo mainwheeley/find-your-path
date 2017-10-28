@@ -1,6 +1,7 @@
 import React from 'react';
 import { 
     StyleSheet,
+    TouchableOpacity,
     Dimensions,
     Text,
     TextInput,
@@ -19,9 +20,12 @@ import Stats from './comps/components/Stats';
 import deleteAcc from './comps/components/deleteAcc';
 
 export default class App extends React.Component {
-    constructor(props) {
-	super(props);
-    	this.state = { text: 'Useless Placeholder' };
+    constructor() {
+	super();
+    	this.state = { 
+	    text: 'Useless Placeholder',
+	    viewSection: false
+	};
     }
 
     itemSeparator = () => (
@@ -33,6 +37,18 @@ export default class App extends React.Component {
 	/>
     );
 
+    renderStats() {
+	if (!this.state.viewSection) {
+	    return (
+		<Stats />
+	    )
+	}
+    }
+
+    setStatsRender=()=> {
+	this.setState({viewSection: true})
+    }
+
     render() {
     return (
  //   <View style = {styles.container}>
@@ -40,7 +56,10 @@ export default class App extends React.Component {
 
 	    <Header />
 	    <Bar />
-	    <Stats />
+	    <TouchableOpacity onPress={this.setStatsRender}>
+		<Text> Render Stats!</Text>
+	    </TouchableOpacity>
+	    {this.renderStats()}
 
 	</View>
 //    </View>
