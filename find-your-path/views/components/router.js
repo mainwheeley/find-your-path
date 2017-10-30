@@ -8,8 +8,8 @@ import SignIn from './Login/Login1.js';
 import Maps from './views/Maps';
 import Profile from '../Main.js';
 import MapSettings from './views/MapSettings';
-import Settings from './Settings.js';
-//import Settings from '../Settings.js';
+//import Settings from './Settings.js';
+import Settings from '../Settings.js';
 //import Weather from '../../Weather/App.js';
 
 const headerStyle = {

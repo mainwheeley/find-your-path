@@ -1,17 +1,6 @@
 import React, { Component } from 'react';
 import { AppRegistry, StyleSheet, Text, View, Button, TouchableOpacity, Alert, TextInput, Picker, Platform} from 'react-native';
-import { Constants, Notifications, Permissions } from 'expo';
-
-async function getiOSNotificationPermission() {
-  const { status } = await Permissions.getAsync(
-    Permissions.NOTIFICATIONS
-  );
-  if (status !== 'granted') {
-    await Permissions.askAsync(Permissions.NOTIFICATIONS);
-  }
-}
-
-
+//import { Constants, Notifications, Permissions } from 'expo';
 
 export default class Settings extends Component{
   constructor(props){
@@ -42,19 +31,6 @@ export default class Settings extends Component{
   Alert.alert('Saved')
 }
 
-listenForNotifications = () => {
-  Notifications.addListener(notification => {
-    if (notification.origin === 'received' && Platform.OS === 'ios') {
-      Alert.alert(notification.title, notification.body);
-    }
-  });
-};
-
-componentWillMount() {
-  getiOSNotificationPermission();
-  this.listenForNotifications();
-}
-
 
   render() {
     if(this.state.saveFlag == 1){
@@ -68,11 +44,9 @@ componentWillMount() {
     }
     return (
       <View>
-
         <View>
           <Text style={styles.style}>Settings</Text>
         </View>
-
         <Picker
           style={[styles.onePickers]} itemStyle={styles.onePickerItems}
           selectedValue={this.state.hour}
@@ -185,9 +159,7 @@ componentWillMount() {
             <Text style={styles.saveButtonText}>Save Daily Notification Time</Text>
           </View>
         </TouchableOpacity>
-
       </View>
-
     );
   }
 }
