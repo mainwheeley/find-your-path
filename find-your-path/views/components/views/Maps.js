@@ -86,12 +86,11 @@ class Clock extends Component {
   }
   render() {
     return (
-      <View style={styles.container}>
+      <View style={styles.stopwatch }>
         <StatusBar style={{backgroundColor: 'transparent'}}/>
         <Text style={styles.timeText}>
           {this.state.time}
         </Text>
-
       </View>
     )
   }
@@ -101,17 +100,19 @@ class Clock extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#000',
+    //backgroundColor: '#000',
     justifyContent: 'flex-end',
     alignItems: 'center',
   },
-  timeText: {
-    color: '#999999',
-    fontSize: 50,
+  stopwatch: {
+    flex: 0,
+    backgroundColor: '#000',
+    justifyContent: 'center',
+    alignItems: 'center',
   },
-  dateText: {
-    color: '#999999',
-    fontSize: 40,
+  timeText: {
+    color: '#FFFFFF',
+    fontSize: 50,
   },
   map: {
     ...StyleSheet.absoluteFillObject,
