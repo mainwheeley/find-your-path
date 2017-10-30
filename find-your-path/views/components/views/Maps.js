@@ -61,24 +61,21 @@ MapStyle =
 export default ({ navigation }) => (
   <View style={styles.container}>
     <Clock />
-    <Button
-      backgroundColor='#03A9F4'
-      title='Cancel'
-      onPress={() => navigation.goBack(null)} />
   </View>
 )
 class Clock extends Component {
   constructor(props) {
     super(props);
+    this.counter = 0;
     this.state = {
-      time: moment().format("LTS"),
+      time: moment().hour(0).minute(0).second(this.counter++).format('HH : mm : ss'),
       //data: moment().format("LL"),
     };
   }
   componentDidMount() {
     var intervalId = setInterval (() => {
       this.setState({
-        time: moment().format("LTS"),
+        time: moment().hour(0).minute(0).second(this.counter++).format('HH : mm : ss'),
         //date: moment().format("LL")
       });
     }, 1000);
@@ -105,7 +102,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#000',
-    justifyContent: 'flex-start',
+    justifyContent: 'flex-end',
     alignItems: 'center',
   },
   timeText: {

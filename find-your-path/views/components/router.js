@@ -8,6 +8,7 @@ import SignIn from './Login/Login1.js';
 import Maps from './views/Maps';
 import Profile from '../Main.js';
 import MapSettings from './views/MapSettings';
+import Settings from './Settings.js';
 //import Settings from '../Settings.js';
 //import Weather from '../../Weather/App.js';
 
@@ -29,7 +30,7 @@ export const MapView = StackNavigator({
   MapSettings: {
     screen: MapSettings,
     navigationOptions: {
-      title: "Settings",
+      title: "Create Route",
       headerStyle
     }
   },
@@ -54,15 +55,15 @@ export const SignedIn = TabNavigator(
     Maps: {
       screen: MapView,
       navigationOptions: {
-        tabBarLabel: "Map"
+        tabBarLabel: "Route"
       }
     },
-    /*Settings: {
-      screen: ,
+    Settings: {
+      screen: Settings,
       navigationOptions: {
         tabBarLabel: "Settings"
       }
-    },*/
+    },
   },
   {
     tabBarOptions: {

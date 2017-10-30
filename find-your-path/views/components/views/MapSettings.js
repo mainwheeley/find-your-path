@@ -29,7 +29,7 @@ export default ({ navigation }) => (
     />
     <Button
       backgroundColor='#03A9F4'
-      title='Generate Route'
+      title='Create Route'
       onPress={() => navigation.navigate('Maps')}
     />
   </View>
