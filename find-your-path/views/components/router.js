@@ -8,6 +8,8 @@ import SignIn from './Login/Login1.js';
 import Maps from './views/Maps';
 import Profile from '../Main.js';
 import MapSettings from './views/MapSettings';
+//import Settings from '../Settings.js';
+//import Weather from '../../Weather/App.js';
 
 const headerStyle = {
   marginTop: Platform.OS === "android" ? StatusBar.currentHeight : 0
@@ -40,20 +42,27 @@ export const MapView = StackNavigator({
   }
 });
 
+
 export const SignedIn = TabNavigator(
   {
+    Profile: {
+      screen: Profile,
+      navigationOptions: {
+        tabBarLabel: "Profile"
+      }
+    },
     Maps: {
       screen: MapView,
       navigationOptions: {
         tabBarLabel: "Map"
       }
     },
-    Profile: {
-      screen: Profile,
+    /*Settings: {
+      screen: ,
       navigationOptions: {
-        tabBarLabel: "Profile"
+        tabBarLabel: "Settings"
       }
-    }
+    },*/
   },
   {
     tabBarOptions: {

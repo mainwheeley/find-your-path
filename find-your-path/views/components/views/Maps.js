@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
-import { View, StyleSheet } from 'react-native';
+import { View, StyleSheet, StatusBar } from 'react-native';
 import { Button, Text } from 'react-native-elements';
+import KeepAwake from 'react-native-keep-awake';
+import moment from "moment";
 //import MapView from 'react-native-maps';
 
 
@@ -56,17 +58,59 @@ MapStyle =
   //onRegionChange={this.onRegionChange}
 />
 */
-export default ({ navitgation }) => (
-  <View >
-    <Text>MapView</Text>
-
+export default ({ navigation }) => (
+  <View style={styles.container}>
+    <Clock />
+    <Button
+      backgroundColor='#03A9F4'
+      title='Cancel'
+      onPress={() => navigation.goBack(null)} />
   </View>
 )
+class Clock extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      time: moment().format("LTS"),
+      //data: moment().format("LL")
+    };
+  }
+  componentDidMount() {
+    setInterval (() => {
+      this.setState({
+        time: moment().format("LTS"),
+        //date: moment().format("LL")
+      });
+    }, 1000);
+  }
+  render() {
+    return (
+      <View style={styles.container}>
+        <StatusBar style={{backgroundColor: 'transparent'}}/>
+        <Text style={styles.timeText}>
+          {this.state.time}
+        </Text>
+
+      </View>
+    )
+  }
+}
 
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: '#000',
+    justifyContent: 'flex-start',
+    alignItems: 'center',
+  },
+  timeText: {
+    color: '#999999',
+    fontSize: 50,
+  },
+  dateText: {
+    color: '#999999',
+    fontSize: 40,
   },
   map: {
     ...StyleSheet.absoluteFillObject,
