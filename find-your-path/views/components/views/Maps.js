@@ -72,16 +72,20 @@ class Clock extends Component {
     super(props);
     this.state = {
       time: moment().format("LTS"),
-      //data: moment().format("LL")
+      //data: moment().format("LL"),
     };
   }
   componentDidMount() {
-    setInterval (() => {
+    var intervalId = setInterval (() => {
       this.setState({
         time: moment().format("LTS"),
         //date: moment().format("LL")
       });
     }, 1000);
+    this.setState({intervalId: intervalId});
+  }
+  componentWillUnmount() {
+    clearInterval(this.state.intervalId);
   }
   render() {
     return (
