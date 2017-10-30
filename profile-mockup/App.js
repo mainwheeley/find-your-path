@@ -24,7 +24,8 @@ export default class App extends React.Component {
 	super();
     	this.state = { 
 	    text: 'Useless Placeholder',
-	    viewSection: false
+	    viewStats: false,
+	    viewWorkouts: false
 	};
     }
 
@@ -38,7 +39,7 @@ export default class App extends React.Component {
     );
 
     renderStats() {
-	if (!this.state.viewSection) {
+	if (this.state.viewStats) {
 	    return (
 		<Stats />
 	    )
@@ -46,7 +47,17 @@ export default class App extends React.Component {
     }
 
     setStatsRender=()=> {
-	this.setState({viewSection: true})
+	this.setState({
+	    viewStats: true,
+	    viewWorkouts: false
+	})
+    }
+
+    setWorkoutsRender=()=> {
+	this.setState({
+	    viewStats: false,
+	    viewWorkouts: true
+	})
     }
 
     render() {
@@ -56,9 +67,27 @@ export default class App extends React.Component {
 
 	    <Header />
 	    <Bar />
-	    <TouchableOpacity onPress={this.setStatsRender}>
-		<Text> Render Stats!</Text>
-	    </TouchableOpacity>
+	    <View style={styles.buttonBar}>
+
+		<View style={styles.buttonBorder}>
+		    <TouchableOpacity onPress={this.setStatsRender}>
+	    	        <Image
+	    	            style={styles.buttons}
+	    	            source={require('./comps/imgs/stats.png')}
+	    	        />
+	    	    </TouchableOpacity>
+		</View>
+
+		<View style={styles.buttonBorder}>
+		    <TouchableOpacity onPress={this.setWorkoutsRender}>
+	    	        <Image
+	    	            style={styles.buttons}
+	    	            source={require('./comps/imgs/workout.png')}
+	    	        />
+	    	    </TouchableOpacity>
+		</View>
+
+	    </View>
 	    {this.renderStats()}
 
 	</View>
@@ -76,6 +105,30 @@ export default class App extends React.Component {
 }
 
 const styles = StyleSheet.create({
+    buttonBar: {
+	borderColor: '#fff',
+	borderWidth: 5,
+	borderBottomWidth: 0,
+	height: Dimensions.get('window').height / 10,
+	backgroundColor: '#fff',
+	flexDirection: 'row',
+	alignItems: 'center',
+    },
+    buttons: {
+	height: Dimensions.get('window').height / 17,
+	width: Dimensions.get('window').height / 17,
+    },
+    buttonBorder: {
+	flex: 1,
+	height: Dimensions.get('window').height / 15,
+	width: Dimensions.get('window').height / 15,
+	borderWidth: 1,
+	borderColor: '#F44336',
+	borderRadius: 10,
+	borderRightWidth: 5,
+	borderLeftWidth: 5,
+	alignItems: 'center',
+    },
     statStyle: {
 	marginTop: 20,
 	marginBottom: 20,
