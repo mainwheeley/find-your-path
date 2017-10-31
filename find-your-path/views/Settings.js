@@ -1,13 +1,17 @@
 import React, { Component } from 'react';
-import { AppRegistry, StyleSheet, Text, View, Button, TouchableOpacity, Alert, TextInput, Picker, Platform} from 'react-native';
-//import { Constants, Notifications, Permissions } from 'expo';
+import { AppRegistry, StyleSheet, Text, View, Button, TouchableOpacity, Alert, TextInput, Picker, Platform, AppState} from 'react-native';
+import PushController from './PushController';
+import PushNotification from 'react-native-push-notification';
+
+
 
 export default class Settings extends Component{
   constructor(props){
     global.hours = 0;
     global.min = 0;
     global.amORpm = '';
-    super(props)
+    super(props);
+    this.handleAppStateChange = this.handleAppStateChange.bind(this);
     this.state = {
       saveFlag: 0,
       hour: '',
@@ -31,6 +35,32 @@ export default class Settings extends Component{
   Alert.alert('Saved')
 }
 
+  componentDidMount(){
+    AppState.addEventListener('change', this.handleAppStateChange)
+  }
+
+  componentWillUnmount(){
+    AppState.removeEventListener('change', this.handleAppStateChange)
+  }
+
+  handleAppStateChange(appState){
+    if(appState == 'background'){
+      let date = new Date();
+      date.setHours()
+      if(Platform.OS === 'ios') {
+        date = date.toISOString();
+      }
+      PushNotification.localNotificationSchedule({
+      message: "Don't forget to work out today!", // (required)
+      vibrate: true,
+      repeatType: 'day',
+      date,
+      //toISOString might not be necessary
+      });
+    }
+  }
+
+
 
   render() {
     if(this.state.saveFlag == 1){
@@ -44,9 +74,11 @@ export default class Settings extends Component{
     }
     return (
       <View>
+
         <View>
           <Text style={styles.style}>Settings</Text>
         </View>
+
         <Picker
           style={[styles.onePickers]} itemStyle={styles.onePickerItems}
           selectedValue={this.state.hour}
@@ -159,7 +191,11 @@ export default class Settings extends Component{
             <Text style={styles.saveButtonText}>Save Daily Notification Time</Text>
           </View>
         </TouchableOpacity>
+
+        <PushController />
+
       </View>
+
     );
   }
 }
