@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { AppRegistry, StyleSheet, Text, View, Dimensions } from "react-native";
 import MapView, { PROVIDER_GOOGLE } from "react-native-maps";
+import Polyline from '@mapbox/polyline';
 
 
  const {width, height} = Dimensions.get('window')
@@ -27,7 +28,8 @@ class Gmaps extends Component {
             markerPosition: {
               latitude: 0,
               longitude: 0
-            }
+            },
+            coords: []
           }
         
       }
@@ -64,10 +66,37 @@ class Gmaps extends Component {
         }
         this.setState({initialPosition: lastRegion});
         this.setState({markerPosition: lastRegion});
-        
+
       
       })
+      var here = this.state.initialPosition.longitude + " , " + this.state.initialPosition.latitude; 
+      
+      this.getDirections(here, "41.8781, 87.6798");
+      console.warn("hello!");
+      //this.getDirections("40.1884979, 29.061018", "41.0082,28.9784");
     } 
+
+    async getDirections(startLoc, destinationLoc) {
+      try {
+          let resp = await fetch(`https://maps.googleapis.com/maps/api/directions/json?origin=${ startLoc }&destination=${ destinationLoc }`)
+          console.warn(JSON.stringify(resp));
+          let respJson = await resp.json();
+          console.warn("hello2")
+          console.warn(destinationLocation) 
+          let points = Polyline.decode(respJson.routes[0].overview_polyline.points);
+          let coords = points.map((point, index) => {
+              return  {
+                  latitude : point[0],
+                  longitude : point[1]
+              }
+          })
+                   
+          this.setState({coords: coords})
+          return coords
+      } catch(error) {
+          return error
+      }
+  }
 
     componentWillUnmount()
     {
@@ -89,6 +118,11 @@ class Gmaps extends Component {
                 </View>
               </View>
               </MapView.Marker>
+             <MapView.Polyline
+             coordinates={this.state.coords}
+            strokeWidth={2}
+            strokeColor="red">
+            </MapView.Polyline>
             </MapView>
       </View>
     );
