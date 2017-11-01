@@ -1,15 +1,7 @@
 import React, { Component } from 'react';
-import { AppRegistry, StyleSheet, Text, View, Button, TouchableOpacity, Alert, TextInput, Picker, Platform} from 'react-native';
-import { Constants, Notifications, Permissions } from 'expo';
-
-async function getiOSNotificationPermission() {
-  const { status } = await Permissions.getAsync(
-    Permissions.NOTIFICATIONS
-  );
-  if (status !== 'granted') {
-    await Permissions.askAsync(Permissions.NOTIFICATIONS);
-  }
-}
+import { AppRegistry, StyleSheet, Text, View, Button, TouchableOpacity, Alert, TextInput, Picker, Platform, AppState} from 'react-native';
+import PushController from './PushController';
+import PushNotification from 'react-native-push-notification';
 
 
 
@@ -18,7 +10,8 @@ export default class Settings extends Component{
     global.hours = 0;
     global.min = 0;
     global.amORpm = '';
-    super(props)
+    super(props);
+    this.handleAppStateChange = this.handleAppStateChange.bind(this);
     this.state = {
       saveFlag: 0,
       hour: '',
@@ -42,18 +35,31 @@ export default class Settings extends Component{
   Alert.alert('Saved')
 }
 
-listenForNotifications = () => {
-  Notifications.addListener(notification => {
-    if (notification.origin === 'received' && Platform.OS === 'ios') {
-      Alert.alert(notification.title, notification.body);
-    }
-  });
-};
+  componentDidMount(){
+    AppState.addEventListener('change', this.handleAppStateChange)
+  }
 
-componentWillMount() {
-  getiOSNotificationPermission();
-  this.listenForNotifications();
-}
+  componentWillUnmount(){
+    AppState.removeEventListener('change', this.handleAppStateChange)
+  }
+
+  handleAppStateChange(appState){
+    if(appState == 'background'){
+      let date = new Date();
+      date.setHours()
+      if(Platform.OS === 'ios') {
+        date = date.toISOString();
+      }
+      PushNotification.localNotificationSchedule({
+      message: "Don't forget to work out today!", // (required)
+      vibrate: true,
+      repeatType: 'day',
+      date,
+      //toISOString might not be necessary
+      });
+    }
+  }
+
 
 
   render() {
@@ -185,6 +191,8 @@ componentWillMount() {
             <Text style={styles.saveButtonText}>Save Daily Notification Time</Text>
           </View>
         </TouchableOpacity>
+
+        <PushController />
 
       </View>
 

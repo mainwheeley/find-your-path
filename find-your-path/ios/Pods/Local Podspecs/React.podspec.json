@@ -38,7 +38,11 @@
       "exclude_files": [
         "**/__tests__/*",
         "IntegrationTests/*",
+<<<<<<< HEAD
         "React/DevSupport/{*c,m,mm,S}",
+=======
+        "React/DevSupport/*",
+>>>>>>> ac8874b6fe23e98e8bb524912a1bc6f8b7e16ca3
         "React/Inspector/*",
         "ReactCommon/yoga/*",
         "React/Cxx*/*",
