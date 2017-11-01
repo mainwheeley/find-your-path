@@ -38,7 +38,7 @@
       "exclude_files": [
         "**/__tests__/*",
         "IntegrationTests/*",
-        "React/DevSupport/*",
+        "React/DevSupport/{*c,m,mm,S}",
         "React/Inspector/*",
         "ReactCommon/yoga/*",
         "React/Cxx*/*",

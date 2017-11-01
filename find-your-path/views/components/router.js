@@ -9,6 +9,7 @@ import Maps from './views/Maps';
 import Profile from '../Main.js';
 import MapSettings from './views/MapSettings';
 import Settings from './Settings.js';
+import Gmaps from './views/gm';
 //import Settings from '../Settings.js';
 //import Weather from '../../Weather/App.js';
 
@@ -40,7 +41,12 @@ export const MapView = StackNavigator({
       title: "Map",
       headerStyle
     }
+  },
+  Gmaps: {
+    screen: Gmaps
   }
+
+
 });
 
 

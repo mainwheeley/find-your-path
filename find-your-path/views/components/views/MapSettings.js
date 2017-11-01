@@ -32,6 +32,11 @@ export default ({ navigation }) => (
       title='Create Route'
       onPress={() => navigation.navigate('Maps')}
     />
+    <Button
+      backgroundColor='#03A9F4'
+      title='Jump to Map'
+      onPress={() => navigation.navigate('Gmaps')}
+    />
   </View>
 )
 
