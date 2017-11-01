@@ -8,6 +8,12 @@ class Gmaps extends Component {
     static navigationOptions = {
         title: "Gmaps"
       };
+
+
+   /*componentDidMount()
+    {
+      navigator.geolocatoin.getCurrentPosition()
+    } */
   
     render() {
     return (
