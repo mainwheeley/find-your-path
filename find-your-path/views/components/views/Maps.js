@@ -58,12 +58,13 @@ MapStyle =
   //onRegionChange={this.onRegionChange}
 />
 */
+/*
 export default ({ navigation }) => (
   <View style={styles.container}>
     <Clock />
   </View>
-)
-class Clock extends Component {
+)*/
+export default class Clock extends Component {
   constructor(props) {
     super(props);
     this.counter = 0;
@@ -87,7 +88,6 @@ class Clock extends Component {
   render() {
     return (
       <View style={styles.stopwatch }>
-        <StatusBar style={{backgroundColor: 'transparent'}}/>
         <Text style={styles.timeText}>
           {this.state.time}
         </Text>
@@ -106,13 +106,13 @@ const styles = StyleSheet.create({
   },
   stopwatch: {
     flex: 0,
-    backgroundColor: '#000',
+    //backgroundColor: '#000',
     justifyContent: 'center',
     alignItems: 'center',
   },
   timeText: {
-    color: '#FFFFFF',
-    fontSize: 50,
+    color: '#fff',
+    fontSize: 16,
   },
   map: {
     ...StyleSheet.absoluteFillObject,
