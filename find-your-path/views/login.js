@@ -19,7 +19,7 @@ class Login extends React.Component {
   loganav(nav)
   {
     this._fbAuth();
-    nav('TestPage');
+    nav('SignedIn');
   }
 
    _fbAuth() {
@@ -30,7 +30,7 @@ class Login extends React.Component {
             } else {
                alert('Login success with permissions: '
                +result.grantedPermissions.toString());
-                //navigate('TestPage');
+                //navigate('SignedIn');
             }
          },
          function(error) {
@@ -43,13 +43,13 @@ class Login extends React.Component {
     var {navigate} = this.props.navigation;
    console.log("this.props.navigation = " + util.inspect(this.props.navigation, false, null));
       return (
-        
+
          <View style={styles.container}>
-            <TouchableOpacity onPress={ this.loganav(navigate) 
+            <TouchableOpacity onPress={ this.loganav(navigate)
               }>
                <Text>Login with Facebook</Text>
             </TouchableOpacity>
-         </View> 
+         </View>
 
       );
    }
