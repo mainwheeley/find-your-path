@@ -69,23 +69,23 @@ export default class App extends React.Component {
 	    <Bar />
 	    <View style={styles.buttonBar}>
 
-		<View style={styles.buttonBorder}>
-		    <TouchableOpacity onPress={this.setStatsRender}>
+	    <TouchableOpacity 
+		onPress={this.setStatsRender}
+		style={styles.buttonBorder} >
 	    	        <Image
 	    	            style={styles.buttons}
 	    	            source={require('./comps/imgs/stats.png')}
 	    	        />
-	    	    </TouchableOpacity>
-		</View>
+	    </TouchableOpacity>
 
-		<View style={styles.buttonBorder}>
-		    <TouchableOpacity onPress={this.setWorkoutsRender}>
+	    <TouchableOpacity 
+		onPress={this.setWorkoutsRender}
+		style={styles.buttonBorder} >
 	    	        <Image
 	    	            style={styles.buttons}
 	    	            source={require('./comps/imgs/workout.png')}
 	    	        />
-	    	    </TouchableOpacity>
-		</View>
+	    </TouchableOpacity>
 
 	    </View>
 	    {this.renderStats()}
