@@ -19,7 +19,7 @@ class Gmaps extends Component {
         super(props) 
           
         this.state = {
-            initialPosition: {
+          /*  initialPosition: {
               latitude: 0,
               longitude: 0,
               latitudeDelta: 0,
@@ -28,7 +28,7 @@ class Gmaps extends Component {
             markerPosition: {
               latitude: 0,
               longitude: 0
-            },
+            },*/
             coords: []
           }
         
@@ -39,7 +39,7 @@ class Gmaps extends Component {
 
 
    componentDidMount()
-    {
+    {/*
       navigator.geolocation.getCurrentPosition((position) =>{
         var lat = parseFloat(position.coords.latitude);
         var long = parseFloat(position.coords.longitude);
@@ -70,8 +70,8 @@ class Gmaps extends Component {
       
       })
       var here = this.state.initialPosition.longitude + " , " + this.state.initialPosition.latitude; 
-      
-      this.getDirections(here, "41.8781, 87.6798");
+      */
+      this.getDirections("40.1884979, 29.061018", "41.8781, 87.6798");
       console.warn("hello!");
       //this.getDirections("40.1884979, 29.061018", "41.0082,28.9784");
     } 
@@ -81,8 +81,8 @@ class Gmaps extends Component {
           let resp = await fetch(`https://maps.googleapis.com/maps/api/directions/json?origin=${ startLoc }&destination=${ destinationLoc }`)
           console.warn(JSON.stringify(resp));
           let respJson = await resp.json();
-          console.warn("hello2")
-          console.warn(destinationLocation) 
+          //console.warn("hello2")
+          //console.warn(destinationLocation) 
           let points = Polyline.decode(respJson.routes[0].overview_polyline.points);
           let coords = points.map((point, index) => {
               return  {
@@ -107,7 +107,21 @@ class Gmaps extends Component {
     render() {
     return (
       <View style={styles.container}>
-        <MapView
+       
+       <MapView style={styles.map} initialRegion={{
+          latitude:41.0082, 
+          longitude:28.9784, 
+          latitudeDelta: 0.0922,
+          longitudeDelta: 0.0421
+        }}>
+
+        <MapView.Polyline 
+            coordinates={this.state.coords}
+            strokeWidth={2}
+            strokeColor="red"/>
+
+        </MapView>
+       {/* <MapView
           provider={PROVIDER_GOOGLE}
           region={this.state.initialPosition}
           style={StyleSheet.absoluteFillObject}>
@@ -124,6 +138,7 @@ class Gmaps extends Component {
             strokeColor="red">
             </MapView.Polyline>
             </MapView>
+       */}
       </View>
     );
   }
@@ -140,6 +155,15 @@ const styles = StyleSheet.create({
     borderColor: 'red',
     alignItems: 'center',
     justifyContent: 'center'
+  },
+  map: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+    width: Dimensions.get('window').width,
+    height: Dimensions.get('window').height
   },
   marker: {
     height: 20,
