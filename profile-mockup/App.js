@@ -18,6 +18,7 @@ import buttontest from './comps/components/buttontest';
 import Bar from './comps/components/Bar';
 import Stats from './comps/components/Stats';
 import deleteAcc from './comps/components/deleteAcc';
+import Workouts from './comps/components/Workouts';
 
 export default class App extends React.Component {
     constructor() {
@@ -42,6 +43,14 @@ export default class App extends React.Component {
 	if (this.state.viewStats) {
 	    return (
 		<Stats />
+	    )
+	}
+    }
+
+    renderWorkouts() {
+	if (this.state.viewWorkouts) {
+	    return (
+		<Workouts />
 	    )
 	}
     }
@@ -89,6 +98,7 @@ export default class App extends React.Component {
 
 	    </View>
 	    {this.renderStats()}
+	    {this.renderWorkouts()}
 
 	</View>
 //    </View>
