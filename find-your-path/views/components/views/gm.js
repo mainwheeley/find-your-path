@@ -10,6 +10,7 @@ import Polyline from '@mapbox/polyline';
  const A_R = width / height;
  const LD = 0.0922;
  const LGD = LD = A_R;
+ var here;
 
 class Gmaps extends Component {
     static navigationOptions = {
@@ -19,7 +20,7 @@ class Gmaps extends Component {
         super(props) 
           
         this.state = {
-          /*  initialPosition: {
+            initialPosition: {
               latitude: 0,
               longitude: 0,
               latitudeDelta: 0,
@@ -28,7 +29,7 @@ class Gmaps extends Component {
             markerPosition: {
               latitude: 0,
               longitude: 0
-            },*/
+            },
             coords: []
           }
         
@@ -39,11 +40,12 @@ class Gmaps extends Component {
 
 
    componentDidMount()
-    {/*
+    {
       navigator.geolocation.getCurrentPosition((position) =>{
         var lat = parseFloat(position.coords.latitude);
         var long = parseFloat(position.coords.longitude);
-
+        here = parseFloat(lat) + ", " + parseFloat(long);
+        this.getDirections(here, "Naperville, IL");
         var initialRegion = {
           latitude: lat,
           longitude: long,
@@ -65,21 +67,19 @@ class Gmaps extends Component {
           longitudeDelta: LGD
         }
         this.setState({initialPosition: lastRegion});
-        this.setState({markerPosition: lastRegion});
-
-      
+        this.setState({markerPosition: lastRegion});     
       })
-      var here = this.state.initialPosition.longitude + " , " + this.state.initialPosition.latitude; 
-      */
-      this.getDirections("40.1884979, 29.061018", "41.8781, 87.6798");
-      console.warn("hello!");
+      //this.getDirections("52.5200, 13.4050", "41.0082, 28.9784");
+      /* console.warn(here);
+      this.getDirections(here, "Naperville, IL"); */
+
+      //console.warn("hello!");
       //this.getDirections("40.1884979, 29.061018", "41.0082,28.9784");
     } 
 
     async getDirections(startLoc, destinationLoc) {
       try {
           let resp = await fetch(`https://maps.googleapis.com/maps/api/directions/json?origin=${ startLoc }&destination=${ destinationLoc }`)
-          console.warn(JSON.stringify(resp));
           let respJson = await resp.json();
           //console.warn("hello2")
           //console.warn(destinationLocation) 
@@ -94,7 +94,8 @@ class Gmaps extends Component {
           this.setState({coords: coords})
           return coords
       } catch(error) {
-          return error
+        alert(error + " getdirections error");  
+        return error
       }
   }
 
@@ -121,7 +122,7 @@ class Gmaps extends Component {
             strokeColor="red"/>
 
         </MapView>
-       {/* <MapView
+        <MapView
           provider={PROVIDER_GOOGLE}
           region={this.state.initialPosition}
           style={StyleSheet.absoluteFillObject}>
@@ -138,7 +139,6 @@ class Gmaps extends Component {
             strokeColor="red">
             </MapView.Polyline>
             </MapView>
-       */}
       </View>
     );
   }
