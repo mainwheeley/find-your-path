@@ -1,12 +1,12 @@
 import React from 'react';
-import { 
+import {
     StyleSheet,
     Text,
     View,
     FlatList,
     Dimensions,
 } from 'react-native';
-import {listWorkouts} from './Data';
+import {listWorkouts} from './data.js';
 
 export default class Workouts extends React.Component {
 
@@ -47,7 +47,7 @@ return (
     <FlatList
 	data={listWorkouts}
 	ItemSeparatorComponent={this.workoutSeparator}
-	renderItem={({ item }) => 
+	renderItem={({ item }) =>
 	    <View>
 	    <Text style={styles.item}><Text style={styles.itemTitle}>Date: </Text>{item.date}</Text>
 	    <Text style={styles.item}><Text style={styles.itemTitle}>Start time: </Text>{item.time}</Text>
