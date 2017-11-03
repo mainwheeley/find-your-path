@@ -1,5 +1,5 @@
 import React from 'react';
-import { 
+import {
     StyleSheet,
     TouchableOpacity,
     Dimensions,
@@ -20,10 +20,10 @@ import Stats from './comps/components/Stats';
 import deleteAcc from './comps/components/deleteAcc';
 import Workouts from './comps/components/Workouts';
 
-class Profile extends React.Component {
+export default class Profile extends React.Component {
     constructor() {
 	super();
-    	this.state = { 
+    	this.state = {
 	    text: 'Useless Placeholder',
 	    viewStats: true,
 	    viewWorkouts: false
@@ -72,13 +72,13 @@ class Profile extends React.Component {
     render() {
     return (
  //   <View style = {styles.container}>
-	<View style={styles.container}> 
+	<View style={styles.container}>
 
 	    <Header />
 	    <Bar />
 	    <View style={styles.buttonBar}>
 
-	    <TouchableOpacity 
+	    <TouchableOpacity
 		onPress={this.setStatsRender}
 		style={styles.buttonBorder} >
 	    	        <Image
@@ -87,7 +87,7 @@ class Profile extends React.Component {
 	    	        />
 	    </TouchableOpacity>
 
-	    <TouchableOpacity 
+	    <TouchableOpacity
 		onPress={this.setWorkoutsRender}
 		style={styles.buttonBorder} >
 	    	        <Image
@@ -103,7 +103,7 @@ class Profile extends React.Component {
 	</View>
 //    </View>
 
-//	<View style={styles.container}>	
+//	<View style={styles.container}>
 //	    <FlatList
 //		data={[{key: 'Total running time: '}, {key: 'Total miles run'}]}
 //  	    	renderItem={({item}) => <Text style={styles.statStyle}>{item.key}</Text>}
