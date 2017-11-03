@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Dimensions, Text, View, Button, Alert, FlatList } from 'react-native';
+import { StyleSheet, Text, View, Button, Alert, FlatList } from 'react-native';
 
 export default class Bar extends React.Component {
    render() {
@@ -27,7 +27,7 @@ const styles = StyleSheet.create({
     bar: {
 	borderColor: '#fff',
 	borderTopWidth: 4,
-	height: Dimensions.get('window').height / 10,
+	height: 80,
 	backgroundColor: '#8BC34A',
 	flexDirection: 'row',
     },
