@@ -1,6 +1,7 @@
 import React, { Component } from "react";
-import { AppRegistry, StyleSheet, Text, View, Dimensions } from "react-native";
+import { Modal, AppRegistry, StyleSheet, Text, View, ListView, FlatList, Dimensions } from "react-native";
 import MapView, { PROVIDER_GOOGLE } from "react-native-maps";
+import { Button, ButtonGroup } from 'react-native-elements';
 import Polyline from '@mapbox/polyline';
 
 
@@ -19,8 +20,6 @@ class Gmaps extends Component {
       constructor(props) {
         super(props) 
     var {state} = props.navigation;       
-    console.warn("PROPS: " + state.params);
-    var dest = "Aurora, IL"; //= state.params.dest;
         this.state = {
             initialPosition: {
               latitude: 0,
@@ -34,13 +33,19 @@ class Gmaps extends Component {
             },
             coords: [],
             dest: state.params.dest,
-            miles: state.params.miles
+            miles: state.params.miles,
+            modalVis: false,
+            directions: []
           }
         
       }
 
       watchID: ?number = null
 
+    setModalVis(vis)
+      {
+        this.setState({modalVis: vis});
+      }  
 
 
    componentDidMount()
@@ -87,6 +92,25 @@ class Gmaps extends Component {
           let respJson = await resp.json();
           //console.warn("hello2")
           //console.warn(destinationLocation) 
+          //console.warn(JSON.stringify(respJson.routes[0].legs[0].steps));
+          var directions = [];
+          var count = 1;
+          respJson.routes[0].legs[0].steps.forEach(function(i)
+          {
+            var dist = i.distance.text;
+            var html = i.html_instructions;
+
+            var nohtml = html.replace(/b/g, "");
+            nohtml = nohtml.replace(/</g, "");
+            nohtml = nohtml.replace(/>/g, "");
+            nohtml = nohtml.replace(/\//g, "");
+
+            
+            var dir = count + ": " + "In " + dist+ " " + nohtml;
+            directions.push(dir);
+            count++;
+          });
+          this.setState({directions: directions});
           let points = Polyline.decode(respJson.routes[0].overview_polyline.points);
           let coords = points.map((point, index) => {
               return  {
@@ -112,7 +136,7 @@ class Gmaps extends Component {
     render() {
     return (
       <View style={styles.container}>
-       
+        
        <MapView style={styles.map} initialRegion={{
           latitude:41.0082, 
           longitude:28.9784, 
@@ -130,6 +154,7 @@ class Gmaps extends Component {
           provider={PROVIDER_GOOGLE}
           region={this.state.initialPosition}
           style={StyleSheet.absoluteFillObject}>
+
           <MapView.Marker
             coordinate={this.state.markerPosition}>
             <View style={styles.radius}>
@@ -143,6 +168,28 @@ class Gmaps extends Component {
             strokeColor="red">
             </MapView.Polyline>
             </MapView>
+            <Modal
+          animationType="slide"
+          transparent={false}
+          visible={this.state.modalVis}
+          onRequestClose={() => {alert("Modal has been closed.")}}
+          >
+          <Button
+      backgroundColor='#03A9F4'
+      title='Close Directions'
+      onPress={() => this.setModalVis(false)}
+    />
+
+        <FlatList
+          data={this.state.directions}
+          renderItem={({item}) => <Text>{item}</Text>}/>          
+          </Modal>
+            
+            <Button
+      backgroundColor='#03A9F4'
+      title='Directions'
+      onPress={() => this.setModalVis(true)}
+    />
       </View>
     );
   }

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, StyleSheet, TextInput, Text } from 'react-native';
+import {View, StyleSheet, TextInput, Text } from 'react-native';
 import { Button, ButtonGroup } from 'react-native-elements';
 /*
 constructor () {
@@ -33,10 +33,12 @@ class MSetting extends Component {
     super(props);
     this.state = {
       miles: 0, 
-      dest: "Chicago, IL"
+      dest: "Chicago, IL",
+      
     
     }
   }
+  
   
 
   render() 
@@ -55,7 +57,7 @@ class MSetting extends Component {
     />
     <TextInput
       keyboardType='default'
-      placeholder='Enter a destination'
+      placeholder='Chicago, IL'
       onChangeText={(dest) => this.setState({dest})}
 
       placeholderTextColor="rgba(255,255,255,0.7)"
