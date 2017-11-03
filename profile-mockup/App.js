@@ -25,7 +25,7 @@ export default class App extends React.Component {
 	super();
     	this.state = { 
 	    text: 'Useless Placeholder',
-	    viewStats: false,
+	    viewStats: true,
 	    viewWorkouts: false
 	};
     }
