@@ -18,7 +18,9 @@ class Gmaps extends Component {
       };
       constructor(props) {
         super(props) 
-          
+    var {state} = props.navigation;       
+    console.warn("PROPS: " + state.params);
+    var dest = "Aurora, IL"; //= state.params.dest;
         this.state = {
             initialPosition: {
               latitude: 0,
@@ -30,7 +32,9 @@ class Gmaps extends Component {
               latitude: 0,
               longitude: 0
             },
-            coords: []
+            coords: [],
+            dest: state.params.dest,
+            miles: state.params.miles
           }
         
       }
@@ -45,7 +49,7 @@ class Gmaps extends Component {
         var lat = parseFloat(position.coords.latitude);
         var long = parseFloat(position.coords.longitude);
         here = parseFloat(lat) + ", " + parseFloat(long);
-        this.getDirections(here, "Naperville, IL");
+        this.getDirections(here, this.state.dest);
         var initialRegion = {
           latitude: lat,
           longitude: long,

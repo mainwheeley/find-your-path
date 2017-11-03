@@ -18,7 +18,8 @@ class Login extends React.Component {
 
   loganav(nav)
   {
-    this._fbAuth();
+    var x = this._fbAuth();
+    //console.warn(x);
     nav('SignedIn');
   }
 
@@ -27,14 +28,17 @@ class Login extends React.Component {
          function(result) {
             if (result.isCancelled) {
                alert('Login cancelled');
+               return 0;
             } else {
                alert('Login success with permissions: '
                +result.grantedPermissions.toString());
+               return 1;
                 //navigate('SignedIn');
             }
          },
          function(error) {
             alert('Login fail with error: ' + error);
+            return 0;
          }
       );
    }

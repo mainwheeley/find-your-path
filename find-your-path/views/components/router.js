@@ -7,7 +7,7 @@ import SignIn from '../login.js';
 //import SignIn from './Login/Login1.js';
 import Maps from './views/TestMap.js';
 import Profile from '../Main.js';
-import MapSettings from './views/MapSettings';
+import MSetting from './views/MapSettings.js';
 import Settings from '../Settings.js';
 import Gmaps from './views/gm';
 //import Settings from '../Settings.js';
@@ -28,8 +28,8 @@ export const SignedOut = StackNavigator({
 });
 
 export const MapView = StackNavigator({
-  MapSettings: {
-    screen: MapSettings,
+  MSetting: {
+    screen: MSetting,
     navigationOptions: {
       title: "Create Route",
       headerStyle
