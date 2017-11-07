@@ -18,8 +18,8 @@ class Gmaps extends Component {
         title: "Gmaps"
       };
       constructor(props) {
-        super(props) 
-    var {state} = props.navigation;       
+        super(props)
+    var {state} = props.navigation;
         this.state = {
             initialPosition: {
               latitude: 0,
@@ -37,7 +37,7 @@ class Gmaps extends Component {
             modalVis: false,
             directions: []
           }
-        
+
       }
 
       watchID: ?number = null
@@ -45,7 +45,7 @@ class Gmaps extends Component {
     setModalVis(vis)
       {
         this.setState({modalVis: vis});
-      }  
+      }
 
 
    componentDidMount()
@@ -63,7 +63,7 @@ class Gmaps extends Component {
         }
 
         this.setState({initialPosition: initialRegion})
-        this.setState({markerPosition: initialRegion})        
+        this.setState({markerPosition: initialRegion})
       }), (error) => alert(JSON.stringify(error) + "component did mount error");
       this.watchID = navigator.geolocation.watchPosition((position) => {
         var lat = parseFloat(position.coords.latitude);
@@ -76,7 +76,7 @@ class Gmaps extends Component {
           longitudeDelta: LGD
         }
         this.setState({initialPosition: lastRegion});
-        this.setState({markerPosition: lastRegion});     
+        this.setState({markerPosition: lastRegion});
       })
       //this.getDirections("52.5200, 13.4050", "41.0082, 28.9784");
       /* console.warn(here);
@@ -84,14 +84,14 @@ class Gmaps extends Component {
 
       //console.warn("hello!");
       //this.getDirections("40.1884979, 29.061018", "41.0082,28.9784");
-    } 
+    }
 
     async getDirections(startLoc, destinationLoc) {
       try {
           let resp = await fetch(`https://maps.googleapis.com/maps/api/directions/json?origin=${ startLoc }&destination=${ destinationLoc }`)
           let respJson = await resp.json();
           //console.warn("hello2")
-          //console.warn(destinationLocation) 
+          //console.warn(destinationLocation)
           //console.warn(JSON.stringify(respJson.routes[0].legs[0].steps));
           var directions = [];
           var count = 1;
@@ -105,7 +105,7 @@ class Gmaps extends Component {
             nohtml = nohtml.replace(/>/g, "");
             nohtml = nohtml.replace(/\//g, "");
 
-            
+
             var dir = count + ": " + "In " + dist+ " " + nohtml;
             directions.push(dir);
             count++;
@@ -118,11 +118,11 @@ class Gmaps extends Component {
                   longitude : point[1]
               }
           })
-                   
+
           this.setState({coords: coords})
           return coords
       } catch(error) {
-        alert(error + " getdirections error");  
+        alert(error + " getdirections error");
         return error
       }
   }
@@ -132,19 +132,19 @@ class Gmaps extends Component {
       navigator.geolocation.clearWatch(this.watchID);
 
     }
-  
+
     render() {
     return (
       <View style={styles.container}>
-        
+
        <MapView style={styles.map} initialRegion={{
-          latitude:41.0082, 
-          longitude:28.9784, 
+          latitude:41.0082,
+          longitude:28.9784,
           latitudeDelta: 0.0922,
           longitudeDelta: 0.0421
         }}>
 
-        <MapView.Polyline 
+        <MapView.Polyline
             coordinates={this.state.coords}
             strokeWidth={2}
             strokeColor="red"/>
@@ -182,9 +182,11 @@ class Gmaps extends Component {
 
         <FlatList
           data={this.state.directions}
-          renderItem={({item}) => <Text>{item}</Text>}/>          
+          renderItem={({item}) => <Text>{item}</Text>}
+          keyExtractor={(item,index)=> index}
+        />
           </Modal>
-            
+
             <Button
       backgroundColor='#03A9F4'
       title='Directions'
