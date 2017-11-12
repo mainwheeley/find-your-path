@@ -4,12 +4,12 @@ import { StyleSheet, Dimensions, Text, View, Button, Alert, FlatList } from 'rea
 export default class Bar extends React.Component {
    render() {
     return (
-	
+
 	<View style={styles.bar}>
 
 	    <View style={[styles.barItem, styles.barseparator]}>
-		<Text style={styles.barTop}>10</Text>
-		<Text style={styles.barBottom}>Followers</Text>
+		<Text style={styles.barTop} onPress={() => this.props.navigation.navigate("FavoriteRoutes")}>Favorite Workouts</Text>
+		<Text style={styles.barBottom}></Text>
 	    </View>
 
 	    <View style={[styles.barItem, styles.barseparator]}>
@@ -57,4 +57,3 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
 });
-
