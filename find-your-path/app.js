@@ -8,6 +8,56 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
+var db = require('./db');
+
+/*****
+ ajax
+
+  $.ajax({
+    url: 'http://localhost:3000/fbdata',
+    dataType: 'json',
+    type: 'post',
+    contentType: 'application/json',
+    data: JSON.stringify(fbdata),
+    processData: false,
+    success: function( data, textStatus, jQxhr ){
+        console.log(data);
+        console.log("success!");
+    },
+    error: function( jqXhr, textStatus, errorThrown ){
+      console.log("error ajax");  
+      console.log( errorThrown );
+    }
+});
+
+
+collecting to backend and then send to db
+
+app.post('/setimg', function(req, res) {
+        var email = req.query.email;
+        var img = req.query.img;
+        var query = "update profile set img = '" + img + "' where email = '" + email + "'";
+
+        console.log(query);
+
+        db.query(query, function(err, result) {
+            if (err) {
+                console.log("Error posting image");
+                throw (err);
+            } else {
+                res.status(200).json({tatus: "ok"});
+            }
+        });
+    });
+
+ example of what a query might look like
+
+ the img and email within the quotes are the names of the columns
+
+the img and email without the quotes are the variable names
+
+
+ */
 var async = require("async");
 
 var FacebookStrategy = require("passport-facebook").Strategy;
