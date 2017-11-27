@@ -21,8 +21,8 @@ import deleteAcc from './comps/components/deleteAcc';
 import Workouts from './comps/components/Workouts';
 
 export default class Profile extends React.Component {
-    constructor() {
-	super();
+    constructor(props) {
+	super(props);
     	this.state = {
 	    text: 'Useless Placeholder',
 	    viewStats: true,
@@ -75,7 +75,7 @@ export default class Profile extends React.Component {
 	<View style={styles.container}>
 
 	    <Header />
-	    <Bar />
+	    <Bar navigation= {this.props.navigation}/>
 	    <View style={styles.buttonBar}>
 
 	    <TouchableOpacity

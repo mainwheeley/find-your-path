@@ -12,6 +12,7 @@ import Settings from '../Settings.js';
 import Gmaps from './views/gm';
 //import Settings from '../Settings.js';
 //import Weather from '../../Weather/App.js';
+import FavRoutes from '../FavRoutes.js';
 
 const headerStyle = {
   marginTop: Platform.OS === "android" ? StatusBar.currentHeight : 0
@@ -45,15 +46,30 @@ export const MapView = StackNavigator({
   Gmaps: {
     screen: Gmaps
   }
+});
 
-
+export const ProfileS = StackNavigator({
+  Profile: {
+    screen: Profile,
+    navigationOptions: {
+      title: "Profile",
+      headerStyle
+    }
+  },
+  FavoriteRoutes: {
+    screen: FavRoutes,
+    navigationOptions: {
+      title: "Favorite Routes",
+      headerStyle
+    }
+  }
 });
 
 
 export const SignedIn = TabNavigator(
   {
     Profile: {
-      screen: Profile,
+      screen: ProfileS,
       navigationOptions: {
         tabBarLabel: "Profile"
       }
