@@ -9,7 +9,7 @@ import {
 } from 'react-native';
 import {listWorkouts} from './Data';
 
-export default class recentWorkouts extends React.Component {
+export default class RecentWorkouts extends React.Component {
 
 workoutSeparator = () => {
     return (

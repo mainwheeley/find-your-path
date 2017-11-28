@@ -9,7 +9,7 @@ import {
 } from 'react-native';
 import {listWorkouts} from './Data';
 
-export default class pastWorkouts extends React.Component {
+export default class PastWorkouts extends React.Component {
 
 constructor(props) {
 super(props)
@@ -61,21 +61,11 @@ return (
 	ItemSeparatorComponent={this.workoutSeparator}
 	renderItem={({ item }) => 
 	    <View>
-	    <Text style={styles.item}><Text style={styles.itemTitle}>Date: </Text>{item.date}</Text>
+	    <Text style={styles.item}><Text style={styles.itemTitle}>Dates: </Text>{item.date}</Text>
 	    <Text style={styles.item}><Text style={styles.itemTitle}>Start time: </Text>{item.time}</Text>
 	    </View>
 	}
     />
-    <View style={styles.statsRow}>
-        <View style={styles.delButton}>
-    	<Button
-       	    onPress={this.deletePrompt}
-       	    title="Delete Account"
-       	    color="red"
-       	/>
-       </View>
-    </View>
-
   </View>);
 }
 

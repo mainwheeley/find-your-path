@@ -8,8 +8,8 @@ import {
     Button,
 } from 'react-native';
 import {listWorkouts} from './Data';
-import recentWorkouts from './recentWorkouts';
-import pastWorkouts from './pastWorkouts';
+import RecentWorkouts from './recentWorkouts';
+import PastWorkouts from './pastWorkouts';
 
 export default class Workouts extends React.Component {
 
@@ -25,7 +25,7 @@ export default class Workouts extends React.Component {
     renderRecent() {
 	if (this.state.viewRecent) {
 	    return (
-		<recentWorkouts />
+		<RecentWorkouts />
 	    )
 	}
     }
@@ -33,7 +33,7 @@ export default class Workouts extends React.Component {
     renderPast() {
 	if (this.state.viewPast) {
 	    return (
-		<pastWorkouts />
+		<PastWorkouts />
 	    )
 	}
     }
@@ -46,9 +46,11 @@ export default class Workouts extends React.Component {
     }
 
     setPastRender=()=> {
+	var recent=this.state.viewRecent
+	var past=this.state.viewPast
 	this.setState({
-	    viewRecent: false,
-	    viewPast: true
+	    viewRecent: !recent,
+	    viewPast: !past
 	})
     }
 
@@ -67,18 +69,9 @@ workoutSeparator = () => {
 
 render() {
 return (
-  <View style={styles.container}>
-    <FlatList
-	data={listWorkouts}
-	ItemSeparatorComponent={this.workoutSeparator}
-	renderItem={({ item }) => 
-	    <View>
-	    <Text style={styles.item}><Text style={styles.itemTitle}>Date: </Text>{item.date}</Text>
-	    <Text style={styles.item}><Text style={styles.itemTitle}>Start time: </Text>{item.time}</Text>
-	    </View>
-	}
-    />
-
+  <View style={styles.mainContainer}>
+    {this.renderRecent()}
+    {this.renderPast()}
     <View style={styles.statsRow}>
         <View style={styles.delButton}>
     	<Button
