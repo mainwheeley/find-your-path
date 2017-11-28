@@ -69,15 +69,17 @@ workoutSeparator = () => {
 
 render() {
 return (
-  <View style={styles.mainContainer}>
-    {this.renderRecent()}
-    {this.renderPast()}
+  <View style={styles.container}>
+    <View style={styles.mainContainer}>
+	{this.renderRecent()}
+    	{this.renderPast()}
+    </View>
     <View style={styles.statsRow}>
         <View style={styles.delButton}>
     	<Button
        	    onPress={this.setPastRender}
-       	    title="Delete Account"
-       	    color="red"
+       	    title="Switch Recent/Past"
+       	    color="#8BC34A"
        	/>
        </View>
     </View>
@@ -94,9 +96,13 @@ const styles = StyleSheet.create({
 	justifyContent: 'center',
     },
     statsRow: {
-	flex: 1,
-	flexDirection: 'column',
-	flexWrap: 'wrap',
+	borderColor: '#fff',
+	borderTopWidth: 0,
+	borderBottomWidth: 0,
+	height: Dimensions.get('window').height / 10,
+	backgroundColor: '#fff',
+	flexDirection: 'row',
+	alignItems: 'center',
     },
     itemTitle: {
 	padding: 10,
@@ -113,14 +119,13 @@ const styles = StyleSheet.create({
     },
     mainContainer: {
 	justifyContent: 'center',
+	height: (Dimensions.get('window').height / 4),
 	flex: 1,
 	margin: 10
     },
   container: {
     flex: 1,
     backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
   },
   listContainer: {
       marginTop: 14,
