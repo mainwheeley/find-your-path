@@ -8,48 +8,36 @@ import {
     Button,
 } from 'react-native';
 import {listWorkouts} from './Data';
-import recentWorkouts from './recentWorkouts';
-import pastWorkouts from './pastWorkouts';
 
-export default class Workouts extends React.Component {
+export default class pastWorkouts extends React.Component {
 
-    constructor() {
-	super();
-    	this.state = { 
-	    text: 'Useless Placeholder',
-	    viewRecent: true,
-	    viewPast: false
-	};
-    }
+constructor(props) {
+super(props)
+this.state = {
+  list: [
+    {
+	key: '1',
+	time: '1:00pm',
+	date: '11/01/2017'
+    },
+    {
+	key: '2',
+	time: '2:00pm',
+	date: '11/02/2017'
+    },
+
+  ]
+};
+}
 
     renderRecent() {
 	if (this.state.viewRecent) {
-	    return (
-		<recentWorkouts />
-	    )
 	}
     }
 
     renderPast() {
 	if (this.state.viewPast) {
-	    return (
-		<pastWorkouts />
-	    )
 	}
-    }
-
-    setRecentRender=()=> {
-	this.setState({
-	    viewRecent: true,
-	    viewPast: false
-	})
-    }
-
-    setPastRender=()=> {
-	this.setState({
-	    viewRecent: false,
-	    viewPast: true
-	})
     }
 
 

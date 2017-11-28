@@ -5,29 +5,53 @@ import {
     View,
     FlatList,
     Dimensions,
+    Button,
 } from 'react-native';
 import {listWorkouts} from './Data';
+import recentWorkouts from './recentWorkouts';
+import pastWorkouts from './pastWorkouts';
 
 export default class Workouts extends React.Component {
 
-constructor(props) {
-super(props)
-this.state = {
-  list: [
-    {
-	key: '1',
-	time: '1:00pm',
-	date: '11/01/2017'
-    },
-    {
-	key: '2',
-	time: '2:00pm',
-	date: '11/02/2017'
-    },
+    constructor() {
+	super();
+    	this.state = { 
+	    text: 'Useless Placeholder',
+	    viewRecent: true,
+	    viewPast: false
+	};
+    }
 
-  ]
-};
-}
+    renderRecent() {
+	if (this.state.viewRecent) {
+	    return (
+		<recentWorkouts />
+	    )
+	}
+    }
+
+    renderPast() {
+	if (this.state.viewPast) {
+	    return (
+		<pastWorkouts />
+	    )
+	}
+    }
+
+    setRecentRender=()=> {
+	this.setState({
+	    viewRecent: true,
+	    viewPast: false
+	})
+    }
+
+    setPastRender=()=> {
+	this.setState({
+	    viewRecent: false,
+	    viewPast: true
+	})
+    }
+
 
 workoutSeparator = () => {
     return (
@@ -43,7 +67,7 @@ workoutSeparator = () => {
 
 render() {
 return (
-  <View style={styles.mainContainer}>
+  <View style={styles.container}>
     <FlatList
 	data={listWorkouts}
 	ItemSeparatorComponent={this.workoutSeparator}
@@ -54,12 +78,33 @@ return (
 	    </View>
 	}
     />
+
+    <View style={styles.statsRow}>
+        <View style={styles.delButton}>
+    	<Button
+       	    onPress={this.setPastRender}
+       	    title="Delete Account"
+       	    color="red"
+       	/>
+       </View>
+    </View>
   </View>);
 }
 
 }
 
 const styles = StyleSheet.create({
+    delButton: {
+	flex: 1,
+	height: (Dimensions.get('window').width / 5) - 25,
+	alignItems: 'center',
+	justifyContent: 'center',
+    },
+    statsRow: {
+	flex: 1,
+	flexDirection: 'column',
+	flexWrap: 'wrap',
+    },
     itemTitle: {
 	padding: 10,
 	fontSize: 18,

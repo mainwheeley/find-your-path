@@ -8,50 +8,8 @@ import {
     Button,
 } from 'react-native';
 import {listWorkouts} from './Data';
-import recentWorkouts from './recentWorkouts';
-import pastWorkouts from './pastWorkouts';
 
-export default class Workouts extends React.Component {
-
-    constructor() {
-	super();
-    	this.state = { 
-	    text: 'Useless Placeholder',
-	    viewRecent: true,
-	    viewPast: false
-	};
-    }
-
-    renderRecent() {
-	if (this.state.viewRecent) {
-	    return (
-		<recentWorkouts />
-	    )
-	}
-    }
-
-    renderPast() {
-	if (this.state.viewPast) {
-	    return (
-		<pastWorkouts />
-	    )
-	}
-    }
-
-    setRecentRender=()=> {
-	this.setState({
-	    viewRecent: true,
-	    viewPast: false
-	})
-    }
-
-    setPastRender=()=> {
-	this.setState({
-	    viewRecent: false,
-	    viewPast: true
-	})
-    }
-
+export default class recentWorkouts extends React.Component {
 
 workoutSeparator = () => {
     return (
@@ -78,15 +36,6 @@ return (
 	    </View>
 	}
     />
-    <View style={styles.statsRow}>
-        <View style={styles.delButton}>
-    	<Button
-       	    onPress={this.deletePrompt}
-       	    title="Delete Account"
-       	    color="red"
-       	/>
-       </View>
-    </View>
 
   </View>);
 }
