@@ -61,8 +61,8 @@ return (
 	ItemSeparatorComponent={this.workoutSeparator}
 	renderItem={({ item }) => 
 	    <View>
-	    <Text style={styles.item}><Text style={styles.itemTitle}>Dates: </Text>{item.date}</Text>
-	    <Text style={styles.item}><Text style={styles.itemTitle}>Start time: </Text>{item.time}</Text>
+	    <Text style={styles.item}>{item.date} -- {item.time}</Text>
+	    <Text style={styles.item}><Text style={styles.itemTitle}>Start point: </Text>{item.time}</Text>
 	    </View>
 	}
     />
