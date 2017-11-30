@@ -9,7 +9,6 @@ import {
 } from 'react-native';
 import {listWorkouts} from './Data';
 import RadioForm, {RadioButton, RadioButtonInput, RadioButtonLabel} from 'react-native-simple-radio-button';
-import PastData from './pastData';
 
 var radio_props = [
     {label: 'All ', value: 0},
@@ -19,34 +18,7 @@ var radio_props = [
     {label: 'Other ', value: 4},
 ];
 
-export default class PastWorkouts extends React.Component {
-    constructor() {
-	super();
-    	this.state = { 
-	    viewType: 0
-	};
-    }
-
-    logOnChange(valuex) {
-	this.setState({viewType:valuex});
-	console.log(this.state.viewType);
-    }
-
-    renderType() {
-	if (this.state.viewType == 0) {
-	} else if (this.state.viewType == 1) {
-	    return (
-		<PastData />
-	    )
-	} else if (this.state.viewType == 2) {
-	} else if (this.state.viewType == 3) {
-	} else if (this.state.viewType == 4) {
-	    return (
-		<PastData />
-	    )
-	}
-    }
-
+export default class PastData extends React.Component {
 workoutSeparator = () => {
     return (
 	<View
@@ -62,17 +34,17 @@ workoutSeparator = () => {
 render() {
 return (
   <View style={styles.container}> 
-    <RadioForm
-	radio_props={radio_props}
-	onPress={(value) => {this.logOnChange(value)}}
-	buttonColor={'#8BC34A'}
-	formHorizontal={true}
-	labelHorizontal={true}
+    <FlatList
+	data={listWorkouts}
+	ItemSeparatorComponent={this.workoutSeparator}
+	renderItem={({ item }) => 
+	    <View>
+	    <Text style={styles.item}>{item.date} -- {item.time}</Text>
+	    <Text style={styles.item}><Text style={styles.itemTitle}>Start point: </Text>{item.time}</Text>
+	    </View>
+	}
     />
-    {this.renderType()}
-  </View>
-  
-  );
+  </View>);
 }
 
 }
