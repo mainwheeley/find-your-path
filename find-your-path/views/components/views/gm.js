@@ -3,7 +3,10 @@ import { Modal, AppRegistry, StyleSheet, Text, View, ListView, FlatList, Dimensi
 import MapView, { PROVIDER_GOOGLE } from "react-native-maps";
 import { Button, ButtonGroup } from 'react-native-elements';
 import Polyline from '@mapbox/polyline';
+import Tts from 'react-native-tts';
 
+Tts.setDefaultLanguage('en-IE');
+Tts.setDefaultVoice('com.apple.ttsbundle.Moira-compact');
 
  const {width, height} = Dimensions.get('window')
  const S_H = height;
@@ -35,7 +38,9 @@ class Gmaps extends Component {
             dest: state.params.dest,
             miles: state.params.miles,
             modalVis: false,
-            directions: []
+            directions: [],
+            dirCount: 0,
+            gencoords: []
           }
 
       }
@@ -88,29 +93,43 @@ class Gmaps extends Component {
 
     async getDirections(startLoc, destinationLoc) {
       try {
-          let resp = await fetch(`https://maps.googleapis.com/maps/api/directions/json?origin=${ startLoc }&destination=${ destinationLoc }`)
+          let resp = await fetch(`https://maps.googleapis.com/maps/api/directions/json?origin=${ startLoc }&destination=${ destinationLoc }&mode=walking&key=AIzaSyDLWhkm_ecWkhFRKi6aJDs1Js70BeP1zW0`);
+          console.warn(startLoc + "\n");
+          console.warn(destinationLoc + " \n");
           let respJson = await resp.json();
           //console.warn("hello2")
           //console.warn(destinationLocation)
           //console.warn(JSON.stringify(respJson.routes[0].legs[0].steps));
+          var gencoords = [];
           var directions = [];
           var count = 1;
           respJson.routes[0].legs[0].steps.forEach(function(i)
           {
             var dist = i.distance.text;
             var html = i.html_instructions;
-
+            var endloc = {};
+            endloc.lat = i.end_location.lat;
+            endloc.lng = i.end_location.lng
             var nohtml = html.replace(/b/g, "");
             nohtml = nohtml.replace(/</g, "");
             nohtml = nohtml.replace(/>/g, "");
             nohtml = nohtml.replace(/\//g, "");
 
+            if (count == 1)
+            {
+              var stloc = {};
+              stloc.lat = i.start_location.lat;
+              stloc.lng = i.start_location.lng;
+              gencoords.push(stloc);
+            }
 
             var dir = count + ": " + "In " + dist+ " " + nohtml;
             directions.push(dir);
+            gencoords.push(endloc);
             count++;
           });
           this.setState({directions: directions});
+          this.setState({dirCount: count-1});
           let points = Polyline.decode(respJson.routes[0].overview_polyline.points);
           let coords = points.map((point, index) => {
               return  {
@@ -130,6 +149,43 @@ class Gmaps extends Component {
     componentWillUnmount()
     {
       navigator.geolocation.clearWatch(this.watchID);
+
+    }
+
+    checkDirections()
+    {
+      //to check directions and update marker
+    console.warn("checkDiretions");    
+    var i = 0;
+    Tts.speak("Starting path");
+    console.warn("count: " + this.state.dirCount);
+    while (i < this.state.dirCount)
+    {
+      setInterval(function() {
+      navigator.geolocation.getCurrentPosition((position) =>{
+        var lat = parseFloat(position.coords.latitude);
+        var long = parseFloat(position.coords.longitude);
+        var curRegion = {
+          latitude: lat,
+          longitude: long,
+          latitudeDelta: LD,
+          longitudeDelta: LGD
+        }
+        this.setState({initialPosition: curRegion});
+        this.setState({markerPosition: curRegion});
+        console.warn("long: "+ curRegion.longitude+ " latitude: " + curRegion.latitude + "\n");
+        if (curRegion.longitude == this.state.gencoords[i].lng && curRegion.latitude == this.state.gencoords[i].lat)
+        {
+          //@ the right location
+          Tts.speak(this.state.directions[i]);
+          console.warn(i);
+          i++;
+        }
+      });
+    }, 100);
+     
+   }
+   Tts.stop();
 
     }
 
@@ -187,6 +243,11 @@ class Gmaps extends Component {
         />
           </Modal>
 
+          <Button
+      backgroundColor='#03A9F4'
+      title='Start'
+      onPress={() => this.checkDirections()}
+    />
             <Button
       backgroundColor='#03A9F4'
       title='Directions'

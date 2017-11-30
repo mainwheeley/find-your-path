@@ -84,7 +84,7 @@ app.use(cookieParser());
 /*app.get('/', routes.index);
 app.get('/users', users.list);*/
 
-function fbProf(profile) {
+/* function fbProf(profile) {
     var name = profile.name;
     var avatar =  profile.picture.data.url;
 }
@@ -108,7 +108,7 @@ app.get('/auth/facebook/callback', passport.authenticate('facebook', {
 failureRedirect : '/auth/facebook'
 }), function(req, res) {
 res.redirect('/main');
-});
+}); */
 
 var facebook = 
 {
