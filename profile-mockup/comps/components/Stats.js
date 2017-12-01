@@ -100,21 +100,6 @@ export default class Stats extends React.Component {
 	    </View>
 	</View>
 
-	<View style={styles.statsRow}>
-	    <View style={{height: 5, backgroundColor: '#000', }}></View>
-	</View>
-
-	<View style={styles.statsRow}>
-	    <View style={styles.delButton}>
-		<Button
-    	   	    onPress={this.deletePrompt}
-    	   	    title="Delete Account"
-    	   	    color="red"
-    	   	/>
-	   </View>
-	</View>
-
-
 	</View>
 	</ScrollView>
     );
