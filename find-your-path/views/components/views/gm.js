@@ -4,6 +4,7 @@ import MapView, { PROVIDER_GOOGLE } from "react-native-maps";
 import { Button, ButtonGroup } from 'react-native-elements';
 import Polyline from '@mapbox/polyline';
 import Tts from 'react-native-tts';
+import { lang } from "moment";
 
 Tts.setDefaultLanguage('en-IE');
 Tts.setDefaultVoice('com.apple.ttsbundle.Moira-compact');
@@ -63,8 +64,8 @@ class Gmaps extends Component {
         var initialRegion = {
           latitude: lat,
           longitude: long,
-          latitudeDelta: LD,
-          longitudeDelta: LGD
+          latitudeDelta: LD / 15,
+          longitudeDelta: LGD / 15
         }
 
         this.setState({initialPosition: initialRegion})
@@ -77,8 +78,8 @@ class Gmaps extends Component {
         var lastRegion = {
           latitude: lat,
           longitude: long,
-          latitudeDelta: LD,
-          longitudeDelta: LGD
+          latitudeDelta: LD / 15,
+          longitudeDelta: LGD / 15
         }
         this.setState({initialPosition: lastRegion});
         this.setState({markerPosition: lastRegion});
@@ -93,14 +94,13 @@ class Gmaps extends Component {
 
     async getDirections(startLoc, destinationLoc) {
       try {
-          let resp = await fetch(`https://maps.googleapis.com/maps/api/directions/json?origin=${ startLoc }&destination=${ destinationLoc }&mode=walking&key=AIzaSyDLWhkm_ecWkhFRKi6aJDs1Js70BeP1zW0`);
-          console.warn(startLoc + "\n");
-          console.warn(destinationLoc + " \n");
+          //let resp = await fetch(`https://maps.googleapis.com/maps/api/directions/json?origin=${ startLoc }&destination=${ destinationLoc }&mode=walking&key=AIzaSyDLWhkm_ecWkhFRKi6aJDs1Js70BeP1zW0`);
+          let resp = await fetch(`https://maps.googleapis.com/maps/api/directions/json?origin=40.4189553,+-86.9080627&destination=40.4248,+-86.9110&mode=walking&key=AIzaSyDLWhkm_ecWkhFRKi6aJDs1Js70BeP1zW0`);
           let respJson = await resp.json();
           //console.warn("hello2")
           //console.warn(destinationLocation)
           //console.warn(JSON.stringify(respJson.routes[0].legs[0].steps));
-          var gencoords = [];
+          var gencoords1 = [];
           var directions = [];
           var count = 1;
           respJson.routes[0].legs[0].steps.forEach(function(i)
@@ -120,16 +120,18 @@ class Gmaps extends Component {
               var stloc = {};
               stloc.lat = i.start_location.lat;
               stloc.lng = i.start_location.lng;
-              gencoords.push(stloc);
+              gencoords1.push(stloc);
             }
 
             var dir = count + ": " + "In " + dist+ " " + nohtml;
             directions.push(dir);
-            gencoords.push(endloc);
+            gencoords1.push(endloc);
             count++;
           });
           this.setState({directions: directions});
-          this.setState({dirCount: count-1});
+          this.setState({gencoords: gencoords1});
+          --count;
+          this.setState({dirCount: count});
           let points = Polyline.decode(respJson.routes[0].overview_polyline.points);
           let coords = points.map((point, index) => {
               return  {
@@ -152,14 +154,51 @@ class Gmaps extends Component {
 
     }
 
+    testDirections()
+    {
+       //to check directions and update marker
+    console.warn("testDiretions");    
+    var i = 0;
+    Tts.speak("Starting path");
+
+    /* let resp = await fetch(`https://maps.googleapis.com/maps/api/directions/json?origin=40.4189553,+-86.9080627&destination=40.4248,+-86.9110&mode=walking&key=AIzaSyDLWhkm_ecWkhFRKi6aJDs1Js70BeP1zW0`);
+    let respJson = await resp.json();
+*/
+    
+    //need to add all the coordinates into an array to test.
+    console.warn("count: " + this.state.dirCount);
+    /* while (i < this.state.dirCount)
+    {
+      setInterval(function() {
+      navigator.geolocation.getCurrentPosition((position) =>{
+        var lat = parseFloat(position.coords.latitude);
+        var long = parseFloat(position.coords.longitude);
+      });
+        
+
+        console.warn("long: "+ long+ " latitude: " + lat + "\n");
+        //consider adding precision here
+        if (long == this.state.gencoords[i].lng && lat == this.state.gencoords[i].lat)
+        {
+          //@ the right location
+          Tts.speak(this.state.directions[i]);
+          console.warn(i);
+          i++;
+        }
+    }, 10);
+     
+   } */
+   Tts.stop();
+    }
+
     checkDirections()
     {
       //to check directions and update marker
     console.warn("checkDiretions");    
     var i = 0;
     Tts.speak("Starting path");
-    console.warn("count: " + this.state.dirCount);
-    while (i < this.state.dirCount)
+    //console.warn("count: " + this.state.dirCount);
+    /* while (i < this.state.dirCount)
     {
       setInterval(function() {
       navigator.geolocation.getCurrentPosition((position) =>{
@@ -184,11 +223,11 @@ class Gmaps extends Component {
       });
     }, 100);
      
-   }
-   Tts.stop();
+   } */
 
     }
 
+    
     render() {
     return (
       <View style={styles.container}>
@@ -246,7 +285,7 @@ class Gmaps extends Component {
           <Button
       backgroundColor='#03A9F4'
       title='Start'
-      onPress={() => this.checkDirections()}
+      onPress={() => this.testDirections()}
     />
             <Button
       backgroundColor='#03A9F4'
@@ -257,6 +296,7 @@ class Gmaps extends Component {
     );
   }
 }
+
 
 const styles = StyleSheet.create({
   radius: {

@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <gpx version="1.1" creator="Xcode">
-    <wpt lat="41.7508" lon="-88.1535">
-        <name>Napes</name>
+    <wpt lat="40.41893629403247" lon="-86.90798670711267">
+        <name>Cur Location</name>
     </wpt>
     <!--
      Provide one or more waypoints containing a latitude/longitude pair. If you provide one

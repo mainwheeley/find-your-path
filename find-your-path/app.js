@@ -64,18 +64,14 @@ var FacebookStrategy = require("passport-facebook").Strategy;
 
 var app = express();
 
-// view engine setup
-/* app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'jade'); */
-
 var passport = require('passport');
 var config =  require('./authenticate/session.js');
 
-app.use(favicon());
+ /* app.use(favicon());
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use(cookieParser());
+app.use(cookieParser()); */
 
 //app.use(express.static(path.join(__dirname, 'public')));
 //app.use(app.router);
@@ -84,7 +80,86 @@ app.use(cookieParser());
 /*app.get('/', routes.index);
 app.get('/users', users.list);*/
 
-/* function fbProf(profile) {
+app.post('/fbdata', function(req, res)
+{
+
+    console.log("here");
+    console.log(req.body);
+    /*var email = req.body.email;
+    var name =  req.body.name;
+    var at = req.body.at; */
+    var query1 = "select * from facebook where email = '" + email + "'";
+    var query = "insert into facebook (name, email) values ('"+ name +"', '" + email +"')";
+    var flag = 0;
+    db.query(query1, function(err, result)
+    {
+        if (err)
+        {
+            console.log("error checking if email is already in db");
+            throw err;
+        }
+        else
+        {
+            //console.log(result[0]);
+            //if (result[0] === undefined)
+            //{
+            var res = 1;
+            if (result[0] !== undefined)
+                res = result[0].email.localeCompare(email);
+            console.log("completed name checking");
+            //console.log(result[0].email);
+
+
+
+            if (!res) // if res = 0 it is already in the database
+            {
+                flag = 1;
+            }
+            console.log(flag);
+            if (!flag)
+                {
+                db.query(query, function(err, result1)
+                {
+                    if (err)
+                    {
+                        console.log("error");
+                        throw err;
+                    }
+                    else
+                    {
+                        console.log("posted user into db");
+                        console.log(result1);
+                    }
+                });
+            }
+                else
+                {
+                    console.log("user is already in db");
+                }
+        //}
+    }
+    });
+
+    var query3 = "select * from facebook where email = '" + email + "'";
+   /* app.get('/play1', function(req, res)
+    {
+        db.query(query3, function(err, result)
+        {
+            if (err)
+            {
+                console.log("error requesting name");
+                throw err;
+            }
+            else
+            {
+                res.send(result);
+            }
+        });
+
+    }); */
+});
+
+function fbProf(profile) {
     var name = profile.name;
     var avatar =  profile.picture.data.url;
 }
@@ -108,7 +183,7 @@ app.get('/auth/facebook/callback', passport.authenticate('facebook', {
 failureRedirect : '/auth/facebook'
 }), function(req, res) {
 res.redirect('/main');
-}); */
+});
 
 var facebook = 
 {
