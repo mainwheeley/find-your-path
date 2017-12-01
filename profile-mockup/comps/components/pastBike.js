@@ -7,10 +7,10 @@ import {
     Dimensions,
     Button,
 } from 'react-native';
-import {listWorkouts} from './AllData';
+import {listWorkouts} from './BikeData';
 import RadioForm, {RadioButton, RadioButtonInput, RadioButtonLabel} from 'react-native-simple-radio-button';
 
-export default class PastData extends React.Component {
+export default class PastBike extends React.Component {
 
 getData(token) {
     fetch('https://graph.facebook.com/v2.8/me?fields=email,name,friends&access_token=' + token)
@@ -93,7 +93,6 @@ return (
 	renderItem={({ item }) => 
 	    <View>
 	    <Text style={styles.item}><Text style={styles.itemTitle}>Starting point: </Text>{item.startp}</Text>
-	    <Text style={styles.item}><Text style={styles.itemTitle}>Workout Type: </Text>{item.type}</Text>
 	    <Text style={styles.item}><Text style={styles.itemTitle}>Total miles: </Text>{item.totmiles}</Text>
 	    </View>
 	}

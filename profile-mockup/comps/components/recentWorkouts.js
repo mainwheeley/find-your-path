@@ -7,7 +7,7 @@ import {
     Dimensions,
     Button,
 } from 'react-native';
-import {listWorkouts} from './Data';
+import {listWorkouts} from './RecentDb';
 
 export default class RecentWorkouts extends React.Component {
 
@@ -26,13 +26,15 @@ workoutSeparator = () => {
 render() {
 return (
   <View style={styles.mainContainer}>
+  <View style={styles.container}><Text style={styles.title}>Most recent workout: </Text></View>
     <FlatList
 	data={listWorkouts}
 	ItemSeparatorComponent={this.workoutSeparator}
 	renderItem={({ item }) => 
 	    <View>
-	    <Text style={styles.item}><Text style={styles.itemTitle}>Date: </Text>{item.date}</Text>
-	    <Text style={styles.item}><Text style={styles.itemTitle}>Start time: </Text>{item.time}</Text>
+	    <Text style={styles.item}><Text style={styles.itemTitle}>Starting point: </Text>{item.startp}</Text>
+	    <Text style={styles.item}><Text style={styles.itemTitle}>Workout Type: </Text>{item.type}</Text>
+	    <Text style={styles.item}><Text style={styles.itemTitle}>Total miles: </Text>{item.totmiles}</Text>
 	    </View>
 	}
     />
@@ -43,6 +45,13 @@ return (
 }
 
 const styles = StyleSheet.create({
+    title: {
+	padding: 10,
+	fontSize: 20,
+	height: 44,
+	borderBottomColor: '#000',
+	fontWeight: 'bold',
+    },
     delButton: {
 	flex: 1,
 	height: (Dimensions.get('window').width / 5) - 25,

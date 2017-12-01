@@ -10,6 +10,9 @@ import {
 import {listWorkouts} from './Data';
 import RadioForm, {RadioButton, RadioButtonInput, RadioButtonLabel} from 'react-native-simple-radio-button';
 import PastData from './pastData';
+import PastBike from './pastBike';
+import PastWalk from './pastWalk';
+import PastRun from './pastRun';
 
 var radio_props = [
     {label: 'All ', value: 0},
@@ -34,16 +37,22 @@ export default class PastWorkouts extends React.Component {
 
     renderType() {
 	if (this.state.viewType == 0) {
+	    return (
+		<PastData />
+	    )
 	} else if (this.state.viewType == 1) {
 	    return (
-		<PastData />
+		<PastWalk />
 	    )
 	} else if (this.state.viewType == 2) {
-	} else if (this.state.viewType == 3) {
-	} else if (this.state.viewType == 4) {
 	    return (
-		<PastData />
+		<PastRun />
 	    )
+	} else if (this.state.viewType == 3) {
+	    return (
+		<PastBike />
+	    )
+	} else if (this.state.viewType == 4) {
 	}
     }
 
