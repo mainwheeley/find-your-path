@@ -83,8 +83,6 @@ app.get('/users', users.list);*/
 app.post('/fbdata', function(req, res)
 {
 
-    console.log("here");
-    console.log(req.body);
     var email = req.body.email;
     var name =  req.body.name;
     var query1 = "select * from facebook where email = '" + email + "'";

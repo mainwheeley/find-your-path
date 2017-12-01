@@ -41,7 +41,8 @@ class Gmaps extends Component {
             modalVis: false,
             directions: [],
             dirCount: 0,
-            gencoords: []
+            gencoords: [],
+            sf: false
           }
 
       }
@@ -52,7 +53,28 @@ class Gmaps extends Component {
       {
         this.setState({modalVis: vis});
       }
+    toggle() {
+        this.setState({
+            sf: !this.state.sf
+        });
+    }
 
+    onStart()
+    {
+      if (this.state.sf) {
+        return (
+            <Button 
+
+            backgroundColor='#03A9F4'
+            title='Modify'
+            onPress={() => this.props.navigation.navigate('MSetting')}
+            />
+        );
+    } else {
+        return null;
+    }
+} 
+    
 
    componentDidMount()
     {
@@ -131,7 +153,7 @@ class Gmaps extends Component {
           this.setState({directions: directions});
           this.setState({gencoords: gencoords1});
           --count;
-          this.setState({dirCount: count});
+          //this.setState({dirCount: count});
           let points = Polyline.decode(respJson.routes[0].overview_polyline.points);
           let coords = points.map((point, index) => {
               return  {
@@ -160,17 +182,14 @@ class Gmaps extends Component {
     console.warn("testDiretions");    
     var i = 0;
     Tts.speak("Starting path");
-
-    /* let resp = await fetch(`https://maps.googleapis.com/maps/api/directions/json?origin=40.4189553,+-86.9080627&destination=40.4248,+-86.9110&mode=walking&key=AIzaSyDLWhkm_ecWkhFRKi6aJDs1Js70BeP1zW0`);
-    let respJson = await resp.json();
-*/
+      this.toggle();
     
     //need to add all the coordinates into an array to test.
-    console.warn("count: " + this.state.dirCount);
-    /* while (i < this.state.dirCount)
+    //console.warn("count: " + this.state.dirCount);
+     while (i < this.state.dirCount)
     {
-      setInterval(function() {
-      navigator.geolocation.getCurrentPosition((position) =>{
+      //setInterval(function() {
+     /* navigator.geolocation.getCurrentPosition((position) =>{
         var lat = parseFloat(position.coords.latitude);
         var long = parseFloat(position.coords.longitude);
       });
@@ -184,11 +203,12 @@ class Gmaps extends Component {
           Tts.speak(this.state.directions[i]);
           console.warn(i);
           i++;
-        }
-    }, 10);
+        } */
+    //}, 10);
      
-   } */
+   } 
    Tts.stop();
+   this.toggle();
     }
 
     checkDirections()
@@ -231,20 +251,6 @@ class Gmaps extends Component {
     render() {
     return (
       <View style={styles.container}>
-
-       <MapView style={styles.map} initialRegion={{
-          latitude:41.0082,
-          longitude:28.9784,
-          latitudeDelta: 0.0922,
-          longitudeDelta: 0.0421
-        }}>
-
-        <MapView.Polyline
-            coordinates={this.state.coords}
-            strokeWidth={2}
-            strokeColor="red"/>
-
-        </MapView>
         <MapView
           provider={PROVIDER_GOOGLE}
           region={this.state.initialPosition}
@@ -292,6 +298,7 @@ class Gmaps extends Component {
       title='Directions'
       onPress={() => this.setModalVis(true)}
     />
+    {this.onStart()}
       </View>
     );
   }

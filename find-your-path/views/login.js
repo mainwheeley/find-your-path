@@ -147,10 +147,10 @@ render()
   AccessToken.getCurrentAccessToken().then(
     (data) => {
       //alert(JSON.stringify(data));
-      /*if (data !== null)
+      if (data !== null)
       {
-        this.props.navigation.navigate('SignedIn')
-      }*/
+        this.props.navigation.navigate('Maps')
+      }
     } //Refresh it every time
 );
   return (
@@ -171,7 +171,8 @@ render()
               }
               
             )
-            this.props.navigation.navigate('SignedIn')
+            //this.props.navigation.navigate('SignedIn')
+            this.props.navigation.navigate('Maps')
           }
         }
       }
