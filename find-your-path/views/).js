@@ -17,15 +17,6 @@ const util = require("util");
 
 class Login extends React.Component {
 
-  constructor(props) {
-    super(props)
-var {state} = props.navigation;
-    this.state = {
-      id : 0
-      }
-
-  }
-
   static navigationOptions = {
     title: "Login"
   };
@@ -40,15 +31,21 @@ var {state} = props.navigation;
 
 
   initUser(token) {
-    fetch('https://graph.facebook.com/v2.8/me?fields=email,name,friends&access_token=' + token)
     //fetch('https://graph.facebook.com/v2.5/me?fields=email,name,friends&access_token=' + token)
-    //fetch('https://graph.facebook.com/v2.5/me?access_token=' + token +'&fields=email,name,friends')
+    fetch('https://graph.facebook.com/v2.5/me?access_token=' + token +"&fields=email,name,friends")
     .then((response) => response.json())
     .then((json) => {
       // Some user object has been set up somewhere, build that user here
       //alert("here2");
+      var user = {};
+      user.name = json.name
+      user.id = json.id
+      user.email = json.email
+      user.loading = false
+      user.loggedIn = true
       //user.avatar = setAvatar(json.id)
       alert(JSON.stringify(json));
+      alert(JSON.stringify(json.gender));
       
       /*$.ajax({
         url: 'http://localhost:3000/fbdata',
@@ -77,6 +74,7 @@ var {state} = props.navigation;
         'name' : json.name, 
         'id' : json.id,
         'email' : json.email,
+        'username' : json.name,
         'loading' : false,
         'loggedIn' : true
       })
@@ -157,7 +155,8 @@ render()
     <View>
       
     <LoginButton
-      readPermissions={['email', 'public_profile']}
+      publishPermissions={["publish_actions"]}
+      readPermissions={["email", "public_profile"]}
       onLoginFinished={
         (error, result) => {
           if (error) {
@@ -165,8 +164,10 @@ render()
           } else if (result.isCancelled) {
             alert("login is cancelled.");
           } else {
+            alert(JSON.stringify(AccessToken)
             AccessToken.getCurrentAccessToken().then(
               (data) => {
+                //alert(data.accessToken.toString())
                 this.initUser(data.accessToken);
               }
               

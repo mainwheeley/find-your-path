@@ -67,11 +67,11 @@ var app = express();
 var passport = require('passport');
 var config =  require('./authenticate/session.js');
 
- /* app.use(favicon());
+  app.use(favicon());
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use(cookieParser()); */
+app.use(cookieParser()); 
 
 //app.use(express.static(path.join(__dirname, 'public')));
 //app.use(app.router);
@@ -85,9 +85,8 @@ app.post('/fbdata', function(req, res)
 
     console.log("here");
     console.log(req.body);
-    /*var email = req.body.email;
+    var email = req.body.email;
     var name =  req.body.name;
-    var at = req.body.at; */
     var query1 = "select * from facebook where email = '" + email + "'";
     var query = "insert into facebook (name, email) values ('"+ name +"', '" + email +"')";
     var flag = 0;
