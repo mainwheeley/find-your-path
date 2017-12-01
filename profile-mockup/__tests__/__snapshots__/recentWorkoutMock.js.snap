@@ -17,29 +17,43 @@ ShallowWrapper {
       }
     }
   >
+    <View
+      style={
+        Object {
+          "alignItems": "center",
+          "backgroundColor": "#fff",
+          "flex": 1,
+          "justifyContent": "center",
+        }
+      }
+    >
+      <Text
+        accessible={true}
+        allowFontScaling={true}
+        disabled={false}
+        ellipsizeMode="tail"
+        style={
+          Object {
+            "borderBottomColor": "#000",
+            "fontSize": 20,
+            "fontWeight": "bold",
+            "height": 44,
+            "padding": 10,
+          }
+        }
+      >
+        Most recent workout: 
+      </Text>
+    </View>
     <FlatList
       ItemSeparatorComponent={[Function]}
       data={
         Array [
           Object {
-            "date": "11/02/2017",
             "key": "1",
-            "time": "1:00 PM",
-          },
-          Object {
-            "date": "11/02/2017",
-            "key": "2",
-            "time": "7:00 AM",
-          },
-          Object {
-            "date": "11/01/2017",
-            "key": "3",
-            "time": "9:00 PM",
-          },
-          Object {
-            "date": "11/01/2017",
-            "key": "4",
-            "time": "3:00 PM",
+            "startp": "134 W State St.",
+            "totmiles": 6,
+            "type": "Bike",
           },
         ]
       }
@@ -66,29 +80,43 @@ ShallowWrapper {
         }
       }
     >
+      <View
+        style={
+          Object {
+            "alignItems": "center",
+            "backgroundColor": "#fff",
+            "flex": 1,
+            "justifyContent": "center",
+          }
+        }
+      >
+        <Text
+          accessible={true}
+          allowFontScaling={true}
+          disabled={false}
+          ellipsizeMode="tail"
+          style={
+            Object {
+              "borderBottomColor": "#000",
+              "fontSize": 20,
+              "fontWeight": "bold",
+              "height": 44,
+              "padding": 10,
+            }
+          }
+        >
+          Most recent workout: 
+        </Text>
+      </View>
       <FlatList
         ItemSeparatorComponent={[Function]}
         data={
           Array [
             Object {
-              "date": "11/02/2017",
               "key": "1",
-              "time": "1:00 PM",
-            },
-            Object {
-              "date": "11/02/2017",
-              "key": "2",
-              "time": "7:00 AM",
-            },
-            Object {
-              "date": "11/01/2017",
-              "key": "3",
-              "time": "9:00 PM",
-            },
-            Object {
-              "date": "11/01/2017",
-              "key": "4",
-              "time": "3:00 PM",
+              "startp": "134 W State St.",
+              "totmiles": 6,
+              "type": "Bike",
             },
           ]
         }
@@ -130,29 +158,43 @@ ShallowWrapper {
         }
       }
     >
+      <View
+        style={
+          Object {
+            "alignItems": "center",
+            "backgroundColor": "#fff",
+            "flex": 1,
+            "justifyContent": "center",
+          }
+        }
+      >
+        <Text
+          accessible={true}
+          allowFontScaling={true}
+          disabled={false}
+          ellipsizeMode="tail"
+          style={
+            Object {
+              "borderBottomColor": "#000",
+              "fontSize": 20,
+              "fontWeight": "bold",
+              "height": 44,
+              "padding": 10,
+            }
+          }
+        >
+          Most recent workout: 
+        </Text>
+      </View>
       <FlatList
         ItemSeparatorComponent={[Function]}
         data={
           Array [
             Object {
-              "date": "11/02/2017",
               "key": "1",
-              "time": "1:00 PM",
-            },
-            Object {
-              "date": "11/02/2017",
-              "key": "2",
-              "time": "7:00 AM",
-            },
-            Object {
-              "date": "11/01/2017",
-              "key": "3",
-              "time": "9:00 PM",
-            },
-            Object {
-              "date": "11/01/2017",
-              "key": "4",
-              "time": "3:00 PM",
+              "startp": "134 W State St.",
+              "totmiles": 6,
+              "type": "Bike",
             },
           ]
         }
