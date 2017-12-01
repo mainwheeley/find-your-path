@@ -1,33 +1,59 @@
 import React from 'react';
-import {
+import { 
     StyleSheet,
     Text,
     View,
     FlatList,
     Dimensions,
+    Button,
 } from 'react-native';
-import {listWorkouts} from './data.js';
+import {listWorkouts} from './Data';
+import RecentWorkouts from './recentWorkouts';
+import PastWorkouts from './pastWorkouts';
 
 export default class Workouts extends React.Component {
 
-constructor(props) {
-super(props)
-this.state = {
-  list: [
-    {
-	key: '1',
-	time: '1:00pm',
-	date: '11/01/2017'
-    },
-    {
-	key: '2',
-	time: '2:00pm',
-	date: '11/02/2017'
-    },
+    constructor() {
+	super();
+    	this.state = { 
+	    text: 'Useless Placeholder',
+	    viewRecent: true,
+	    viewPast: false
+	};
+    }
 
-  ]
-};
-}
+    renderRecent() {
+	if (this.state.viewRecent) {
+	    return (
+		<RecentWorkouts />
+	    )
+	}
+    }
+
+    renderPast() {
+	if (this.state.viewPast) {
+	    return (
+		<PastWorkouts />
+	    )
+	}
+    }
+
+    setRecentRender=()=> {
+	this.setState({
+	    viewRecent: true,
+	    viewPast: false
+	})
+    }
+
+    setPastRender=()=> {
+	var recent=this.state.viewRecent
+	var past=this.state.viewPast
+	this.setState({
+	    viewRecent: !recent,
+	    viewPast: !past
+	})
+    }
+
 
 workoutSeparator = () => {
     return (
@@ -43,23 +69,41 @@ workoutSeparator = () => {
 
 render() {
 return (
-  <View style={styles.mainContainer}>
-    <FlatList
-	data={listWorkouts}
-	ItemSeparatorComponent={this.workoutSeparator}
-	renderItem={({ item }) =>
-	    <View>
-	    <Text style={styles.item}><Text style={styles.itemTitle}>Date: </Text>{item.date}</Text>
-	    <Text style={styles.item}><Text style={styles.itemTitle}>Start time: </Text>{item.time}</Text>
-	    </View>
-	}
-    />
+  <View style={styles.container}>
+    <View style={styles.mainContainer}>
+	{this.renderRecent()}
+    	{this.renderPast()}
+    </View>
+    <View style={styles.statsRow}>
+        <View style={styles.delButton}>
+    	<Button
+       	    onPress={this.setPastRender}
+       	    title="Switch Recent/Past"
+       	    color="#8BC34A"
+       	/>
+       </View>
+    </View>
   </View>);
 }
 
 }
 
 const styles = StyleSheet.create({
+    delButton: {
+	flex: 1,
+	height: (Dimensions.get('window').width / 5) - 25,
+	alignItems: 'center',
+	justifyContent: 'center',
+    },
+    statsRow: {
+	borderColor: '#fff',
+	borderTopWidth: 0,
+	borderBottomWidth: 0,
+	height: Dimensions.get('window').height / 10,
+	backgroundColor: '#fff',
+	flexDirection: 'row',
+	alignItems: 'center',
+    },
     itemTitle: {
 	padding: 10,
 	fontSize: 18,
@@ -75,14 +119,13 @@ const styles = StyleSheet.create({
     },
     mainContainer: {
 	justifyContent: 'center',
+	height: (Dimensions.get('window').height / 4),
 	flex: 1,
 	margin: 10
     },
   container: {
     flex: 1,
     backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
   },
   listContainer: {
       marginTop: 14,

@@ -20,7 +20,7 @@ import Stats from './comps/components/Stats';
 import deleteAcc from './comps/components/deleteAcc';
 import Workouts from './comps/components/Workouts';
 
-export default class Profile extends React.Component {
+export default class Main extends React.Component {
     constructor() {
 	super();
     	this.state = { 
@@ -75,7 +75,16 @@ export default class Profile extends React.Component {
 	<View style={styles.container}> 
 
 	    <Header />
-	    <Bar />
+	    <View style={styles.buttonBar}>
+		    <View style={styles.pastWorkouts}>
+			<Button
+	    	   	    onPress={this.deletePrompt}
+	    	   	    title="Past Workouts"
+	    	   	    color="red"
+	    	   	/>
+		    </View>
+	   </View>
+
 	    <View style={styles.buttonBar}>
 
 	    <TouchableOpacity 
@@ -115,6 +124,12 @@ export default class Profile extends React.Component {
 }
 
 const styles = StyleSheet.create({
+    pastWorkouts: {
+	flex: 1,
+	height: Dimensions.get('window').height / 10,
+	alignItems: 'center',
+	justifyContent: 'center',
+    },
     buttonBar: {
 	borderColor: '#fff',
 	borderWidth: 5,
