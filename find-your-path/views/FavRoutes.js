@@ -39,7 +39,7 @@ const styles = StyleSheet.create({
   }
 });
 
-const routes = [
+export var routes = [
   {
     name: 'PMU Run',
     startpoint: '610 Purdue Mall',

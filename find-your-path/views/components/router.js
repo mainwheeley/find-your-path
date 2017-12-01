@@ -37,6 +37,13 @@ export const MapView = StackNavigator({
       headerStyle
     }
   },
+  SaveRoute: {
+    screen: SaveRoute,
+    navigationOptions: {
+      title: "Save Route",
+      headerStyle
+    }
+  },
   Maps: {
     screen: Maps,
     navigationOptions: {
@@ -58,7 +65,7 @@ export const ProfileS = StackNavigator({
     }
   },
   FavoriteRoutes: {
-    screen: SaveRoute,
+    screen: FavRoutes,
     navigationOptions: {
       title: "Favorite Routes",
       headerStyle

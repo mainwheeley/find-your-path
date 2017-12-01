@@ -18,7 +18,7 @@ updateIndex (selectedIndex) {
 
 var miles;
 //export default ({ navigation }) => (
-class MSetting extends Component { 
+class MSetting extends Component {
   /*_toMap (prop1){
      let nextIndex = ++this.props.index;
     this.props.navigator.push({
@@ -26,22 +26,22 @@ class MSetting extends Component {
       title: 'Maps ' + nextIndex,
       passProps: {miles: prop1}
     });
-    navigation.navigate('Gmaps'); 
+    navigation.navigate('Gmaps');
   }*/
 
   constructor(props) {
     super(props);
     this.state = {
-      miles: 0, 
+      miles: 0,
       dest: "Chicago, IL",
-      
-    
+
+
     }
   }
-  
-  
 
-  render() 
+
+
+  render()
   { var {navigate} = this.props.navigation;
     return(
   <View style={styles.container}>
@@ -63,6 +63,11 @@ class MSetting extends Component {
       placeholderTextColor="rgba(255,255,255,0.7)"
       returnKeyType='next'
       style={styles.input}
+    />
+    <Button
+      backgroundColor='#03A9F4'
+      title='Save Route'
+      onPress={() => navigate('SaveRoute')}
     />
     <Button
       backgroundColor='#03A9F4'
