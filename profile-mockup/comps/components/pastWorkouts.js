@@ -8,38 +8,53 @@ import {
     Button,
 } from 'react-native';
 import {listWorkouts} from './Data';
+import RadioForm, {RadioButton, RadioButtonInput, RadioButtonLabel} from 'react-native-simple-radio-button';
+import PastData from './pastData';
+import PastBike from './pastBike';
+import PastWalk from './pastWalk';
+import PastRun from './pastRun';
+
+var radio_props = [
+    {label: 'All ', value: 0},
+    {label: 'Walk ', value: 1},
+    {label: 'Run ', value: 2},
+    {label: 'Bike ', value: 3},
+    {label: 'Other ', value: 4},
+];
 
 export default class PastWorkouts extends React.Component {
-
-constructor(props) {
-super(props)
-this.state = {
-  list: [
-    {
-	key: '1',
-	time: '1:00pm',
-	date: '11/01/2017'
-    },
-    {
-	key: '2',
-	time: '2:00pm',
-	date: '11/02/2017'
-    },
-
-  ]
-};
-}
-
-    renderRecent() {
-	if (this.state.viewRecent) {
-	}
+    constructor() {
+	super();
+    	this.state = { 
+	    viewType: 0
+	};
     }
 
-    renderPast() {
-	if (this.state.viewPast) {
-	}
+    logOnChange(valuex) {
+	this.setState({viewType:valuex});
+	console.log(this.state.viewType);
     }
 
+    renderType() {
+	if (this.state.viewType == 0) {
+	    return (
+		<PastData />
+	    )
+	} else if (this.state.viewType == 1) {
+	    return (
+		<PastWalk />
+	    )
+	} else if (this.state.viewType == 2) {
+	    return (
+		<PastRun />
+	    )
+	} else if (this.state.viewType == 3) {
+	    return (
+		<PastBike />
+	    )
+	} else if (this.state.viewType == 4) {
+	}
+    }
 
 workoutSeparator = () => {
     return (
@@ -55,18 +70,18 @@ workoutSeparator = () => {
 
 render() {
 return (
-  <View style={styles.mainContainer}>
-    <FlatList
-	data={listWorkouts}
-	ItemSeparatorComponent={this.workoutSeparator}
-	renderItem={({ item }) => 
-	    <View>
-	    <Text style={styles.item}>{item.date} -- {item.time}</Text>
-	    <Text style={styles.item}><Text style={styles.itemTitle}>Start point: </Text>{item.time}</Text>
-	    </View>
-	}
+  <View style={styles.container}> 
+    <RadioForm
+	radio_props={radio_props}
+	onPress={(value) => {this.logOnChange(value)}}
+	buttonColor={'#8BC34A'}
+	formHorizontal={true}
+	labelHorizontal={true}
     />
-  </View>);
+    {this.renderType()}
+  </View>
+  
+  );
 }
 
 }
@@ -103,6 +118,7 @@ const styles = StyleSheet.create({
     },
   container: {
     flex: 1,
+    margin: 10,
     backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'center',

@@ -50,7 +50,7 @@ export default class Stats extends React.Component {
 		    <Image style={styles.photo} resizeMode="stretch" source={require('../imgs/road.jpg')} />
 		</View>
 		<View style={styles.textWrap}>
-		    <Text style={styles.statsList}>Total distance: 200 mi </Text>
+		    <Text style={styles.statsList}>Total distance: 20 mi </Text>
 		</View>
 	    </View>
 	</View>
@@ -65,7 +65,7 @@ export default class Stats extends React.Component {
 		    <Image style={styles.photo} resizeMode="contain" source={require('../imgs/fire.jpg')} />
 		</View>
 		<View style={styles.textWrap}>
-		    <Text style={styles.statsList}>Ave. calories burned: 150 cals</Text>
+		    <Text style={styles.statsList}>Ave. cal.: 150 cals</Text>
 		</View>
 	    </View>
 	</View>
@@ -80,7 +80,7 @@ export default class Stats extends React.Component {
 		    <Image style={styles.photo} resizeMode="contain" source={require('../imgs/time.png')} />
 		</View>
 		<View style={styles.textWrap}>
-		    <Text style={styles.statsList}>Total time run: 200 hrs</Text>
+		    <Text style={styles.statsList}>Total time run: 5 hrs</Text>
 		</View>
 	    </View>
 	</View>
@@ -95,7 +95,7 @@ export default class Stats extends React.Component {
 		    <Image style={styles.photo} resizeMode="contain" source={require('../imgs/star.png')} />
 		</View>
 		<View style={styles.textWrap}>
-		    <Text style={styles.statsList}>Favorite route: State St.</Text>
+		    <Text style={styles.statsList}>Fav route: 134 W. State St</Text>
 		</View>
 	    </View>
 	</View>
