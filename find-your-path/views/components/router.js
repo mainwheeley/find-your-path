@@ -13,6 +13,7 @@ import Gmaps from './views/gm';
 //import Settings from '../Settings.js';
 //import Weather from '../../Weather/App.js';
 import FavRoutes from '../FavRoutes.js';
+import SaveRoute from '../SaveRoute.js';
 
 const headerStyle = {
   marginTop: Platform.OS === "android" ? StatusBar.currentHeight : 0
@@ -57,7 +58,7 @@ export const ProfileS = StackNavigator({
     }
   },
   FavoriteRoutes: {
-    screen: FavRoutes,
+    screen: SaveRoute,
     navigationOptions: {
       title: "Favorite Routes",
       headerStyle
