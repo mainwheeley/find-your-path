@@ -1,5 +1,5 @@
 import React from 'react';
-import { 
+import {
     AppRegistry,
     Button,
     StyleSheet,
@@ -171,4 +171,3 @@ const styles = StyleSheet.create({
 //	alignSelf: 'stretch',
     },
 });
-
