@@ -3,7 +3,11 @@ import { Modal, AppRegistry, StyleSheet, Text, View, ListView, FlatList, Dimensi
 import MapView, { PROVIDER_GOOGLE } from "react-native-maps";
 import { Button, ButtonGroup } from 'react-native-elements';
 import Polyline from '@mapbox/polyline';
+import Tts from 'react-native-tts';
+import { lang } from "moment";
 
+Tts.setDefaultLanguage('en-IE');
+Tts.setDefaultVoice('com.apple.ttsbundle.Moira-compact');
 
  const {width, height} = Dimensions.get('window')
  const S_H = height;
@@ -35,7 +39,10 @@ class Gmaps extends Component {
             dest: state.params.dest,
             miles: state.params.miles,
             modalVis: false,
-            directions: []
+            directions: [],
+            dirCount: 0,
+            gencoords: [],
+            sf: false
           }
 
       }
@@ -46,7 +53,28 @@ class Gmaps extends Component {
       {
         this.setState({modalVis: vis});
       }
+    toggle() {
+        this.setState({
+            sf: !this.state.sf
+        });
+    }
 
+    onStart()
+    {
+      if (this.state.sf) {
+        return (
+            <Button 
+
+            backgroundColor='#03A9F4'
+            title='Modify'
+            onPress={() => this.props.navigation.navigate('MSetting')}
+            />
+        );
+    } else {
+        return null;
+    }
+} 
+    
 
    componentDidMount()
     {
@@ -58,8 +86,8 @@ class Gmaps extends Component {
         var initialRegion = {
           latitude: lat,
           longitude: long,
-          latitudeDelta: LD,
-          longitudeDelta: LGD
+          latitudeDelta: LD / 15,
+          longitudeDelta: LGD / 15
         }
 
         this.setState({initialPosition: initialRegion})
@@ -72,8 +100,8 @@ class Gmaps extends Component {
         var lastRegion = {
           latitude: lat,
           longitude: long,
-          latitudeDelta: LD,
-          longitudeDelta: LGD
+          latitudeDelta: LD / 15,
+          longitudeDelta: LGD / 15
         }
         this.setState({initialPosition: lastRegion});
         this.setState({markerPosition: lastRegion});
@@ -88,29 +116,44 @@ class Gmaps extends Component {
 
     async getDirections(startLoc, destinationLoc) {
       try {
-          let resp = await fetch(`https://maps.googleapis.com/maps/api/directions/json?origin=${ startLoc }&destination=${ destinationLoc }`)
+          //let resp = await fetch(`https://maps.googleapis.com/maps/api/directions/json?origin=${ startLoc }&destination=${ destinationLoc }&mode=walking&key=AIzaSyDLWhkm_ecWkhFRKi6aJDs1Js70BeP1zW0`);
+          let resp = await fetch(`https://maps.googleapis.com/maps/api/directions/json?origin=40.4189553,+-86.9080627&destination=40.4248,+-86.9110&mode=walking&key=AIzaSyDLWhkm_ecWkhFRKi6aJDs1Js70BeP1zW0`);
           let respJson = await resp.json();
           //console.warn("hello2")
           //console.warn(destinationLocation)
           //console.warn(JSON.stringify(respJson.routes[0].legs[0].steps));
+          var gencoords1 = [];
           var directions = [];
           var count = 1;
           respJson.routes[0].legs[0].steps.forEach(function(i)
           {
             var dist = i.distance.text;
             var html = i.html_instructions;
-
+            var endloc = {};
+            endloc.lat = i.end_location.lat;
+            endloc.lng = i.end_location.lng
             var nohtml = html.replace(/b/g, "");
             nohtml = nohtml.replace(/</g, "");
             nohtml = nohtml.replace(/>/g, "");
             nohtml = nohtml.replace(/\//g, "");
 
+            if (count == 1)
+            {
+              var stloc = {};
+              stloc.lat = i.start_location.lat;
+              stloc.lng = i.start_location.lng;
+              gencoords1.push(stloc);
+            }
 
             var dir = count + ": " + "In " + dist+ " " + nohtml;
             directions.push(dir);
+            gencoords1.push(endloc);
             count++;
           });
           this.setState({directions: directions});
+          this.setState({gencoords: gencoords1});
+          --count;
+          //this.setState({dirCount: count});
           let points = Polyline.decode(respJson.routes[0].overview_polyline.points);
           let coords = points.map((point, index) => {
               return  {
@@ -133,23 +176,81 @@ class Gmaps extends Component {
 
     }
 
+    testDirections()
+    {
+       //to check directions and update marker
+    console.warn("testDiretions");    
+    var i = 0;
+    Tts.speak("Starting path");
+      this.toggle();
+    
+    //need to add all the coordinates into an array to test.
+    //console.warn("count: " + this.state.dirCount);
+     while (i < this.state.dirCount)
+    {
+      //setInterval(function() {
+     /* navigator.geolocation.getCurrentPosition((position) =>{
+        var lat = parseFloat(position.coords.latitude);
+        var long = parseFloat(position.coords.longitude);
+      });
+        
+
+        console.warn("long: "+ long+ " latitude: " + lat + "\n");
+        //consider adding precision here
+        if (long == this.state.gencoords[i].lng && lat == this.state.gencoords[i].lat)
+        {
+          //@ the right location
+          Tts.speak(this.state.directions[i]);
+          console.warn(i);
+          i++;
+        } */
+    //}, 10);
+     
+   } 
+   Tts.stop();
+   this.toggle();
+    }
+
+    checkDirections()
+    {
+      //to check directions and update marker
+    console.warn("checkDiretions");    
+    var i = 0;
+    Tts.speak("Starting path");
+    //console.warn("count: " + this.state.dirCount);
+    /* while (i < this.state.dirCount)
+    {
+      setInterval(function() {
+      navigator.geolocation.getCurrentPosition((position) =>{
+        var lat = parseFloat(position.coords.latitude);
+        var long = parseFloat(position.coords.longitude);
+        var curRegion = {
+          latitude: lat,
+          longitude: long,
+          latitudeDelta: LD,
+          longitudeDelta: LGD
+        }
+        this.setState({initialPosition: curRegion});
+        this.setState({markerPosition: curRegion});
+        console.warn("long: "+ curRegion.longitude+ " latitude: " + curRegion.latitude + "\n");
+        if (curRegion.longitude == this.state.gencoords[i].lng && curRegion.latitude == this.state.gencoords[i].lat)
+        {
+          //@ the right location
+          Tts.speak(this.state.directions[i]);
+          console.warn(i);
+          i++;
+        }
+      });
+    }, 100);
+     
+   } */
+
+    }
+
+    
     render() {
     return (
       <View style={styles.container}>
-
-       <MapView style={styles.map} initialRegion={{
-          latitude:41.0082,
-          longitude:28.9784,
-          latitudeDelta: 0.0922,
-          longitudeDelta: 0.0421
-        }}>
-
-        <MapView.Polyline
-            coordinates={this.state.coords}
-            strokeWidth={2}
-            strokeColor="red"/>
-
-        </MapView>
         <MapView
           provider={PROVIDER_GOOGLE}
           region={this.state.initialPosition}
@@ -187,15 +288,22 @@ class Gmaps extends Component {
         />
           </Modal>
 
+          <Button
+      backgroundColor='#03A9F4'
+      title='Start'
+      onPress={() => this.testDirections()}
+    />
             <Button
       backgroundColor='#03A9F4'
       title='Directions'
       onPress={() => this.setModalVis(true)}
     />
+    {this.onStart()}
       </View>
     );
   }
 }
+
 
 const styles = StyleSheet.create({
   radius: {
