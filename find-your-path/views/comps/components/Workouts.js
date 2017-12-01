@@ -1,5 +1,5 @@
 import React from 'react';
-import { 
+import {
     StyleSheet,
     Text,
     View,
@@ -7,7 +7,7 @@ import {
     Dimensions,
     Button,
 } from 'react-native';
-import {listWorkouts} from './Data';
+import {listWorkouts} from './data.js';
 import RecentWorkouts from './recentWorkouts';
 import PastWorkouts from './pastWorkouts';
 
@@ -15,7 +15,7 @@ export default class Workouts extends React.Component {
 
     constructor() {
 	super();
-    	this.state = { 
+    	this.state = {
 	    text: 'Useless Placeholder',
 	    viewRecent: true,
 	    viewPast: false
