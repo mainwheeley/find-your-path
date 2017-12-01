@@ -1,0 +1,284 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Profile Page renders correctly 1`] = `
+ShallowWrapper {
+  "complexSelector": ComplexSelector {
+    "buildPredicate": [Function],
+    "childrenOfNode": [Function],
+    "findWhereUnwrapped": [Function],
+  },
+  "length": 1,
+  "node": <View
+    style={
+      Object {
+        "backgroundColor": "#fff",
+        "flex": 1,
+      }
+    }
+  >
+    <Header />
+    <Bar />
+    <View
+      style={
+        Object {
+          "alignItems": "center",
+          "backgroundColor": "#fff",
+          "borderBottomWidth": 0,
+          "borderColor": "#fff",
+          "borderWidth": 5,
+          "flexDirection": "row",
+          "height": 133.4,
+        }
+      }
+    >
+      <TouchableOpacity
+        activeOpacity={0.2}
+        onPress={[Function]}
+        style={
+          Object {
+            "alignItems": "center",
+            "borderColor": "#F44336",
+            "borderLeftWidth": 5,
+            "borderRadius": 10,
+            "borderRightWidth": 5,
+            "borderWidth": 1,
+            "flex": 1,
+            "height": 88.93333333333334,
+            "width": 88.93333333333334,
+          }
+        }
+      >
+        <Image
+          source={1}
+          style={
+            Object {
+              "height": 78.47058823529412,
+              "width": 78.47058823529412,
+            }
+          }
+        />
+      </TouchableOpacity>
+      <TouchableOpacity
+        activeOpacity={0.2}
+        onPress={[Function]}
+        style={
+          Object {
+            "alignItems": "center",
+            "borderColor": "#F44336",
+            "borderLeftWidth": 5,
+            "borderRadius": 10,
+            "borderRightWidth": 5,
+            "borderWidth": 1,
+            "flex": 1,
+            "height": 88.93333333333334,
+            "width": 88.93333333333334,
+          }
+        }
+      >
+        <Image
+          source={1}
+          style={
+            Object {
+              "height": 78.47058823529412,
+              "width": 78.47058823529412,
+            }
+          }
+        />
+      </TouchableOpacity>
+    </View>
+    <Stats />
+  </View>,
+  "nodes": Array [
+    <View
+      style={
+        Object {
+          "backgroundColor": "#fff",
+          "flex": 1,
+        }
+      }
+    >
+      <Header />
+      <Bar />
+      <View
+        style={
+          Object {
+            "alignItems": "center",
+            "backgroundColor": "#fff",
+            "borderBottomWidth": 0,
+            "borderColor": "#fff",
+            "borderWidth": 5,
+            "flexDirection": "row",
+            "height": 133.4,
+          }
+        }
+      >
+        <TouchableOpacity
+          activeOpacity={0.2}
+          onPress={[Function]}
+          style={
+            Object {
+              "alignItems": "center",
+              "borderColor": "#F44336",
+              "borderLeftWidth": 5,
+              "borderRadius": 10,
+              "borderRightWidth": 5,
+              "borderWidth": 1,
+              "flex": 1,
+              "height": 88.93333333333334,
+              "width": 88.93333333333334,
+            }
+          }
+        >
+          <Image
+            source={1}
+            style={
+              Object {
+                "height": 78.47058823529412,
+                "width": 78.47058823529412,
+              }
+            }
+          />
+        </TouchableOpacity>
+        <TouchableOpacity
+          activeOpacity={0.2}
+          onPress={[Function]}
+          style={
+            Object {
+              "alignItems": "center",
+              "borderColor": "#F44336",
+              "borderLeftWidth": 5,
+              "borderRadius": 10,
+              "borderRightWidth": 5,
+              "borderWidth": 1,
+              "flex": 1,
+              "height": 88.93333333333334,
+              "width": 88.93333333333334,
+            }
+          }
+        >
+          <Image
+            source={1}
+            style={
+              Object {
+                "height": 78.47058823529412,
+                "width": 78.47058823529412,
+              }
+            }
+          />
+        </TouchableOpacity>
+      </View>
+      <Stats />
+    </View>,
+  ],
+  "options": Object {},
+  "renderer": ReactShallowRenderer {
+    "_context": Object {},
+    "_element": <App />,
+    "_instance": App {
+      "context": Object {},
+      "itemSeparator": [Function],
+      "props": Object {},
+      "refs": Object {},
+      "setStatsRender": [Function],
+      "setWorkoutsRender": [Function],
+      "state": Object {
+        "text": "Useless Placeholder",
+        "viewStats": true,
+        "viewWorkouts": false,
+      },
+      "updater": Updater {
+        "_renderer": [Circular],
+      },
+    },
+    "_newState": null,
+    "_rendered": <View
+      style={
+        Object {
+          "backgroundColor": "#fff",
+          "flex": 1,
+        }
+      }
+    >
+      <Header />
+      <Bar />
+      <View
+        style={
+          Object {
+            "alignItems": "center",
+            "backgroundColor": "#fff",
+            "borderBottomWidth": 0,
+            "borderColor": "#fff",
+            "borderWidth": 5,
+            "flexDirection": "row",
+            "height": 133.4,
+          }
+        }
+      >
+        <TouchableOpacity
+          activeOpacity={0.2}
+          onPress={[Function]}
+          style={
+            Object {
+              "alignItems": "center",
+              "borderColor": "#F44336",
+              "borderLeftWidth": 5,
+              "borderRadius": 10,
+              "borderRightWidth": 5,
+              "borderWidth": 1,
+              "flex": 1,
+              "height": 88.93333333333334,
+              "width": 88.93333333333334,
+            }
+          }
+        >
+          <Image
+            source={1}
+            style={
+              Object {
+                "height": 78.47058823529412,
+                "width": 78.47058823529412,
+              }
+            }
+          />
+        </TouchableOpacity>
+        <TouchableOpacity
+          activeOpacity={0.2}
+          onPress={[Function]}
+          style={
+            Object {
+              "alignItems": "center",
+              "borderColor": "#F44336",
+              "borderLeftWidth": 5,
+              "borderRadius": 10,
+              "borderRightWidth": 5,
+              "borderWidth": 1,
+              "flex": 1,
+              "height": 88.93333333333334,
+              "width": 88.93333333333334,
+            }
+          }
+        >
+          <Image
+            source={1}
+            style={
+              Object {
+                "height": 78.47058823529412,
+                "width": 78.47058823529412,
+              }
+            }
+          />
+        </TouchableOpacity>
+      </View>
+      <Stats />
+    </View>,
+    "_rendering": false,
+    "_updater": Updater {
+      "_renderer": [Circular],
+    },
+    "getRenderOutput": [Function],
+    "render": [Function],
+  },
+  "root": [Circular],
+  "unrendered": <App />,
+}
+`;

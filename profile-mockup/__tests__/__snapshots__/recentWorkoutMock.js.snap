@@ -1,0 +1,182 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Profile Bar renders correctly 1`] = `
+ShallowWrapper {
+  "complexSelector": ComplexSelector {
+    "buildPredicate": [Function],
+    "childrenOfNode": [Function],
+    "findWhereUnwrapped": [Function],
+  },
+  "length": 1,
+  "node": <View
+    style={
+      Object {
+        "flex": 1,
+        "justifyContent": "center",
+        "margin": 10,
+      }
+    }
+  >
+    <FlatList
+      ItemSeparatorComponent={[Function]}
+      data={
+        Array [
+          Object {
+            "date": "11/02/2017",
+            "key": "1",
+            "time": "1:00 PM",
+          },
+          Object {
+            "date": "11/02/2017",
+            "key": "2",
+            "time": "7:00 AM",
+          },
+          Object {
+            "date": "11/01/2017",
+            "key": "3",
+            "time": "9:00 PM",
+          },
+          Object {
+            "date": "11/01/2017",
+            "key": "4",
+            "time": "3:00 PM",
+          },
+        ]
+      }
+      disableVirtualization={false}
+      horizontal={false}
+      initialNumToRender={10}
+      keyExtractor={[Function]}
+      maxToRenderPerBatch={10}
+      numColumns={1}
+      onEndReachedThreshold={2}
+      renderItem={[Function]}
+      scrollEventThrottle={50}
+      updateCellsBatchingPeriod={50}
+      windowSize={21}
+    />
+  </View>,
+  "nodes": Array [
+    <View
+      style={
+        Object {
+          "flex": 1,
+          "justifyContent": "center",
+          "margin": 10,
+        }
+      }
+    >
+      <FlatList
+        ItemSeparatorComponent={[Function]}
+        data={
+          Array [
+            Object {
+              "date": "11/02/2017",
+              "key": "1",
+              "time": "1:00 PM",
+            },
+            Object {
+              "date": "11/02/2017",
+              "key": "2",
+              "time": "7:00 AM",
+            },
+            Object {
+              "date": "11/01/2017",
+              "key": "3",
+              "time": "9:00 PM",
+            },
+            Object {
+              "date": "11/01/2017",
+              "key": "4",
+              "time": "3:00 PM",
+            },
+          ]
+        }
+        disableVirtualization={false}
+        horizontal={false}
+        initialNumToRender={10}
+        keyExtractor={[Function]}
+        maxToRenderPerBatch={10}
+        numColumns={1}
+        onEndReachedThreshold={2}
+        renderItem={[Function]}
+        scrollEventThrottle={50}
+        updateCellsBatchingPeriod={50}
+        windowSize={21}
+      />
+    </View>,
+  ],
+  "options": Object {},
+  "renderer": ReactShallowRenderer {
+    "_context": Object {},
+    "_element": <RecentWorkouts />,
+    "_instance": RecentWorkouts {
+      "context": Object {},
+      "props": Object {},
+      "refs": Object {},
+      "state": Object {},
+      "updater": Updater {
+        "_renderer": [Circular],
+      },
+      "workoutSeparator": [Function],
+    },
+    "_newState": null,
+    "_rendered": <View
+      style={
+        Object {
+          "flex": 1,
+          "justifyContent": "center",
+          "margin": 10,
+        }
+      }
+    >
+      <FlatList
+        ItemSeparatorComponent={[Function]}
+        data={
+          Array [
+            Object {
+              "date": "11/02/2017",
+              "key": "1",
+              "time": "1:00 PM",
+            },
+            Object {
+              "date": "11/02/2017",
+              "key": "2",
+              "time": "7:00 AM",
+            },
+            Object {
+              "date": "11/01/2017",
+              "key": "3",
+              "time": "9:00 PM",
+            },
+            Object {
+              "date": "11/01/2017",
+              "key": "4",
+              "time": "3:00 PM",
+            },
+          ]
+        }
+        disableVirtualization={false}
+        horizontal={false}
+        initialNumToRender={10}
+        keyExtractor={[Function]}
+        maxToRenderPerBatch={10}
+        numColumns={1}
+        onEndReachedThreshold={2}
+        renderItem={[Function]}
+        scrollEventThrottle={50}
+        updateCellsBatchingPeriod={50}
+        windowSize={21}
+      />
+    </View>,
+    "_rendering": false,
+    "_updater": Updater {
+      "_renderer": [Circular],
+    },
+    "getRenderOutput": [Function],
+    "render": [Function],
+  },
+  "root": [Circular],
+  "unrendered": <RecentWorkouts />,
+}
+`;
