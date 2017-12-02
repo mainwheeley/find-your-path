@@ -23,5 +23,10 @@ export const listWorkouts = [
 	startp: '134 W State St.',
 	totmiles: 6
     },
-
+    {
+  key: '5',
+  type: 'Other',
+  startp: '135 W State St.',
+  totmiles: 7
+},
 ];

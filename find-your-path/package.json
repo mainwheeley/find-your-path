@@ -30,11 +30,8 @@
 		"react-native-prompt": "^1.0.0",
 		"react-native-push-notification": "^3.0.1",
 		"react-native-safari-view": "^2.1.0",
-<<<<<<< HEAD
 		"react-native-simple-radio-button": "^2.7.0",
-=======
 		"react-native-tts": "^1.4.1",
->>>>>>> master
 		"react-native-vector-icons": "^4.4.2",
 		"react-navigation": "git+https://github.com/react-community/react-navigation.git",
 		"require": "^2.4.20",

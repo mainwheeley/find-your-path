@@ -149,7 +149,7 @@ render()
       //alert(JSON.stringify(data));
       if (data !== null)
       {
-        this.props.navigation.navigate('Maps')
+        this.props.navigation.navigate('SignedIn')
       }
     } //Refresh it every time
 );
@@ -172,7 +172,7 @@ render()
 
             )
             //this.props.navigation.navigate('SignedIn')
-            this.props.navigation.navigate('Maps')
+            this.props.navigation.navigate('SignedIn')
           }
         }
       }
