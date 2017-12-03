@@ -73,7 +73,7 @@ class Gmaps extends Component {
     } else {
         return null;
     }
-} 
+  } 
     
 
    componentDidMount()
@@ -117,7 +117,11 @@ class Gmaps extends Component {
     async getDirections(startLoc, destinationLoc) {
       try {
           //let resp = await fetch(`https://maps.googleapis.com/maps/api/directions/json?origin=${ startLoc }&destination=${ destinationLoc }&mode=walking&key=AIzaSyDLWhkm_ecWkhFRKi6aJDs1Js70BeP1zW0`);
-          let resp = await fetch(`https://maps.googleapis.com/maps/api/directions/json?origin=40.4189553,+-86.9080627&destination=40.4248,+-86.9110&mode=walking&key=AIzaSyDLWhkm_ecWkhFRKi6aJDs1Js70BeP1zW0`);
+          //let resp = await fetch(`https://maps.googleapis.com/maps/api/directions/json?origin=40.4189553,+-86.9080627&destination=40.4248,+-86.9110&mode=walking&key=AIzaSyDLWhkm_ecWkhFRKi6aJDs1Js70BeP1zW0`); <--works
+          let resp = await fetch(`https://maps.googleapis.com/maps/api/directions/json?origin=40.4190019,-86.9080573&destination=40.4190019,-86.9080573&waypoints=Gary,IN&key=%20AIzaSyDLWhkm_ecWkhFRKi6aJDs1Js70BeP1zW0`);
+          //let resp = await fetch(`https://maps.googleapis.com/maps/api/directions/json?origin=Boston,MA&destination=Concord,MA&waypoints=Charlestown,MA|Lexington,MA&key=AIzaSyDLWhkm_ecWkhFRKi6aJDs1Js70BeP1zW0`);
+          //let resp = await fetch(`https://maps.googleapis.com/maps/api/directions/json?origin=40.4190019,-86.9080573&destination=Champaign,IL&waypoints=Gary,IN&key=%20AIzaSyDLWhkm_ecWkhFRKi6aJDs1Js70BeP1zW0`);
+          
           let respJson = await resp.json();
           //console.warn("hello2")
           //console.warn(destinationLocation)
@@ -125,6 +129,7 @@ class Gmaps extends Component {
           var gencoords1 = [];
           var directions = [];
           var count = 1;
+          console.warn(respJson.routes);
           respJson.routes[0].legs[0].steps.forEach(function(i)
           {
             var dist = i.distance.text;
