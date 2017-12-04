@@ -165,12 +165,7 @@ class Gmaps extends Component {
         this.setState({initialPosition: lastRegion});
         this.setState({markerPosition: lastRegion});
       })
-      //this.getDirections("52.5200, 13.4050", "41.0082, 28.9784");
-      /* console.warn(here);
-      this.getDirections(here, "Naperville, IL"); */
 
-      //console.warn("hello!");
-      //this.getDirections("40.1884979, 29.061018", "41.0082,28.9784");
     }
 
     async getDirections(startLoc, destinationLoc, waypoints, flag) {
@@ -178,38 +173,22 @@ class Gmaps extends Component {
 
         //if flag is 1, then waypoints are there. If flag is 0 no way points
         var i = 0;
-        /*while (i < 3)
-        {
-          console.warn("long: "+waypoints[i].lng + " lat: "+ waypoints[i].lat + "\n");
-          i++;
-        }  */
 
         let resp;
         if (!flag)
         {
           resp = await fetch(`https://maps.googleapis.com/maps/api/directions/json?origin=${ startLoc }&destination=${ destinationLoc }&mode=walking&key=AIzaSyDLWhkm_ecWkhFRKi6aJDs1Js70BeP1zW0`);
         }
-          //let resp = await fetch(`https://maps.googleapis.com/maps/api/directions/json?origin=40.4189553,+-86.9080627&destination=40.4248,+-86.9110&mode=walking&key=AIzaSyDLWhkm_ecWkhFRKi6aJDs1Js70BeP1zW0`); <--works
-          //let resp = await fetch(`https://maps.googleapis.com/maps/api/directions/json?origin=40.4190019,-86.9080573&destination=40.4190019,-86.9080573&waypoints=Chicago,IL|San Diego,CA&key=%20AIzaSyDLWhkm_ecWkhFRKi6aJDs1Js70BeP1zW0`);
-          //let resp = await fetch(`https://maps.googleapis.com/maps/api/directions/json?origin=Boston,MA&destination=Concord,MA&waypoints=Charlestown,MA|West Lafayette,IN&key=AIzaSyDLWhkm_ecWkhFRKi6aJDs1Js70BeP1zW0`);
-          //let resp = await fetch(`https://maps.googleapis.com/maps/api/directions/json?origin=40.4190019,-86.9080573&destination=Champaign,IL&waypoints=Gary,IN&key=%20AIzaSyDLWhkm_ecWkhFRKi6aJDs1Js70BeP1zW0`);
-          //let resp = await fetch(`https://maps.googleapis.com/maps/api/directions/json?origin=40.4189553,+-86.9080627&destination=40.4189553,+-86.9080627&waypoints=Chicago,IL|Naperville, IL|Rockford, IL&key=AIzaSyDLWhkm_ecWkhFRKi6aJDs1Js70BeP1zW0`);
+
         if (flag)
         {
-          //console.warn(waypoints);
-          //console.warn(`https://maps.googleapis.com/maps/api/directions/json?origin=${startLoc.lat},${startLoc.lng}&destination=${destinationLoc.lat},${destinationLoc.lng}&waypoints=${waypoints[0].lat},${waypoints[0].lng}|${waypoints[1].lat},${waypoints[1].lng}|${waypoints[2].lat},${waypoints[2].lng}&key=AIzaSyDLWhkm_ecWkhFRKi6aJDs1Js70BeP1zW0`)
           resp = await fetch(`https://maps.googleapis.com/maps/api/directions/json?origin=${startLoc.lat},${startLoc.lng}&destination=${destinationLoc.lat},${destinationLoc.lng}&waypoints=${waypoints[0].lat},${waypoints[0].lng}|${waypoints[1].lat},${waypoints[1].lng}|${waypoints[2].lat},${waypoints[2].lng}&key=AIzaSyDLWhkm_ecWkhFRKi6aJDs1Js70BeP1zW0`);
-          //resp = await fetch(`https://maps.googleapis.com/maps/api/directions/json?origin=40.4190019,-86.9080573&destination=40.4190019,-86.908057&waypoints=40.4490, -86.9079|40.4490, -86.8679|40.4190, -86.8679&key=AIzaSyDLWhkm_ecWkhFRKi6aJDs1Js70BeP1zW0`);
+
         }
           let respJson = await resp.json();
-          //console.warn("hello2")
-          //console.warn(destinationLocation)
-          //console.warn(JSON.stringify(respJson.routes[0].legs[0].steps));
           var gencoords1 = [];
           var directions = [];
           var count = 1;
-          //var j = 0;
-          //console.warn(respJson.routes);
           respJson.routes[0].legs.forEach(function(j)
           {
             j.steps.forEach(function(i)
@@ -238,33 +217,6 @@ class Gmaps extends Component {
               count++;
             });
           });
-          /*
-          respJson.routes[0].legs[0].steps.forEach(function(i)
-          {
-            var dist = i.distance.text;
-            var html = i.html_instructions;
-            var endloc = {};
-            endloc.lat = i.end_location.lat;
-            endloc.lng = i.end_location.lng
-            var nohtml = html.replace(/b/g, "");
-            nohtml = nohtml.replace(/</g, "");
-            nohtml = nohtml.replace(/>/g, "");
-            nohtml = nohtml.replace(/\//g, "");
-
-            if (count == 1)
-            {
-              var stloc = [];
-              stloc.lat = i.start_location.lat;
-              stloc.lng = i.start_location.lng;
-              gencoords1.push(stloc);
-            }
-
-            var dir = count + ": " + "In " + dist+ " " + nohtml;
-            directions.push(dir);
-            gencoords1.push(endloc);
-            count++;
-          });
-*/
           this.setState({directions: directions});
           this.setState({gencoords: gencoords1});
           --count;
@@ -302,23 +254,23 @@ class Gmaps extends Component {
        //to check directions and update marker
     //console.warn("testDiretions");
     var i = 0;
-    Tts.speak("Starting path");
+    //Tts.speak("Starting path");
 
       this.toggle();
       //alert(JSON.stringify(this.state.directions[2]));
 
     //need to add all the coordinates into an array to test.
     //console.warn("count: " + this.state.dirCount);
-    if (i < this.state.dirCount)
+    //if (i < this.state.dirCount)
     //  console.warn("true");
-     while (i < this.state.dirCount)
+  /*   while (i < this.state.dirCount)
     {
       var string = this.state.directions[i].toString();
 
       setTimeout(function(){
         Tts.speak(string);
       }, 200);
-      /*console.warn("hi");
+      console.warn("hi");
       //setInterval(function() {
       var lat;
       var long;
@@ -337,11 +289,11 @@ class Gmaps extends Component {
           console.warn(i);
           i++;
         }
-    //}, 10); */
+    //}, 10); 
     i++;
 
   }
-   Tts.stop();
+   Tts.stop(); */
    //this.toggle();
     }
 
