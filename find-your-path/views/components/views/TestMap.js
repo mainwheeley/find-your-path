@@ -86,7 +86,7 @@ export default class TestMap extends Component {
             <Text style={styles.bottomBarHeader}>Time Elapsed</Text>
             <Clock style={styles.bottomBarContent}/>
             <Text style={styles.bottomBarHeader}>Distance Traveled</Text>
-            <Text style={styles.bottomBarContent}>{parseFloat(this.state.distanceTravelled).toFixed(2)} km</Text>
+            <Text style={styles.bottomBarContent}>{parseFloat(this.state.distanceTravelled).toFixed(2)*.621} miles</Text>
           </View>
         </View>
       </View>

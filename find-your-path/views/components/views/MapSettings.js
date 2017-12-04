@@ -91,7 +91,7 @@ class MSetting extends Component {
      justifyContent: 'center'
    },
    input: {
-     width: 100,
+     width: 200,
      height: 40,
      backgroundColor: 'rgba(0,0,0,0.2)',
      marginBottom: 10,

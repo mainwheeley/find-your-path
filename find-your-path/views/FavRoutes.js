@@ -1,22 +1,74 @@
-import React from 'react';
-import { Component, View, Text, StyleSheet, FlatList, Dimensions } from 'react-native';
+import React, { Component } from 'react';
+import { View, Text, StyleSheet, FlatList, Dimensions } from 'react-native';
 
-export default ({ navigation }) => (
-  <View style={styles.container}>
-    <FlatList
-      data={routes}
-      ItemSeparatorComponent={routesSeparator}
-      keyExtractor={(item,index)=> index}
-      renderItem={({item}) =>
-        <View>
-          <Text style={styles.item}><Text style={styles.itemTitle}>Name: </Text>{item.name} <Text style={styles.itemTitle}>Distance: </Text>{item.totmiles}</Text>
-          <Text style={styles.item}><Text style={styles.itemTitle}>Workout Type: </Text>{item.worktype}</Text>
-          <Text style={styles.item}><Text style={styles.itemTitle}>Date: </Text>{item.created}</Text>
-        </View>
+export default class FavRoutes extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      routes: ''
+    };
+  }
+
+  get() {
+    var query = "SELECT * FROM save_routes ORDER BY created DESC LIMIT 1";
+    query = encodeURI(query);
+    var url = 'http://localhost:3000/query'+'?query='+query;
+    fetch(url, {
+      method: 'GET',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
       }
-      />
-  </View>
-);
+    }).then((res) => res.json())
+    .then(function(data) {
+      this.setState({routes: data});
+      console.log(this.state.routes);
+    })
+    .catch((error) => {
+      console.warn(error);
+    });
+  }
+
+  componentDidMount() {
+    var query = "SELECT * FROM save_routes ORDER BY created DESC LIMIT 1";
+    query = encodeURI(query);
+    var url = 'http://localhost:3000/query'+'?query='+query;
+    fetch(url, {
+      method: 'GET',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+      }
+    })
+    .then((res) => res.json())
+    .then((data) => {
+      this.setState({routes: data});
+      console.log(this.state.routes);
+    })
+    .catch((error) => {
+      console.warn(error);
+    });
+  }
+
+  render() {
+    return (
+      <View style={styles.container}>
+        <FlatList
+          data={this.state.routes}
+          ItemSeparatorComponent={routesSeparator}
+          keyExtractor={(item,index)=> index}
+          renderItem={({item}) =>
+            <View>
+              <Text style={styles.item}><Text style={styles.itemTitle}>Name: </Text>{item.name} <Text style={styles.itemTitle}>Distance: </Text>{item.totmiles}</Text>
+              <Text style={styles.item}><Text style={styles.itemTitle}>Workout Type: </Text>{item.worktype}</Text>
+              <Text style={styles.item}><Text style={styles.itemTitle}>Date: </Text>{item.created}</Text>
+            </View>
+          }
+          />
+      </View>
+    );
+  }
+}
 
 const styles = StyleSheet.create({
   container: {
