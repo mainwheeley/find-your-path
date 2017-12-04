@@ -1,5 +1,5 @@
 import React from 'react';
-import { 
+import {
     StyleSheet,
     Text,
     View,
@@ -10,6 +10,36 @@ import {
 import {listWorkouts} from './RecentDb';
 
 export default class RecentWorkouts extends React.Component {
+
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      route: '',
+    }
+  }
+
+  componentDidMount() {
+    var query = "SELECT * FROM route_table ORDER BY routeid DESC LIMIT 1";
+    query = encodeURI(query);
+    var url = 'http://localhost:3000/query'+'?query='+query;
+    fetch(url, {
+      method: 'GET',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+      }
+    })
+    .then((res) => res.json())
+    .then((data) => {
+      this.setState({route: data});
+      console.log(this.state.route);
+      //this.forceUpdate();
+    })
+    .catch((error) => {
+      console.warn(error);
+    });
+  }
 
 workoutSeparator = () => {
     return (
@@ -28,12 +58,13 @@ return (
   <View style={styles.mainContainer}>
   <View style={styles.container}><Text style={styles.title}>Most recent workout: </Text></View>
     <FlatList
-	data={listWorkouts}
+	data={this.state.route}
 	ItemSeparatorComponent={this.workoutSeparator}
-	renderItem={({ item }) => 
+  keyExtractor={(item,index)=> index}
+	renderItem={({ item }) =>
 	    <View>
-	    <Text style={styles.item}><Text style={styles.itemTitle}>Starting point: </Text>{item.startp}</Text>
-	    <Text style={styles.item}><Text style={styles.itemTitle}>Workout Type: </Text>{item.type}</Text>
+	    <Text style={styles.item}><Text style={styles.itemTitle}>Starting point: </Text>{item.startpoint}</Text>
+	    <Text style={styles.item}><Text style={styles.itemTitle}>Workout Type: </Text>{item.worktype}</Text>
 	    <Text style={styles.item}><Text style={styles.itemTitle}>Total miles: </Text>{item.totmiles}</Text>
 	    </View>
 	}

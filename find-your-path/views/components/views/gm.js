@@ -6,6 +6,8 @@ import Polyline from '@mapbox/polyline';
 import Tts from 'react-native-tts';
 import { lang } from "moment";
 import Clock from './Maps.js';
+import pick from 'lodash/pick';
+import haversine from 'haversine';
 
 Tts.setDefaultLanguage('en-IE');
 Tts.setDefaultVoice('com.apple.ttsbundle.Moira-compact');
@@ -202,7 +204,7 @@ class Gmaps extends Component {
               nohtml = nohtml.replace(/</g, "");
               nohtml = nohtml.replace(/>/g, "");
               nohtml = nohtml.replace(/\//g, "");
-  
+
               if (count == 1)
               {
                 var stloc = [];
@@ -210,7 +212,7 @@ class Gmaps extends Component {
                 stloc.lng = i.start_location.lng;
                 gencoords1.push(stloc);
               }
-  
+
               var dir = count + ": " + "In " + dist+ " " + nohtml;
               directions.push(dir);
               gencoords1.push(endloc);
@@ -289,7 +291,7 @@ class Gmaps extends Component {
           console.warn(i);
           i++;
         }
-    //}, 10); 
+    //}, 10);
     i++;
 
   }
