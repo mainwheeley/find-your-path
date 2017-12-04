@@ -5,6 +5,7 @@ import { Button, ButtonGroup } from 'react-native-elements';
 import Polyline from '@mapbox/polyline';
 import Tts from 'react-native-tts';
 import { lang } from "moment";
+import Clock from './Maps.js';
 
 Tts.setDefaultLanguage('en-IE');
 Tts.setDefaultVoice('com.apple.ttsbundle.Moira-compact');
@@ -18,36 +19,40 @@ Tts.setDefaultVoice('com.apple.ttsbundle.Moira-compact');
  var here;
 
 class Gmaps extends Component {
-    static navigationOptions = {
-        title: "Gmaps"
-      };
-      constructor(props) {
-        super(props)
+  static navigationOptions = {
+    title: "Gmaps"
+  };
+  constructor(props) {
+    super(props)
     var {state} = props.navigation;
-        this.state = {
-            initialPosition: {
-              latitude: 0,
-              longitude: 0,
-              latitudeDelta: 0,
-              longitudeDelta: 0
-            },
-            markerPosition: {
-              latitude: 0,
-              longitude: 0
-            },
-            coords: [],
-            dest: state.params.dest,
-            miles: state.params.miles,
-            modalVis: false,
-            directions: [],
-            dirCount: 0,
-            gencoords: [],
-            sf: false
-          }
+    this.state = {
+        initialPosition: {
+          latitude: 0,
+          longitude: 0,
+          latitudeDelta: 0,
+          longitudeDelta: 0
+        },
+        markerPosition: {
+          latitude: 0,
+          longitude: 0
+        },
+        coords: [],
+        dest: state.params.dest,
+        miles: state.params.miles,
+        modalVis: false,
+        directions: [],
+        dirCount: 0,
+        gencoords: [],
+        sf: false,
+        routeCoordinates: [],
+        distanceTravelled: 0,
+        prevLatLng: {}
+    }
 
-      }
+  }
 
-      watchID: ?number = null
+  watchID: ?number = null;
+  watchID2: ?number = null;
 
     setModalVis(vis)
       {
@@ -73,8 +78,24 @@ class Gmaps extends Component {
     } else {
         return null;
     }
-  } 
-    
+}
+  tracking() {
+    navigator.geolocation.getCurrentPosition(
+      (position) => {},
+      (error) => alert(JSON.stringify(error)),
+      {enableHighAccuracy: true, timeout: 20000, maximumAge: 1000}
+    );
+    this.watchID2 = navigator.geolocation.watchPosition((position) => {
+      const { routeCoordinates, distanceTravelled } = this.state;
+      const newLatLngs = {latitude: position.coords.latitude, longitude: position.coords.longitude };
+      const positionLatLngs = pick(position.coords, ['latitude', 'longitude']);
+      this.setState({
+        routeCoordinates: routeCoordinates.concat(positionLatLngs),
+        distanceTravelled: distanceTravelled + this.calcDistance(newLatLngs),
+        prevLatLng: newLatLngs
+      });
+    });
+  }
 
    componentDidMount()
     {
@@ -85,7 +106,7 @@ class Gmaps extends Component {
 
         var waypoints = [];
         var flag = false;
-        
+
         if (this.state.miles > 0)
       {
         var c1 = //start location
@@ -93,12 +114,12 @@ class Gmaps extends Component {
           lat: lat,
           lng: long
         };
-        var c2 = 
+        var c2 =
         {
           lat: c1.lat + (.00375 * this.state.miles),
           lng: c1.lng
         };
-        var c3 = 
+        var c3 =
         {
           lat: c2.lat,
           lng: c1.lng + (.005 * this.state.miles )
@@ -115,8 +136,9 @@ class Gmaps extends Component {
         flag = true;
 
         this.getDirections(c1, c1, waypoints, flag);
+        this.tracking();
       }
-      
+
       else
         this.getDirections(here, this.state.dest, waypoints, flag);
 
@@ -166,19 +188,19 @@ class Gmaps extends Component {
         if (!flag)
         {
           resp = await fetch(`https://maps.googleapis.com/maps/api/directions/json?origin=${ startLoc }&destination=${ destinationLoc }&mode=walking&key=AIzaSyDLWhkm_ecWkhFRKi6aJDs1Js70BeP1zW0`);
-        } 
+        }
           //let resp = await fetch(`https://maps.googleapis.com/maps/api/directions/json?origin=40.4189553,+-86.9080627&destination=40.4248,+-86.9110&mode=walking&key=AIzaSyDLWhkm_ecWkhFRKi6aJDs1Js70BeP1zW0`); <--works
           //let resp = await fetch(`https://maps.googleapis.com/maps/api/directions/json?origin=40.4190019,-86.9080573&destination=40.4190019,-86.9080573&waypoints=Chicago,IL|San Diego,CA&key=%20AIzaSyDLWhkm_ecWkhFRKi6aJDs1Js70BeP1zW0`);
           //let resp = await fetch(`https://maps.googleapis.com/maps/api/directions/json?origin=Boston,MA&destination=Concord,MA&waypoints=Charlestown,MA|West Lafayette,IN&key=AIzaSyDLWhkm_ecWkhFRKi6aJDs1Js70BeP1zW0`);
           //let resp = await fetch(`https://maps.googleapis.com/maps/api/directions/json?origin=40.4190019,-86.9080573&destination=Champaign,IL&waypoints=Gary,IN&key=%20AIzaSyDLWhkm_ecWkhFRKi6aJDs1Js70BeP1zW0`);
           //let resp = await fetch(`https://maps.googleapis.com/maps/api/directions/json?origin=40.4189553,+-86.9080627&destination=40.4189553,+-86.9080627&waypoints=Chicago,IL|Naperville, IL|Rockford, IL&key=AIzaSyDLWhkm_ecWkhFRKi6aJDs1Js70BeP1zW0`);
         if (flag)
-        {  
+        {
           //console.warn(waypoints);
           //console.warn(`https://maps.googleapis.com/maps/api/directions/json?origin=${startLoc.lat},${startLoc.lng}&destination=${destinationLoc.lat},${destinationLoc.lng}&waypoints=${waypoints[0].lat},${waypoints[0].lng}|${waypoints[1].lat},${waypoints[1].lng}|${waypoints[2].lat},${waypoints[2].lng}&key=AIzaSyDLWhkm_ecWkhFRKi6aJDs1Js70BeP1zW0`)
           resp = await fetch(`https://maps.googleapis.com/maps/api/directions/json?origin=${startLoc.lat},${startLoc.lng}&destination=${destinationLoc.lat},${destinationLoc.lng}&waypoints=${waypoints[0].lat},${waypoints[0].lng}|${waypoints[1].lat},${waypoints[1].lng}|${waypoints[2].lat},${waypoints[2].lng}&key=AIzaSyDLWhkm_ecWkhFRKi6aJDs1Js70BeP1zW0`);
           //resp = await fetch(`https://maps.googleapis.com/maps/api/directions/json?origin=40.4190019,-86.9080573&destination=40.4190019,-86.908057&waypoints=40.4490, -86.9079|40.4490, -86.8679|40.4190, -86.8679&key=AIzaSyDLWhkm_ecWkhFRKi6aJDs1Js70BeP1zW0`);
-        }  
+        }
           let respJson = await resp.json();
           //console.warn("hello2")
           //console.warn(destinationLocation)
@@ -266,9 +288,13 @@ class Gmaps extends Component {
     componentWillUnmount()
     {
       navigator.geolocation.clearWatch(this.watchID);
-
+      navigator.geolocation.clearWatch(this.watchID2);
     }
 
+    calcDistance(newLatLng) {
+      const { prevLatLng } = this.state;
+      return (haversine(prevLatLng, newLatLng) || 0);
+    }
 
 
     testDirections()
@@ -407,6 +433,14 @@ class Gmaps extends Component {
       onPress={() => this.setModalVis(true)}
     />
     {this.onStart()}
+        <View style={styles.bottomBar}>
+          <View style={styles.bottomBarGroup}>
+            <Text style={styles.bottomBarHeader}>Time Elapsed</Text>
+            <Clock style={styles.bottomBarContent}/>
+            <Text style={styles.bottomBarHeader}>Distance Traveled</Text>
+            <Text style={styles.bottomBarContent}>{parseFloat(this.state.distanceTravelled).toFixed(2)*.621} miles</Text>
+          </View>
+        </View>
       </View>
     );
   }
@@ -445,7 +479,34 @@ const styles = StyleSheet.create({
   },
   container: {
     flex: 1
-  }
+  },
+  bottomBar: {
+    position: 'absolute',
+    height: 100,
+    bottom: 0,
+    backgroundColor: 'rgba(0,0,0,0.7)',
+    width: width,
+    padding: 20,
+    flexWrap: 'wrap',
+    flexDirection: 'row'
+  },
+  bottomBarGroup: {
+    flex: 1
+  },
+  bottomBarHeader: {
+    color: '#fff',
+    fontWeight: "400",
+    textAlign: 'center'
+  },
+  bottomBarContent: {
+    color: '#fff',
+    fontWeight: "700",
+    fontSize: 18,
+    //marginTop: 10,
+    color: '#19B5FE',
+    //justifyContent: 'center',
+    textAlign: 'center'
+  },
 });
 
 export default Gmaps;

@@ -13,15 +13,46 @@ import {
 } from 'react-native';
 
 export default class Stats extends React.Component {
+    constructor(props) {
+      super(props);
+
+      this.state = {
+        route: [''],
+      }
+    }
+
+    componentDidMount() {
+      var query = "SELECT * FROM save_routes ORDER BY created DESC LIMIT 1";
+      query = encodeURI(query);
+      var url = 'http://localhost:3000/query'+'?query='+query;
+      fetch(url, {
+        method: 'GET',
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json',
+        }
+      })
+      .then((res) => res.json())
+      .then((data) => {
+        this.setState({route: data});
+        console.log(this.state.route);
+        //this.forceUpdate();
+      })
+      .catch((error) => {
+        console.warn(error);
+      });
+    }
+
+
     deletePrompt() {
-	Alert.alert(
-	    'Delete Account',
-	    'Are you sure you want to delete your account?',
-	    [
-		{text: 'Delete', onPress: () => console.log('User delete')},
-		{text: 'No', onPress: () => console.log('No delete')},
-	    ],
-	);
+    	Alert.alert(
+    	    'Delete Account',
+    	    'Are you sure you want to delete your account?',
+    	    [
+        		{text: 'Delete', onPress: () => console.log('User delete')},
+        		{text: 'No', onPress: () => console.log('No delete')},
+    	    ],
+    	);
     }
 
   render() {
@@ -155,7 +186,7 @@ export default class Stats extends React.Component {
         <Image style={styles.photo} resizeMode="contain" source={require('../imgs/heart.jpg')} />
     </View>
     <View style={styles.textWrap}>
-        <Text style={styles.statsList}>Fav. route: 134 W State St.</Text>
+        <Text style={styles.statsList}>Fav. route: {this.state.route[0].name}</Text>
     </View>
       </View>
   </View>
@@ -165,6 +196,7 @@ export default class Stats extends React.Component {
     );
   }
 }
+
 
 const styles = StyleSheet.create({
     delButton: {

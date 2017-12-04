@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { View, Text, StyleSheet, TextInput, Button } from 'react-native';
 import { ButtonGroup, CheckBox } from 'react-native-elements';
+var moment = require('moment');
 
 
 export default class SaveRoute extends Component {
@@ -8,13 +9,16 @@ export default class SaveRoute extends Component {
     super(props);
     this.state = {
       name: '',
-      index: 0,
+      index: this.props.navigation.state.params.index,
       notes: '',
-      park: false,
-      trail: false,
-      beach: false,
+      park: this.props.navigation.state.params.park,
+      trail: this.props.navigation.state.params.trail,
+      beach: this.props.navigation.state.params.beach,
+      startpoint: this.props.navigation.state.params.dest,
+      totmiles: this.props.navigation.state.params.miles,
     }
     this.updateIndex = this.updateIndex.bind(this);
+    this.type = ["Walk", "Run", "Bike"];
   }
 
   updateIndex(index) {
@@ -22,8 +26,40 @@ export default class SaveRoute extends Component {
   }
 
   save() {
-    
+    var entry = new Object();
+    entry.name = this.state.name;
+    entry.startpoint = this.state.startpoint;
+    entry.totmiles = this.state.totmiles;
+    entry.uname = 'john_appleseed@yahoo.com';
+    entry.worktype = this.type[this.state.index];
+    entry.park_flag = this.state.park ? 1:0;
+    entry.trail_flag = this.state.trail ? 1:0;
+    entry.beach_flag = this.state.beach ? 1:0;
+    entry.notes = this.state.notes;
+    entry.created = moment().format("YYYY-MM-DD HH:mm:ss");
+    var query = "INSERT INTO save_routes (name, startpoint, totmiles, uname, worktype, park_flag, trail_flag, beach_flag, notes, created) VALUES (\'" + entry.name + "\', \'" +
+      entry.startpoint + "\', " + entry.totmiles + ", \'" + entry.uname + "\', \'" +
+      entry.worktype + "\', " + entry.park_flag + ", " + entry.trail_flag + ", " +
+      entry.beach_flag + ", \'" + entry.notes + "\', " + "NOW());";
+    var json = JSON.stringify({'query': query});
+
+    fetch('http://localhost:3000/query', {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+      },
+      body: json
+    }).then((response) => response.json())
+     .then((responseText) => {
+      console.log(responseText);
+    })
+    .catch((error) => {
+      console.warn(error);
+      console.warn("here5");
+    });
   }
+
 
   render() {
     const {goBack} = this.props.navigation;
@@ -40,7 +76,7 @@ export default class SaveRoute extends Component {
           onPress={this.updateIndex}
           selectedBackgroundColor='#007aff'
           selectedIndex={this.state.index}
-          buttons={["Walk", "Run", "Bike"]}
+          buttons={ this.type }
           containerStyle={{height: 30}}
         />
         <Text>Flags:</Text>
@@ -69,8 +105,8 @@ export default class SaveRoute extends Component {
         <Button
           title='Save Route'
           onPress={() => {
-            goBack();
             this.save();
+            goBack();
           }}
         />
 
