@@ -5,6 +5,7 @@ import { Button, ButtonGroup } from 'react-native-elements';
 import Polyline from '@mapbox/polyline';
 import Tts from 'react-native-tts';
 import { lang } from "moment";
+import Clock from './Maps.js';
 
 Tts.setDefaultLanguage('en-IE');
 Tts.setDefaultVoice('com.apple.ttsbundle.Moira-compact');
@@ -135,6 +136,7 @@ class Gmaps extends Component {
         flag = true;
 
         this.getDirections(c1, c1, waypoints, flag);
+        this.tracking();
       }
 
       else
@@ -255,9 +257,13 @@ class Gmaps extends Component {
     componentWillUnmount()
     {
       navigator.geolocation.clearWatch(this.watchID);
-
+      navigator.geolocation.clearWatch(this.watchID2);
     }
 
+    calcDistance(newLatLng) {
+      const { prevLatLng } = this.state;
+      return (haversine(prevLatLng, newLatLng) || 0);
+    }
 
 
     testDirections()
@@ -396,6 +402,14 @@ class Gmaps extends Component {
       onPress={() => this.setModalVis(true)}
     />
     {this.onStart()}
+        <View style={styles.bottomBar}>
+          <View style={styles.bottomBarGroup}>
+            <Text style={styles.bottomBarHeader}>Time Elapsed</Text>
+            <Clock style={styles.bottomBarContent}/>
+            <Text style={styles.bottomBarHeader}>Distance Traveled</Text>
+            <Text style={styles.bottomBarContent}>{parseFloat(this.state.distanceTravelled).toFixed(2)*.621} miles</Text>
+          </View>
+        </View>
       </View>
     );
   }
@@ -434,7 +448,34 @@ const styles = StyleSheet.create({
   },
   container: {
     flex: 1
-  }
+  },
+  bottomBar: {
+    position: 'absolute',
+    height: 100,
+    bottom: 0,
+    backgroundColor: 'rgba(0,0,0,0.7)',
+    width: width,
+    padding: 20,
+    flexWrap: 'wrap',
+    flexDirection: 'row'
+  },
+  bottomBarGroup: {
+    flex: 1
+  },
+  bottomBarHeader: {
+    color: '#fff',
+    fontWeight: "400",
+    textAlign: 'center'
+  },
+  bottomBarContent: {
+    color: '#fff',
+    fontWeight: "700",
+    fontSize: 18,
+    //marginTop: 10,
+    color: '#19B5FE',
+    //justifyContent: 'center',
+    textAlign: 'center'
+  },
 });
 
 export default Gmaps;
