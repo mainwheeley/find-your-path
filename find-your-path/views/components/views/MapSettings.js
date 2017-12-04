@@ -42,7 +42,7 @@ export default class MSetting extends Component {
     this.weatherTemp = '',
     this.weatherType ='',
     this.state = {
-      miles: 0,
+      miles: 0, 
       dest: "Chicago, IL",
       index: 0,
       park: false,
@@ -90,7 +90,7 @@ export default class MSetting extends Component {
     <Text>Distance</Text>
     <TextInput
       keyboardType='numeric'
-      placeholder='8 miles'
+      placeholder='0 miles'
       onChangeText={(miles) => this.setState({miles})}
 
       placeholderTextColor="rgba(255,255,255,0.7)"
