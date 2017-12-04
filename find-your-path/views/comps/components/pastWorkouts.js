@@ -19,7 +19,6 @@ var radio_props = [
     {label: 'Walk ', value: 1},
     {label: 'Run ', value: 2},
     {label: 'Bike ', value: 3},
-    {label: 'Other ', value: 4},
 ];
 
 export default class PastWorkouts extends React.Component {
@@ -52,7 +51,6 @@ export default class PastWorkouts extends React.Component {
 	    return (
 		<PastBike />
 	    )
-	} else if (this.state.viewType == 4) {
 	}
     }
 

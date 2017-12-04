@@ -1,5 +1,5 @@
 import React from 'react';
-import { 
+import {
     StyleSheet,
     Text,
     View,
@@ -11,66 +11,35 @@ import {listWorkouts} from './AllData';
 import RadioForm, {RadioButton, RadioButtonInput, RadioButtonLabel} from 'react-native-simple-radio-button';
 
 export default class PastData extends React.Component {
+  constructor(props) {
+    super(props);
 
-getData(token) {
-    fetch('https://graph.facebook.com/v2.8/me?fields=email,name,friends&access_token=' + token)
-    //fetch('https://graph.facebook.com/v2.5/me?fields=email,name,friends&access_token=' + token)
-    //fetch('https://graph.facebook.com/v2.5/me?access_token=' + token +'&fields=email,name,friends')
-    .then((response) => response.json())
-    .then((json) => {
-      // Some user object has been set up somewhere, build that user here
-      //alert("here2");
-      //user.avatar = setAvatar(json.id)
-      alert(JSON.stringify(json));
-      
-      /*$.ajax({
-        url: 'http://localhost:3000/fbdata',
-        dataType: 'json',
-        type: 'post',
-        contentType: 'application/json',
-        data: JSON.stringify(user),
-        processData: false,
-        success: function( data, textStatus, jQxhr ){
-            console.warn(JSON.stringify(data));
-            console.warn("success!");
-        },
-        error: function( jqXhr, textStatus, errorThrown ){
-          console.warn("error ajax");  
-          console.warn( errorThrown );
-        }
-    }); */
+    this.state = {
+      route: '',
+    }
+  }
 
-    fetch('http://10.0.0.31:3000/fbdata', {
-      method: 'POST',
+  componentDidMount() {
+    var query = "SELECT * FROM route_table";
+    query = encodeURI(query);
+    var url = 'http://localhost:3000/query'+'?query='+query;
+    fetch(url, {
+      method: 'GET',
       headers: {
         'Accept': 'application/json',
         'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        'name' : json.name, 
-        'id' : json.id,
-        'email' : json.email,
-        'loading' : false,
-        'loggedIn' : true
-      })
-    }).then((response) => response.json())
-     .then((responseText) => {
-      console.log(responseText);
-      console.warn("here4");
-
+      }
+    })
+    .then((res) => res.json())
+    .then((data) => {
+      this.setState({route: data});
+      console.log(this.state.route);
+      //this.forceUpdate();
     })
     .catch((error) => {
       console.warn(error);
-      console.warn("here5");
-    }); 
-    
-    
-    })
-    .catch(() => {
-      reject('ERROR GETTING DATA FROM FACEBOOK')
-    })
+    });
   }
-
 
 workoutSeparator = () => {
     return (
@@ -88,12 +57,13 @@ render() {
 return (
   <View style={styles.mainContainer}>
     <FlatList
-	data={listWorkouts}
+	data={this.state.route}
 	ItemSeparatorComponent={this.workoutSeparator}
-	renderItem={({ item }) => 
+  keyExtractor={(item,index)=> index}
+	renderItem={({ item }) =>
 	    <View>
-	    <Text style={styles.item}><Text style={styles.itemTitle}>Starting point: </Text>{item.startp}</Text>
-	    <Text style={styles.item}><Text style={styles.itemTitle}>Workout Type: </Text>{item.type}</Text>
+	    <Text style={styles.item}><Text style={styles.itemTitle}>Starting point: </Text>{item.startpoint}</Text>
+	    <Text style={styles.item}><Text style={styles.itemTitle}>Workout Type: </Text>{item.worktype}</Text>
 	    <Text style={styles.item}><Text style={styles.itemTitle}>Total miles: </Text>{item.totmiles}</Text>
 	    </View>
 	}

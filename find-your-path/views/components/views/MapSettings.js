@@ -18,7 +18,7 @@ updateIndex (selectedIndex) {
 
 var miles;
 //export default ({ navigation }) => (
-class MSetting extends Component {
+export default class MSetting extends Component {
   /*_toMap (prop1){
      let nextIndex = ++this.props.index;
     this.props.navigator.push({
@@ -31,6 +31,16 @@ class MSetting extends Component {
 
   constructor(props) {
     super(props);
+    this.url= "https://api.openweathermap.org/data/2.5/weather?zip=";
+    this.id = ",US&APPID=1463a41ff3a66b079bfefd971d6f4084";
+    this.finalURL = "";
+    this.cityName = "";
+    this.finalC = "";
+    this.finalF = "";
+    this.tempName = '';
+    this.weather = [],
+    this.weatherTemp = '',
+    this.weatherType ='',
     this.state = {
       miles: 0,
       dest: "Chicago, IL",
@@ -38,8 +48,37 @@ class MSetting extends Component {
       park: false,
       trail: false,
       beach: false,
+      weatherText: '',
+      zip: ''
     }
     this.type = ["Walk", "Run", "Bike"];
+    this.callAPI = this.callAPI.bind(this);
+  }
+
+
+  callAPI()  {
+    this.finalURL = this.url + this.state.zip + this.id
+    console.log(this.finalURL);
+    fetch(this.finalURL, {
+      method: 'GET',
+      headers: {
+        'Accept': "application/json",
+        'Content-Type': "application/json"
+      },
+    })
+    .then((res) => res.json())
+    .then((res) =>{
+        this.weather = res.weather;
+        this.weatherTemp = res.main.temp;
+        this.weatherType = res.weather[0].description;
+        this.finalC = Math.round(this.weatherTemp - 273);
+        this.finalF = Math.round((this.weatherTemp - 273) * 9 / 5 +32);
+        this.setState({weatherText: this.weatherType + ' ' + this.finalC + 'C ' + this.finalF + 'ºF'});
+        console.log(this.weatherType + ' ' + this.finalC + 'C ' + this.finalF + 'ºF');
+    })
+    .catch((error) => {
+      console.warn(error);
+    });
   }
 
 
@@ -96,14 +135,19 @@ class MSetting extends Component {
         checked={this.state.beach}
       />
     </View>
-    <Text>Weather:</Text>
+    <Text>Weather: {this.state.weatherText}</Text>
     <TextInput
       keyboardType='default'
       placeholder='ZIP Code'
-      onChangeText={(dest) => this.setState({zip})}
       placeholderTextColor="rgba(255,255,255,0.7)"
+      onChangeText={(zip) => this.setState({zip})}
       returnKeyType='next'
       style={styles.input}
+    />
+    <Button
+      backgroundColor='#03A9F4'
+      title='Enter'
+      onPress={() => this.callAPI()}
     />
     <Button
       backgroundColor='#03A9F4'
@@ -140,5 +184,3 @@ class MSetting extends Component {
      flexDirection: 'row',
    }
  })
-
- export default MSetting;
