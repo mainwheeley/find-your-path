@@ -113,11 +113,6 @@ class MSetting extends Component {
     <Button
       backgroundColor='#03A9F4'
       title='Create Route'
-      onPress={() => navigate('Maps')}
-    />
-    <Button
-      backgroundColor='#03A9F4'
-      title='Jump to Map'
       onPress={() => navigate('Gmaps', {miles: this.state.miles, dest: this.state.dest})}
     />
   </View>
