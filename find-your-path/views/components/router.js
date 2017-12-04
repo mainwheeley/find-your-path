@@ -13,6 +13,7 @@ import Gmaps from './views/gm';
 //import Settings from '../Settings.js';
 //import Weather from '../../Weather/App.js';
 import FavRoutes from '../FavRoutes.js';
+import SaveRoute from '../SaveRoute.js';
 
 const headerStyle = {
   marginTop: Platform.OS === "android" ? StatusBar.currentHeight : 0
@@ -33,6 +34,13 @@ export const MapView = StackNavigator({
     screen: MSetting,
     navigationOptions: {
       title: "Create Route",
+      headerStyle
+    }
+  },
+  SaveRoute: {
+    screen: SaveRoute,
+    navigationOptions: {
+      title: "Save Route",
       headerStyle
     }
   },

@@ -63,7 +63,7 @@ class Gmaps extends Component {
     {
       if (this.state.sf) {
         return (
-            <Button 
+            <Button
 
             backgroundColor='#03A9F4'
             title='Modify'
@@ -123,8 +123,8 @@ class Gmaps extends Component {
         var initialRegion = {
           latitude: lat,
           longitude: long,
-          latitudeDelta: LD / 15,
-          longitudeDelta: LGD / 15
+          latitudeDelta: LD,
+          longitudeDelta: LGD
         }
 
         this.setState({initialPosition: initialRegion})
@@ -137,8 +137,8 @@ class Gmaps extends Component {
         var lastRegion = {
           latitude: lat,
           longitude: long,
-          latitudeDelta: LD / 15,
-          longitudeDelta: LGD / 15
+          latitudeDelta: LD,
+          longitudeDelta: LGD
         }
         this.setState({initialPosition: lastRegion});
         this.setState({markerPosition: lastRegion});
@@ -215,7 +215,7 @@ class Gmaps extends Component {
           this.setState({directions: directions});
           this.setState({gencoords: gencoords1});
           --count;
-          //this.setState({dirCount: count});
+          this.setState({dirCount: count});
           let points = Polyline.decode(respJson.routes[0].overview_polyline.points);
           let coords = points.map((point, index) => {
               return  {
@@ -238,26 +238,40 @@ class Gmaps extends Component {
 
     }
 
+
+
     testDirections()
     {
        //to check directions and update marker
-    console.warn("testDiretions");    
+    //console.warn("testDiretions");
     var i = 0;
     Tts.speak("Starting path");
+
       this.toggle();
-    
+      //alert(JSON.stringify(this.state.directions[2]));
+
     //need to add all the coordinates into an array to test.
     //console.warn("count: " + this.state.dirCount);
+    if (i < this.state.dirCount)
+    //  console.warn("true");
      while (i < this.state.dirCount)
     {
-      //setInterval(function() {
-     /* navigator.geolocation.getCurrentPosition((position) =>{
-        var lat = parseFloat(position.coords.latitude);
-        var long = parseFloat(position.coords.longitude);
-      });
-        
+      var string = this.state.directions[i].toString();
 
+      setTimeout(function(){
+        Tts.speak(string);
+      }, 200);
+      /*console.warn("hi");
+      //setInterval(function() {
+      var lat;
+      var long;
+      navigator.geolocation.getCurrentPosition((position) =>{
+        lat = parseFloat(position.coords.latitude);
+        long = parseFloat(position.coords.longitude);
         console.warn("long: "+ long+ " latitude: " + lat + "\n");
+      });
+
+
         //consider adding precision here
         if (long == this.state.gencoords[i].lng && lat == this.state.gencoords[i].lat)
         {
@@ -265,18 +279,19 @@ class Gmaps extends Component {
           Tts.speak(this.state.directions[i]);
           console.warn(i);
           i++;
-        } */
-    //}, 10);
-     
-   } 
+        }
+    //}, 10); */
+    i++;
+
+  }
    Tts.stop();
-   this.toggle();
+   //this.toggle();
     }
 
     checkDirections()
     {
       //to check directions and update marker
-    console.warn("checkDiretions");    
+    console.warn("checkDiretions");
     var i = 0;
     Tts.speak("Starting path");
     //console.warn("count: " + this.state.dirCount);
@@ -304,12 +319,12 @@ class Gmaps extends Component {
         }
       });
     }, 100);
-     
+
    } */
 
     }
 
-    
+
     render() {
     return (
       <View style={styles.container}>

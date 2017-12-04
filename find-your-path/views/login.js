@@ -49,7 +49,7 @@ var {state} = props.navigation;
       //alert("here2");
       //user.avatar = setAvatar(json.id)
       alert(JSON.stringify(json));
-      
+
       /*$.ajax({
         url: 'http://localhost:3000/fbdata',
         dataType: 'json',
@@ -62,19 +62,19 @@ var {state} = props.navigation;
             console.warn("success!");
         },
         error: function( jqXhr, textStatus, errorThrown ){
-          console.warn("error ajax");  
+          console.warn("error ajax");
           console.warn( errorThrown );
         }
     }); */
 
-    fetch('http://10.0.0.31:3000/fbdata', {
+    fetch('http://localhost:3000/fbdata', {
       method: 'POST',
       headers: {
         'Accept': 'application/json',
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        'name' : json.name, 
+        'name' : json.name,
         'id' : json.id,
         'email' : json.email,
         'loading' : false,
@@ -89,9 +89,9 @@ var {state} = props.navigation;
     .catch((error) => {
       console.warn(error);
       console.warn("here5");
-    }); 
-    
-    
+    });
+
+
     })
     .catch(() => {
       reject('ERROR GETTING DATA FROM FACEBOOK')
@@ -125,7 +125,7 @@ var {state} = props.navigation;
       );
    } */
 
-   
+
   /* render() {
     var {navigate} = this.props.navigation;
    console.log("this.props.navigation = " + util.inspect(this.props.navigation, false, null));
@@ -149,13 +149,13 @@ render()
       //alert(JSON.stringify(data));
       if (data !== null)
       {
-        this.props.navigation.navigate('Maps')
+        this.props.navigation.navigate('SignedIn')
       }
     } //Refresh it every time
 );
   return (
     <View>
-      
+
     <LoginButton
       readPermissions={['email', 'public_profile']}
       onLoginFinished={
@@ -169,10 +169,10 @@ render()
               (data) => {
                 this.initUser(data.accessToken);
               }
-              
+
             )
             //this.props.navigation.navigate('SignedIn')
-            this.props.navigation.navigate('Maps')
+            this.props.navigation.navigate('SignedIn')
           }
         }
       }

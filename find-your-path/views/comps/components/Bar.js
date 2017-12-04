@@ -1,24 +1,20 @@
 import React from 'react';
-import { StyleSheet, Dimensions, Text, View, Button, Alert, FlatList } from 'react-native';
+import { StyleSheet, Dimensions, Text, View, Button, Alert, FlatList, TextInput } from 'react-native';
 
 export default class Bar extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {text: ''};
+  }
    render() {
     return (
-
-	<View style={styles.bar}>
-
-	    <View style={[styles.barItem, styles.barseparator]}>
-		<Text style={styles.barTop} onPress={() => this.props.navigation.navigate("FavoriteRoutes")}>Favorite Workouts</Text>
-		<Text style={styles.barBottom}></Text>
-	    </View>
-
-	    <View style={[styles.barItem, styles.barseparator]}>
-		<Text style={styles.barTop}>10</Text>
-		<Text style={styles.barBottom}>Following</Text>
-	    </View>
-
-	</View>
-
+      <TextInput
+      style={{height: Dimensions.get('window').height / 10, borderColor: '#fff', borderTopWidth: 4, flexDirection: 'row', textAlign: 'center', backgroundColor: '#8BC34A',  }}
+      placeholder="Enter workout goal here!"
+      placeholderTextColor="red"
+      onChangeText={(text) => this.setState({text})}
+      value={this.state.text}
+      />
     );
   }
 }

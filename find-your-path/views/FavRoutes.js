@@ -9,8 +9,9 @@ export default ({ navigation }) => (
       keyExtractor={(item,index)=> index}
       renderItem={({item}) =>
         <View>
-          <Text style={styles.item}><Text style={styles.itemTitle}>Name: </Text>{item.name}</Text>
-    	    <Text style={styles.item}><Text style={styles.itemTitle}>Distance: </Text>{item.distance}</Text>
+          <Text style={styles.item}><Text style={styles.itemTitle}>Name: </Text>{item.name} <Text style={styles.itemTitle}>Distance: </Text>{item.totmiles}</Text>
+          <Text style={styles.item}><Text style={styles.itemTitle}>Workout Type: </Text>{item.worktype}</Text>
+          <Text style={styles.item}><Text style={styles.itemTitle}>Date: </Text>{item.created}</Text>
         </View>
       }
       />
@@ -25,36 +26,43 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   itemTitle: {
+  	fontSize: 14,
     padding: 10,
-  	fontSize: 18,
-  	height: 44,
   	borderBottomColor: '#000',
   	fontWeight: 'bold',
   },
   item: {
-    padding: 10,
-  	fontSize: 18,
-  	height: 44,
+  	fontSize: 14,
+    alignItems: 'center',
+    justifyContent: 'center',
   	borderBottomColor: '#000',
   }
 });
 
-const routes = [
+export var routes = [
   {
-    name: 'Silver Loop',
-    distance: '3 miles',
+    name: 'PMU Run',
+    startpoint: '610 Purdue Mall',
+    totmiles: '5',
+    uname: 'john_appleseed@yahoo.com',
+    worktype: 'Run',
+    park_flag: 0,
+    trail_flag: 0,
+    beach_flag: 1,
+    notes: 'fun stuff',
+    created: '2017-12-01 04:29:21'
   },
   {
-    name: 'Gold Loop',
-    distance: '7 miles',
-  },
-  {
-    name: 'Bronze Loop',
-    distance: '5 miles',
-  },
-  {
-    name: 'McD Run',
-    distance: '2.5 miles',
+    name: 'PMU Run',
+    startpoint: '610 Purdue Mall',
+    totmiles: '5',
+    uname: 'john_appleseed@yahoo.com',
+    worktype: 'Run',
+    park_flag: 0,
+    trail_flag: 0,
+    beach_flag: 1,
+    notes: 'fun stuff',
+    created: '2017-12-01 04:29:21'
   },
 ];
 
