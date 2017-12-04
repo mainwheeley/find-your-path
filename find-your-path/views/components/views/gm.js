@@ -18,36 +18,40 @@ Tts.setDefaultVoice('com.apple.ttsbundle.Moira-compact');
  var here;
 
 class Gmaps extends Component {
-    static navigationOptions = {
-        title: "Gmaps"
-      };
-      constructor(props) {
-        super(props)
+  static navigationOptions = {
+    title: "Gmaps"
+  };
+  constructor(props) {
+    super(props)
     var {state} = props.navigation;
-        this.state = {
-            initialPosition: {
-              latitude: 0,
-              longitude: 0,
-              latitudeDelta: 0,
-              longitudeDelta: 0
-            },
-            markerPosition: {
-              latitude: 0,
-              longitude: 0
-            },
-            coords: [],
-            dest: state.params.dest,
-            miles: state.params.miles,
-            modalVis: false,
-            directions: [],
-            dirCount: 0,
-            gencoords: [],
-            sf: false
-          }
+    this.state = {
+        initialPosition: {
+          latitude: 0,
+          longitude: 0,
+          latitudeDelta: 0,
+          longitudeDelta: 0
+        },
+        markerPosition: {
+          latitude: 0,
+          longitude: 0
+        },
+        coords: [],
+        dest: state.params.dest,
+        miles: state.params.miles,
+        modalVis: false,
+        directions: [],
+        dirCount: 0,
+        gencoords: [],
+        sf: false,
+        routeCoordinates: [],
+        distanceTravelled: 0,
+        prevLatLng: {}
+    }
 
-      }
+  }
 
-      watchID: ?number = null
+  watchID: ?number = null;
+  watchID2: ?number = null;
 
     setModalVis(vis)
       {
@@ -74,7 +78,23 @@ class Gmaps extends Component {
         return null;
     }
 }
-
+  tracking() {
+    navigator.geolocation.getCurrentPosition(
+      (position) => {},
+      (error) => alert(JSON.stringify(error)),
+      {enableHighAccuracy: true, timeout: 20000, maximumAge: 1000}
+    );
+    this.watchID2 = navigator.geolocation.watchPosition((position) => {
+      const { routeCoordinates, distanceTravelled } = this.state;
+      const newLatLngs = {latitude: position.coords.latitude, longitude: position.coords.longitude };
+      const positionLatLngs = pick(position.coords, ['latitude', 'longitude']);
+      this.setState({
+        routeCoordinates: routeCoordinates.concat(positionLatLngs),
+        distanceTravelled: distanceTravelled + this.calcDistance(newLatLngs),
+        prevLatLng: newLatLngs
+      });
+    });
+  }
 
    componentDidMount()
     {
