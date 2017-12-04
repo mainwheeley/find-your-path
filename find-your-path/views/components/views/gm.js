@@ -82,44 +82,7 @@ class Gmaps extends Component {
         var lat = parseFloat(position.coords.latitude);
         var long = parseFloat(position.coords.longitude);
         here = parseFloat(lat) + ", " + parseFloat(long);
-
-        var waypoints = [];
-        var flag = false;
-        
-        if (this.state.miles > 0)
-      {
-        var c1 = //start location
-        {
-          lat: lat,
-          lng: long
-        };
-        var c2 = 
-        {
-          lat: c1.lat + (.00375 * this.state.miles),
-          lng: c1.lng
-        };
-        var c3 = 
-        {
-          lat: c2.lat,
-          lng: c1.lng + (.005 * this.state.miles )
-        }
-
-        var c4 =
-        {
-          lat: c1.lat,
-          lng: c2.lng
-        }
-        waypoints.push(c2);
-        waypoints.push(c3);
-        waypoints.push(c4);
-        flag = true;
-
-        this.getDirections(c1, c1, waypoints, flag);
-      }
-      
-      else
-        this.getDirections(here, this.state.dest, waypoints, flag);
-
+        this.getDirections(here, this.state.dest);
         var initialRegion = {
           latitude: lat,
           longitude: long,
@@ -151,34 +114,14 @@ class Gmaps extends Component {
       //this.getDirections("40.1884979, 29.061018", "41.0082,28.9784");
     }
 
-    async getDirections(startLoc, destinationLoc, waypoints, flag) {
+    async getDirections(startLoc, destinationLoc) {
       try {
-
-        //if flag is 1, then waypoints are there. If flag is 0 no way points
-        var i = 0;
-        /*while (i < 3)
-        {
-          console.warn("long: "+waypoints[i].lng + " lat: "+ waypoints[i].lat + "\n");
-          i++;
-        }  */
-
-        let resp;
-        if (!flag)
-        {
-          resp = await fetch(`https://maps.googleapis.com/maps/api/directions/json?origin=${ startLoc }&destination=${ destinationLoc }&mode=walking&key=AIzaSyDLWhkm_ecWkhFRKi6aJDs1Js70BeP1zW0`);
-        } 
+          //let resp = await fetch(`https://maps.googleapis.com/maps/api/directions/json?origin=${ startLoc }&destination=${ destinationLoc }&mode=walking&key=AIzaSyDLWhkm_ecWkhFRKi6aJDs1Js70BeP1zW0`);
           //let resp = await fetch(`https://maps.googleapis.com/maps/api/directions/json?origin=40.4189553,+-86.9080627&destination=40.4248,+-86.9110&mode=walking&key=AIzaSyDLWhkm_ecWkhFRKi6aJDs1Js70BeP1zW0`); <--works
-          //let resp = await fetch(`https://maps.googleapis.com/maps/api/directions/json?origin=40.4190019,-86.9080573&destination=40.4190019,-86.9080573&waypoints=Chicago,IL|San Diego,CA&key=%20AIzaSyDLWhkm_ecWkhFRKi6aJDs1Js70BeP1zW0`);
-          //let resp = await fetch(`https://maps.googleapis.com/maps/api/directions/json?origin=Boston,MA&destination=Concord,MA&waypoints=Charlestown,MA|West Lafayette,IN&key=AIzaSyDLWhkm_ecWkhFRKi6aJDs1Js70BeP1zW0`);
+          let resp = await fetch(`https://maps.googleapis.com/maps/api/directions/json?origin=40.4190019,-86.9080573&destination=40.4190019,-86.9080573&waypoints=Gary,IN&key=%20AIzaSyDLWhkm_ecWkhFRKi6aJDs1Js70BeP1zW0`);
+          //let resp = await fetch(`https://maps.googleapis.com/maps/api/directions/json?origin=Boston,MA&destination=Concord,MA&waypoints=Charlestown,MA|Lexington,MA&key=AIzaSyDLWhkm_ecWkhFRKi6aJDs1Js70BeP1zW0`);
           //let resp = await fetch(`https://maps.googleapis.com/maps/api/directions/json?origin=40.4190019,-86.9080573&destination=Champaign,IL&waypoints=Gary,IN&key=%20AIzaSyDLWhkm_ecWkhFRKi6aJDs1Js70BeP1zW0`);
-          //let resp = await fetch(`https://maps.googleapis.com/maps/api/directions/json?origin=40.4189553,+-86.9080627&destination=40.4189553,+-86.9080627&waypoints=Chicago,IL|Naperville, IL|Rockford, IL&key=AIzaSyDLWhkm_ecWkhFRKi6aJDs1Js70BeP1zW0`);
-        if (flag)
-        {  
-          //console.warn(waypoints);
-          //console.warn(`https://maps.googleapis.com/maps/api/directions/json?origin=${startLoc.lat},${startLoc.lng}&destination=${destinationLoc.lat},${destinationLoc.lng}&waypoints=${waypoints[0].lat},${waypoints[0].lng}|${waypoints[1].lat},${waypoints[1].lng}|${waypoints[2].lat},${waypoints[2].lng}&key=AIzaSyDLWhkm_ecWkhFRKi6aJDs1Js70BeP1zW0`)
-          resp = await fetch(`https://maps.googleapis.com/maps/api/directions/json?origin=${startLoc.lat},${startLoc.lng}&destination=${destinationLoc.lat},${destinationLoc.lng}&waypoints=${waypoints[0].lat},${waypoints[0].lng}|${waypoints[1].lat},${waypoints[1].lng}|${waypoints[2].lat},${waypoints[2].lng}&key=AIzaSyDLWhkm_ecWkhFRKi6aJDs1Js70BeP1zW0`);
-          //resp = await fetch(`https://maps.googleapis.com/maps/api/directions/json?origin=40.4190019,-86.9080573&destination=40.4190019,-86.908057&waypoints=40.4490, -86.9079|40.4490, -86.8679|40.4190, -86.8679&key=AIzaSyDLWhkm_ecWkhFRKi6aJDs1Js70BeP1zW0`);
-        }  
+          
           let respJson = await resp.json();
           //console.warn("hello2")
           //console.warn(destinationLocation)
@@ -186,10 +129,14 @@ class Gmaps extends Component {
           var gencoords1 = [];
           var directions = [];
           var count = 1;
+<<<<<<< HEAD
           var j = 0;
           //console.warn(respJson.routes);
         while (j < 2 + waypoints.length)
         {
+=======
+          console.warn(respJson.routes);
+>>>>>>> parent of 255c46c0... creates circular route sort of
           respJson.routes[0].legs[0].steps.forEach(function(i)
           {
             var dist = i.distance.text;
@@ -204,7 +151,7 @@ class Gmaps extends Component {
 
             if (count == 1)
             {
-              var stloc = [];
+              var stloc = {};
               stloc.lat = i.start_location.lat;
               stloc.lng = i.start_location.lng;
               gencoords1.push(stloc);
