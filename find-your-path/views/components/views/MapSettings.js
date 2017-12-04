@@ -32,7 +32,7 @@ class MSetting extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      miles: 0, 
+      miles: 8, 
       dest: "Chicago, IL",
       
     
@@ -48,7 +48,7 @@ class MSetting extends Component {
     <Text>Distance</Text>
     <TextInput
       keyboardType='numeric'
-      placeholder='0 miles'
+      placeholder='8 miles'
       onChangeText={(miles) => this.setState({miles})}
 
       placeholderTextColor="rgba(255,255,255,0.7)"
