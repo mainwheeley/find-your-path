@@ -53,7 +53,7 @@
 		</dict>
 		<key>NSAllowsArbitraryLoads</key>
 		<true/>
-    <key>NSAllowArbitraryLoads</key>
+    <key>NSAllowsArbitraryLoadsInWebContent</key>
     <true/>
     <key>NSAllowsLocalNetworking</key>
     <true/>
