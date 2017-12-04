@@ -108,7 +108,7 @@ class MSetting extends Component {
     <Button
       backgroundColor='#03A9F4'
       title='Save Route'
-      onPress={() => navigate('SaveRoute')}
+      onPress={() => navigate('SaveRoute', {miles: this.state.miles, dest: this.state.dest, index: this.state.index, park: this.state.park, trail: this.state.trail, beach: this.state.beach})}
     />
     <Button
       backgroundColor='#03A9F4'

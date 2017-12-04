@@ -9,11 +9,13 @@ export default class SaveRoute extends Component {
     super(props);
     this.state = {
       name: '',
-      index: 0,
+      index: this.props.navigation.state.params.index,
       notes: '',
-      park: false,
-      trail: false,
-      beach: false,
+      park: this.props.navigation.state.params.park,
+      trail: this.props.navigation.state.params.trail,
+      beach: this.props.navigation.state.params.beach,
+      startpoint: this.props.navigation.state.params.dest,
+      totmiles: this.props.navigation.state.params.miles,
     }
     this.updateIndex = this.updateIndex.bind(this);
     this.type = ["Walk", "Run", "Bike"];
@@ -26,8 +28,8 @@ export default class SaveRoute extends Component {
   save() {
     var entry = new Object();
     entry.name = this.state.name;
-    entry.startpoint = '610 Purdue Mall';
-    entry.totmiles = 5;
+    entry.startpoint = this.state.startpoint;
+    entry.totmiles = this.state.totmiles;
     entry.uname = 'john_appleseed@yahoo.com';
     entry.worktype = this.type[this.state.index];
     entry.park_flag = this.state.park ? 1:0;

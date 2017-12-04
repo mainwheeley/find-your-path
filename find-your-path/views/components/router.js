@@ -38,7 +38,7 @@ export const MapView = StackNavigator({
     }
   },
   SaveRoute: {
-    screen: FavRoutes,
+    screen: SaveRoute,
     navigationOptions: {
       title: "Save Route",
       headerStyle
