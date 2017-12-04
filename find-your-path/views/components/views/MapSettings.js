@@ -32,11 +32,7 @@ class MSetting extends Component {
   constructor(props) {
     super(props);
     this.state = {
-<<<<<<< HEAD
-      miles: 0,
-=======
       miles: 0, 
->>>>>>> parent of 255c46c0... creates circular route sort of
       dest: "Chicago, IL",
 
 
