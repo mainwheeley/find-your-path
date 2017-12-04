@@ -186,7 +186,10 @@ class Gmaps extends Component {
           var gencoords1 = [];
           var directions = [];
           var count = 1;
+          var j = 0;
           //console.warn(respJson.routes);
+        while (j < 2 + waypoints.length)
+        {
           respJson.routes[0].legs[0].steps.forEach(function(i)
           {
             var dist = i.distance.text;
@@ -212,6 +215,7 @@ class Gmaps extends Component {
             gencoords1.push(endloc);
             count++;
           });
+        }
           this.setState({directions: directions});
           this.setState({gencoords: gencoords1});
           --count;

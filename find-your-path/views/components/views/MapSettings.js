@@ -48,7 +48,7 @@ class MSetting extends Component {
     <Text>Distance</Text>
     <TextInput
       keyboardType='numeric'
-      placeholder='8 miles'
+      placeholder='0 miles'
       onChangeText={(miles) => this.setState({miles})}
 
       placeholderTextColor="rgba(255,255,255,0.7)"
