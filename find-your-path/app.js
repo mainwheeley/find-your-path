@@ -25,7 +25,7 @@ var db = require('./db');
         console.log("success!");
     },
     error: function( jqXhr, textStatus, errorThrown ){
-      console.log("error ajax");  
+      console.log("error ajax");
       console.log( errorThrown );
     }
 });
@@ -71,7 +71,7 @@ var config =  require('./authenticate/session.js');
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use(cookieParser()); 
+app.use(cookieParser());
 
 //app.use(express.static(path.join(__dirname, 'public')));
 //app.use(app.router);
@@ -79,12 +79,43 @@ app.use(cookieParser());
 
 /*app.get('/', routes.index);
 app.get('/users', users.list);*/
+app.get('/query', function(req, res)
+{
+  var query = decodeURI(req.query.query);
+  console.log(query);
+  db.query(query, function(err, result)
+  {
+    if (err)
+    {
+      console.log(err);
+    }
+    else
+    {
+      console.log(result);
+      return res.send(result);
+    }
+  });
+});
+
+app.post('/query', function(req, res)
+{
+  var query = req.body.query;
+  db.query(query, function(err, result)
+  {
+    if (err)
+    {
+      console.log(err);
+    }
+    else
+    {
+      return res.status(200).json({message: 'success'});
+    }
+  });
+});
 
 app.post('/fbdata', function(req, res)
 {
 
-    console.log("here");
-    console.log(req.body);
     var email = req.body.email;
     var name =  req.body.name;
     var query1 = "select * from facebook where email = '" + email + "'";
@@ -184,7 +215,7 @@ failureRedirect : '/auth/facebook'
 res.redirect('/main');
 });
 
-var facebook = 
+var facebook =
 {
     clientID : '152108875375918',
     clientSecret : 'bd42eddd9914fbaa28a3b3878a34db99',
