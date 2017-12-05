@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { AppRegistry, StyleSheet, Text, View, Button, TouchableOpacity, Alert, TextInput, Picker, Platform, AppState} from 'react-native';
+import { AppRegistry, StyleSheet, Text, View, Button, TouchableOpacity, Alert, TextInput, Picker, Platform, AppState, PushNotificationIOS} from 'react-native';
 import PushController from './PushController';
 import PushNotification from 'react-native-push-notification';
 
@@ -14,9 +14,9 @@ export default class Settings extends Component{
     this.handleAppStateChange = this.handleAppStateChange.bind(this);
     this.state = {
       saveFlag: 0,
-      hour: '',
-      minutes: '',
-      ampm: '',
+      hour: 1,
+      minutes: 1,
+      ampm: '1',
     }
   }
 
@@ -36,7 +36,8 @@ export default class Settings extends Component{
 }
 
   componentDidMount(){
-    AppState.addEventListener('change', this.handleAppStateChange)
+    AppState.addEventListener('change', this.handleAppStateChange);
+    //this.setState({hour: new Date().getHours(), minutes: new Date().getMinutes()});
   }
 
   componentWillUnmount(){
@@ -45,18 +46,26 @@ export default class Settings extends Component{
 
   handleAppStateChange(appState){
     if(appState == 'background'){
-      let date = new Date();
-      date.setHours()
-      if(Platform.OS === 'ios') {
-        date = date.toISOString();
-      }
-      PushNotification.localNotificationSchedule({
-      message: "Don't forget to work out today!", // (required)
-      vibrate: true,
-      repeatType: 'day',
-      date,
-      //toISOString might not be necessary
+      var curr = new Date();
+      console.log("Curr:"+curr);
+      var date = new Date(2017, curr.getMonth(), curr.getDate()-21,(this.state.ampm=='PM')?this.state.hour + 24-3:this.state.hour-3, this.state.minutes,0,0);
+      console.log("HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH");
+      console.log("Time: " + date);
+
+      PushNotificationIOS.scheduleLocalNotification({
+        alertTitle: "Don't forget to work out today!",
+        alertBody:  "Don't forget to work out today!",// (required)
+        repeatInterval: 'day',
+        fireDate: date,
+        //toISOString might not be necessary
       });
+
+      /*
+      PushNotification.localNotificationSchedule({
+        message: "Don't forget to work out today!",
+        date: date
+      });
+      */
     }
   }
 
