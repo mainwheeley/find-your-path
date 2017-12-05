@@ -157,7 +157,7 @@ ShallowWrapper {
                 }
               }
             >
-              Total distance: 200 mi 
+              Total distance: 20 mi 
             </Text>
           </View>
         </View>
@@ -243,7 +243,7 @@ ShallowWrapper {
                 }
               }
             >
-              Ave. calories burned: 150 cals
+              Ave. cal.: 150 cals
             </Text>
           </View>
         </View>
@@ -329,7 +329,7 @@ ShallowWrapper {
                 }
               }
             >
-              Total time run: 200 hrs
+              Total time run: 5 hrs
             </Text>
           </View>
         </View>
@@ -415,7 +415,7 @@ ShallowWrapper {
                 }
               }
             >
-              Favorite route: State St.
+              Fav route: 134 W. State St
             </Text>
           </View>
         </View>
@@ -572,7 +572,7 @@ ShallowWrapper {
                   }
                 }
               >
-                Total distance: 200 mi 
+                Total distance: 20 mi 
               </Text>
             </View>
           </View>
@@ -658,7 +658,7 @@ ShallowWrapper {
                   }
                 }
               >
-                Ave. calories burned: 150 cals
+                Ave. cal.: 150 cals
               </Text>
             </View>
           </View>
@@ -744,7 +744,7 @@ ShallowWrapper {
                   }
                 }
               >
-                Total time run: 200 hrs
+                Total time run: 5 hrs
               </Text>
             </View>
           </View>
@@ -830,7 +830,7 @@ ShallowWrapper {
                   }
                 }
               >
-                Favorite route: State St.
+                Fav route: 134 W. State St
               </Text>
             </View>
           </View>
@@ -1001,7 +1001,7 @@ ShallowWrapper {
                   }
                 }
               >
-                Total distance: 200 mi 
+                Total distance: 20 mi 
               </Text>
             </View>
           </View>
@@ -1087,7 +1087,7 @@ ShallowWrapper {
                   }
                 }
               >
-                Ave. calories burned: 150 cals
+                Ave. cal.: 150 cals
               </Text>
             </View>
           </View>
@@ -1173,7 +1173,7 @@ ShallowWrapper {
                   }
                 }
               >
-                Total time run: 200 hrs
+                Total time run: 5 hrs
               </Text>
             </View>
           </View>
@@ -1259,7 +1259,7 @@ ShallowWrapper {
                   }
                 }
               >
-                Favorite route: State St.
+                Fav route: 134 W. State St
               </Text>
             </View>
           </View>

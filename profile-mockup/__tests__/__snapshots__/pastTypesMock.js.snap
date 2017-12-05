@@ -11,8 +11,6 @@ ShallowWrapper {
   "node": <View
     style={
       Object {
-        "alignItems": "center",
-        "backgroundColor": "#fff",
         "flex": 1,
         "justifyContent": "center",
         "margin": 10,
@@ -24,24 +22,28 @@ ShallowWrapper {
       data={
         Array [
           Object {
-            "date": "11/02/2017",
             "key": "1",
-            "time": "1:00 PM",
+            "startp": "N. Martin Jischke Dr",
+            "totmiles": 5,
+            "type": "Walk",
           },
           Object {
-            "date": "11/02/2017",
             "key": "2",
-            "time": "7:00 AM",
+            "startp": "610 Purdue Mall",
+            "totmiles": 5,
+            "type": "Run",
           },
           Object {
-            "date": "11/01/2017",
             "key": "3",
-            "time": "9:00 PM",
+            "startp": "230 S Grant St.",
+            "totmiles": 4,
+            "type": "Walk",
           },
           Object {
-            "date": "11/01/2017",
             "key": "4",
-            "time": "3:00 PM",
+            "startp": "134 W State St.",
+            "totmiles": 6,
+            "type": "Bike",
           },
         ]
       }
@@ -62,8 +64,6 @@ ShallowWrapper {
     <View
       style={
         Object {
-          "alignItems": "center",
-          "backgroundColor": "#fff",
           "flex": 1,
           "justifyContent": "center",
           "margin": 10,
@@ -75,24 +75,28 @@ ShallowWrapper {
         data={
           Array [
             Object {
-              "date": "11/02/2017",
               "key": "1",
-              "time": "1:00 PM",
+              "startp": "N. Martin Jischke Dr",
+              "totmiles": 5,
+              "type": "Walk",
             },
             Object {
-              "date": "11/02/2017",
               "key": "2",
-              "time": "7:00 AM",
+              "startp": "610 Purdue Mall",
+              "totmiles": 5,
+              "type": "Run",
             },
             Object {
-              "date": "11/01/2017",
               "key": "3",
-              "time": "9:00 PM",
+              "startp": "230 S Grant St.",
+              "totmiles": 4,
+              "type": "Walk",
             },
             Object {
-              "date": "11/01/2017",
               "key": "4",
-              "time": "3:00 PM",
+              "startp": "134 W State St.",
+              "totmiles": 6,
+              "type": "Bike",
             },
           ]
         }
@@ -128,8 +132,6 @@ ShallowWrapper {
     "_rendered": <View
       style={
         Object {
-          "alignItems": "center",
-          "backgroundColor": "#fff",
           "flex": 1,
           "justifyContent": "center",
           "margin": 10,
@@ -141,24 +143,28 @@ ShallowWrapper {
         data={
           Array [
             Object {
-              "date": "11/02/2017",
               "key": "1",
-              "time": "1:00 PM",
+              "startp": "N. Martin Jischke Dr",
+              "totmiles": 5,
+              "type": "Walk",
             },
             Object {
-              "date": "11/02/2017",
               "key": "2",
-              "time": "7:00 AM",
+              "startp": "610 Purdue Mall",
+              "totmiles": 5,
+              "type": "Run",
             },
             Object {
-              "date": "11/01/2017",
               "key": "3",
-              "time": "9:00 PM",
+              "startp": "230 S Grant St.",
+              "totmiles": 4,
+              "type": "Walk",
             },
             Object {
-              "date": "11/01/2017",
               "key": "4",
-              "time": "3:00 PM",
+              "startp": "134 W State St.",
+              "totmiles": 6,
+              "type": "Bike",
             },
           ]
         }

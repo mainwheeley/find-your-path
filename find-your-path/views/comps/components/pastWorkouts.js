@@ -1,5 +1,5 @@
 import React from 'react';
-import {
+import { 
     StyleSheet,
     Text,
     View,
@@ -7,7 +7,7 @@ import {
     Dimensions,
     Button,
 } from 'react-native';
-import {listWorkouts} from './data';
+import {listWorkouts} from './Data';
 import RadioForm, {RadioButton, RadioButtonInput, RadioButtonLabel} from 'react-native-simple-radio-button';
 import PastData from './pastData';
 import PastBike from './pastBike';
@@ -25,7 +25,7 @@ var radio_props = [
 export default class PastWorkouts extends React.Component {
     constructor() {
 	super();
-    	this.state = {
+    	this.state = { 
 	    viewType: 0
 	};
     }
@@ -70,7 +70,7 @@ workoutSeparator = () => {
 
 render() {
 return (
-  <View style={styles.container}>
+  <View style={styles.container}> 
     <RadioForm
 	radio_props={radio_props}
 	onPress={(value) => {this.logOnChange(value)}}
@@ -80,7 +80,6 @@ return (
     />
     {this.renderType()}
   </View>
-
   );
 }
 
