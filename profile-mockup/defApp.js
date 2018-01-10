@@ -3,6 +3,7 @@ import { StyleSheet, Text, View, Button, Alert, FlatList } from 'react-native';
 
 var testerhello;
 
+
 export default class App extends React.Component {
     tester() {
 	Alert.alert("TITIT ALDIO PALING KECIL");
